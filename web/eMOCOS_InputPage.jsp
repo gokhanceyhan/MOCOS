@@ -1,5 +1,5 @@
 <%-- 
-    Document   : newjsp
+    Document   : eMOCOS_InputPage
     Created on : Jun 22, 2016, 8:09:43 PM
     Author     : gokhanceyhan
 --%>
@@ -24,10 +24,10 @@
         <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="css/userForm.css" rel="stylesheet">
+        <link href="css/eMOCOS_Input.css" rel="stylesheet">
 
         <!-- Custom javascript files -->
-        <script type="text/javascript" src="client_side.js"></script>
+        <script src="js/eMOCOS.js"></script>
 
     </head>
 
@@ -41,7 +41,7 @@
 
                     <fieldset class="form-group" id="eMOCOS_InputParams1">
                         <label for="eMOCOS_InputType">Input Type</label>
-                        <select class="form-control" id="eMOCOS_InputType" onchange="eMOCOS_updateInputParamsLists();">
+                        <select class="form-control" id="eMOCOS_InputType" name="InputType" onchange="updateInputParamsLists();">
                             <option value="" disabled="disabled" selected="selected">Select File Type</option>
                             <option value="Model">Model File (.lp)</option>
                             <option value="Data" >Data File</option>
@@ -50,7 +50,7 @@
 
                     <fieldset class="form-group" id="eMOCOS_InputParams2">
                         <label for="eMOCOS_ProblemType">Problem Type</label>
-                        <select class="form-control" id="eMOCOS_ProblemType" onchange="eMOCOS_updateInputParamsLists();">
+                        <select class="form-control" id="eMOCOS_ProblemType" name="ProblemType" onchange="updateInputParamsLists();">
                             <option value="" disabled="disabled" selected="selected">Select Problem Type</option>
                             <option value="Knapsack">Knapsack Problem</option>
                             <option value="Assignment">Assignment Problem</option>
@@ -59,45 +59,38 @@
 
                     <fieldset class="form-group" id="eMOCOS_InputParams3">
                         <label for="eMOCOS_numOfObjectives">Number of Objectives</label>
-                        <input type="text" class="form-control" id="eMOCOS_numOfObjectives" placeholder="">
+                        <input type="text" class="form-control" id="eMOCOS_numOfObjectives" name="numOfObj" placeholder="">
                     </fieldset>
 
                 </fieldset>
 
-                <fieldset class="form-group" id="eMOCOS_ProblemParams" style="display: block">
+                <fieldset class="form-group" id="eMOCOS_ProblemParams" style="display: none">
                     <legend> Problem Parameters:</legend>
 
                     <fieldset class="form-group" id="eMOCOS_KnapsackParams1">
                         <label for="eMOCOS_numOfKnapsacks">Number of Knapsacks</label>
-                        <input type="text" class="form-control" id="eMOCOS_numOfKnapsacks" placeholder="">
+                        <input type="text" class="form-control" id="eMOCOS_numOfKnapsacks" name="numOfKnapsacks" placeholder="">
                     </fieldset>
 
                     <fieldset class="form-group" id="eMOCOS_KnapsackParams2">
                         <label for="eMOCOS_numOfItems">Number of Items</label>
-                        <input type="text" class="form-control" id="eMOCOS_numOfItems" placeholder="">
+                        <input type="text" class="form-control" id="eMOCOS_numOfItems" name="numOfItems" placeholder="">
                     </fieldset>
 
                     <fieldset class="form-group" id="eMOCOS_AssignmentParams1">
                         <label for="eMOCOS_numOfJobs">Number of Jobs</label>
-                        <input type="text" class="form-control" id="eMOCOS_numOfJobs" placeholder="">
+                        <input type="text" class="form-control" id="eMOCOS_numOfJobs" name="numOfJobs" placeholder="">
                     </fieldset>
 
                 </fieldset>
 
                 <fieldset class="form-group" id="eMOCOS_fileUpload">
                     <label for="eMOCOS_InputFile">File Input</label>
-                    <input type="file" class="form-control-file" id="eMOCOS_InputFile">
+                    <input type="file" class="form-control-file" id="eMOCOS_InputFile" name="uploadFile">
                 </fieldset>
 
                 <button type="submit" class="btn btn-primary">Upload</button>
-            </form>
-
-            <button style="margin-left: 24em" type="submit" class="btn btn-primary" onclick="eMOCOS_SolveModel(); ">Solve</button>
-            <input type="text" id="Status" value="" />
-
-            <form class="form-eMOCOS" action="OutputServlet" method="POST">
-                <button type="submit" class="btn btn-primary">Get Results</button>
-            </form>
+            </form>            
 
         </div> <!-- /container -->
 

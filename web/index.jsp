@@ -61,8 +61,8 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">eMOCOS</a></li>
-                    <li><a href="#">Another action</a></li>
+                    <li><a href="eMOCOS_InputPage.jsp">eMOCOS</a></li>
+                    <li><a href="#">iMOCOS</a></li>
                     <li><a href="#">Something else here</a></li>
                     <li role="separator" class="divider"></li>
                     <li class="dropdown-header">Nav header</li>
