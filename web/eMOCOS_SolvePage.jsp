@@ -71,21 +71,21 @@
             </nav>
 
             <div class="jumbotron">
-                <div class="alert alert-success" role="alert">Upload successful!</div>
+                <div class="alert alert-success" role="alert">Upload successful! 
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </div>
                 <div>
                     <p>
                         <button type="submit" class="btn btn-primary" onclick="solveModel();">Solve</button>
                     </p>
                 </div>
-                
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                        60%
-                    </div>
-                </div>
+
+                <div class="well well-lg" id="eMOCOS_log"></div>
 
                 <form class="form-eMOCOS" action="OutputServlet" method="POST">
-                    <button type="submit" class="btn btn-success">Get Results</button>
+                    <button type="submit" id="eMOCOS_getResultsButton" class="btn btn-success" disabled="disabled">Get Results
+                        <span class="glyphicon glyphicon-save-file"></span>
+                    </button>
                 </form>
             </div>
         </div> <!-- /container -->

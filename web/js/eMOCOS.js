@@ -9,7 +9,7 @@ var req;
 function initRequest() {
     var isIE;
     if (window.XMLHttpRequest) {
-        if (navigator.userAgent.indexOf('MSIE') != -1) {
+        if (navigator.userAgent.indexOf('MSIE') !== -1) {
             isIE = true;
         }
         return new XMLHttpRequest();
@@ -22,7 +22,7 @@ function initRequest() {
 function solveModel()
 {
     // display status info as "Processing"
-    document.getElementById("Status").value = "Processing";
+    document.getElementById("eMOCOS_log").innerHTML = "Solving...";
 
     // send request to servlet
     var url = "SolveServlet";
@@ -39,10 +39,12 @@ function get_results()
 
 function Process()
 {
-    if (req.readyState == 4 && req.status == 200)
+    if (req.readyState === 4 && req.status === 200)
     {
         // change the status bar into "Complete" which is in the response to solve request
-        document.getElementById("Status").value = req.responseText;
+        document.getElementById("eMOCOS_log").innerHTML = req.responseText;
+        document.getElementById("eMOCOS_getResultsButton").disabled = false;
+        
     }
 }
 
