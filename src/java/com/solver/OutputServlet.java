@@ -36,7 +36,6 @@ public class OutputServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -49,8 +48,7 @@ public class OutputServlet extends HttpServlet {
             out.close();
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -79,15 +77,14 @@ public class OutputServlet extends HttpServlet {
 
         try {
 
-            List<String> results = new ArrayList<String>();
-            File OutputFile = new File("C:\\Users\\gokhan\\Dropbox\\Ph.D\\Solver_on_Web\\MOIP\\web\\myFiles", "Output_nd_points.txt");
-            //Scanner fileScanner = new Scanner(new File("C:\\Users\\gokhan\\Dropbox\\Ph.D\\Solver_on_Web\\MOIP\\web\\myFiles\\Output_nd_points.txt"));
-            Scanner fileScanner = new Scanner(OutputFile);
-            while (fileScanner.hasNext()) {
-                results.add(fileScanner.next());
-            }
+            List<String> results = new ArrayList<>();
+            File OutputFile = new File("/Users/gokhanceyhan/Dropbox/Ph.D/Solver_on_Web/MOIP/web/myFiles", "Output_nd_points.txt");
             
-            fileScanner.close();
+            try (Scanner fileScanner = new Scanner(OutputFile)) {
+                while (fileScanner.hasNext()) {
+                    results.add(fileScanner.next());
+                }
+            }
   
 
             request.setAttribute("numofP", results.get(0));
@@ -96,7 +93,7 @@ public class OutputServlet extends HttpServlet {
             
             results.clear();            
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("results.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("eMOCOS_SolvePage.jsp");
             dispatcher.forward(request, response);
 
         } catch (IOException | ServletException ex) {

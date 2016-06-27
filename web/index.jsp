@@ -50,11 +50,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">MOCOS</a>
+              <a class="navbar-brand" href="index.jsp">MOCOS</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="index.jsp">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#library">Library</a></li>
@@ -95,7 +95,7 @@
               <h1>eMOCOS</h1>
               <p>Exact Multi-objective Combinatorial Optimization Solver</p>
               <p>Generate efficient solutions of your multi-objective combinatorial problem. Upload your file, compute on the cloud, download results. </p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Try it!</a></p>
+              <p><a class="btn btn-lg btn-primary" href="eMOCOS_InputPage.jsp" role="button">Try it!</a></p>
             </div>
           </div>
         </div>
