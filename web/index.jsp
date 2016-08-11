@@ -15,7 +15,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>MOCOS</title>
+    <title>MOCOs</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -50,7 +50,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="index.jsp">MOCOS</a>
+              <a class="navbar-brand" href="index.jsp">MOCOs</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
@@ -61,8 +61,8 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="eMOCOS_InputPage.jsp">eMOCOS</a></li>
-                    <li><a href="#">iMOCOS</a></li>
+                    <li><a href="eMOCOS_InputPage.jsp">eMOCOs</a></li>
+                    <li><a href="#">iMOCOs</a></li>
                     <li><a href="#">Something else here</a></li>
                     <li role="separator" class="divider"></li>
                     <li class="dropdown-header">Nav header</li>
@@ -92,7 +92,7 @@
           <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>eMOCOS</h1>
+              <h1>eMOCOs</h1>
               <p>Exact Multi-objective Combinatorial Optimization Solver</p>
               <p>Generate efficient solutions of your multi-objective combinatorial problem. Upload your file, compute on the cloud, download results. </p>
               <p><a class="btn btn-lg btn-primary" href="eMOCOS_InputPage.jsp" role="button">Try it!</a></p>
@@ -106,7 +106,7 @@
               <h1>libMOCO</h1>
               <p>Library for Multi-objective Combinatorial Optimization</p>
               <p>Hundreds of instances in an easy format.</p>
-              <p>Do you have a MOCO solver? Test it on our instances, compare with eMOCOS.</p>
+              <p>Do you have a MOCO solver? Test it on our instances, compare with eMOCOs.</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse library.</a></p>
             </div>
           </div>
@@ -115,7 +115,7 @@
           <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>iMOCOS</h1>
+              <h1>iMOCOs</h1>
               <p>Interactive Multi-objective Combinatorial Optimization Solver</p>
               <p>Set parameter values interactively, display results, monitor your solutions.</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more.</a></p>
@@ -143,22 +143,19 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="muratkoksalan.jpg" alt="muratkoksalan" width="140" height="140">
+          <h2>Murat Köksalan</h2>
+          <p><a class="btn btn-default" href="http://users.metu.edu.tr/koksalan/" target="_blank" role="button">View &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="banulokman.png" alt="banulokman" width="140" height="140">
+          <h2>Banu Lokman</h2>
+          <p><a class="btn btn-default" href="http://www.banulokman.com" target="_blank" role="button">View &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <img class="img-circle" src="gokhanceyhan.jpg" alt="gokhanceyhan" width="140" height="140">
+          <h2>Gökhan Ceyhan</h2>
+          <p><a class="btn btn-default" href="http://blog.metu.edu.tr/e162742/" target="_blank" role="button">View &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 
@@ -169,12 +166,12 @@
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+          <h2 class="featurette-heading">eMOCOs. <span class="text-muted">Find efficient solutions to your multi-objective integer program.</span></h2>
           <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
+          <img class="featurette-image img-responsive center-block" src="image11.PNG" alt="nondominatedPoints">
+        </div>  
       </div>
 
       <hr class="featurette-divider">

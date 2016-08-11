@@ -16,7 +16,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>eMOCOS</title>
+        <title>eMOCOs</title>
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.jsp">MOCOS</a>
+                        <a class="navbar-brand" href="index.jsp">MOCOs</a>
                     </div>
 
                     <div class="navbar-collapse collapse">
@@ -60,7 +60,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="eMOCOS_InputPage.jsp">eMOCOS</a></li>
-                                    <li><a href="#">iMOCOS</a></li>
+                                    <li><a href="#">iMOCOs</a></li>
                                     <li><a href="#">Something else here</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li class="dropdown-header">Nav header</li>
@@ -103,7 +103,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="eMOCOS_numOfModels" class="col-lg-3">Number of calls to Cplex:</label>
+                            <label for="eMOCOS_numOfModels" class="col-lg-3">Number of calls to solver:</label>
                             <div class="col-lg-2">
                                 <input type="text" class="form-control" id="eMOCOS_numOfModels" value="${numofM}" placeholder="">
                             </div>
