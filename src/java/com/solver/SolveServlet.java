@@ -25,12 +25,12 @@ public class SolveServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // we need to invoke our algorithm
-        try {          
+        try {
 
             // start the solver
 //            Runtime runtime = Runtime.getRuntime();
-//            String solverPath = "/Users/gokhanceyhan/Dropbox/Ph.D/Solver_on_Web/MOIP/web/myFiles/MOIP_software.exe";
-//            String folderPath = "/Users/gokhanceyhan/Dropbox/Ph.D/Solver_on_Web/MOIP/web/myFiles";
+//            String solverPath = "/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/web/myFiles/MOIP_software.exe";
+//            String folderPath = "/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/web/myFiles";
 //            Process p = runtime.exec(solverPath, null, new File(folderPath));
 //
 //            InputStream stderr = p.getInputStream();
@@ -39,7 +39,6 @@ public class SolveServlet extends HttpServlet {
 //            String line = null;
 //            while ((line = br.readLine()) != null);
 //            p.waitFor();
-
             // display "Complete" on the page
             response.setHeader("Content-Type", "text/plain");
             response.getWriter().write("Finished!");

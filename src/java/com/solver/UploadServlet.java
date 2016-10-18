@@ -48,7 +48,7 @@ public class UploadServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // declare the workspace directory 
-        String uploadPath = "/Users/gokhanceyhan/Dropbox/Ph.D/Solver_on_Web/MOIP/web/myFiles";
+        String uploadPath = "/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/web/myFiles";
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();

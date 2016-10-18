@@ -21,7 +21,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <!--%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -55,9 +55,9 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="index.jsp">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#library">Library</a></li>
+                <li><a href="about.jsp">About</a></li>
+                <li><a href="contact.jsp">Contact</a></li>
+                <li><a href="library.jsp">Library</a></li>
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
                   <ul class="dropdown-menu">
@@ -89,6 +89,17 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
+          <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+                <img class="img-rounded" src="logo4.png" alt="logo" width="150" height="150">
+              <h1 style="color: darkslateblue;">onlinemoco.web</h1>
+              <p>The first multi-objective combinatorial optimization solver on the web.</p>
+              
+            </div>
+          </div>
+        </div>  
+        <div class="item">
           <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
@@ -167,7 +178,7 @@
       <div class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading">eMOCOs. <span class="text-muted">Find efficient solutions to your multi-objective integer program.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <p class="lead"> See how much the efficient solutions can achieve at each criterion.  </p>
         </div>
         <div class="col-md-5">
           <img class="featurette-image img-responsive center-block" src="image11.PNG" alt="nondominatedPoints">

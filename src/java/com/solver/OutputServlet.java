@@ -78,7 +78,7 @@ public class OutputServlet extends HttpServlet {
         try {
 
             List<String> results = new ArrayList<>();
-            File OutputFile = new File("/Users/gokhanceyhan/Dropbox/Ph.D/Solver_on_Web/MOIP/web/myFiles", "Output_nd_points.txt");
+            File OutputFile = new File("/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/web/myFiles", "Output_nd_points.txt");
             
             try (Scanner fileScanner = new Scanner(OutputFile)) {
                 while (fileScanner.hasNext()) {
