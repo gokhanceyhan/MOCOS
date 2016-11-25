@@ -16,11 +16,11 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>eMOCOs</title>
+        <title>nMOCO-S</title>
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <!--%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -48,7 +48,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index.jsp">MOCOs</a>
+                        <a class="navbar-brand" href="index.jsp">MOCO-S</a>
                     </div>
 
                     <div class="navbar-collapse collapse">
@@ -56,17 +56,18 @@
                             <li class="active"><a href="index.jsp">Home</a></li>
                             <li><a href="about">About</a></li>
                             <li><a href="contact">Contact</a></li>
-                            <li><a href="library">Library</a></li>
+                            <li><a href="libMOCOS.jsp">Library</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="eMOCOS_InputPage.jsp">eMOCOS</a></li>
-                                    <li><a href="#">iMOCOs</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li role="separator" class="divider"></li>
+                                    <li><a href="eMOCOS_InputPage.jsp">nMOCO-S</a></li>
+                                    <li><a href="#">rMOCO-S</a></li>
+                                    <li><a href="#">iMOCO-S</a></li>
+
+                                    <!--li role="separator" class="divider"></li>
                                     <li class="dropdown-header">Nav header</li>
                                     <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li-->
                                 </ul>
                             </li>
                         </ul>
@@ -120,8 +121,6 @@
                 </div>
 
                 <a class="btn btn-info" href="./myFiles/Output_nd_points.txt" role="button">Download <span class="glyphicon glyphicon-save-file"></span></a>
-
-                </fieldset>
 
 
 

@@ -15,11 +15,11 @@
         <meta name="author" content="">
         <link rel="icon" href="favicon.ico">
 
-        <title>MOCOs</title>
+        <title>MOCO-S</title>
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <!--%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
@@ -57,7 +57,7 @@
                                 <li class="active"><a href="index.jsp">Home</a></li>
                                 <li><a href="about.jsp">About</a></li>
                                 <li><a href="contact.jsp">Contact</a></li>
-                                <li><a href="library.jsp">Library</a></li>
+                                <li><a href="libMOCOS.jsp">Library</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
@@ -205,7 +205,7 @@
                     <p class="lead">It is the place where you can find test instances and the corresponding nondominated point sets for different MOCO problems like knapsack, assignment, shortest path etc...</p>             
                 </div>
                 <div class="col-md-5 col-md-pull-7">
-                    <img class="featurette-image img-responsive center-block" src="lib-logo.png" alt="MOKP">
+                    <img class="featurette-image img-responsive center-block" src="lib-logo-1.png" alt="MOKP">
                 </div>
             </div>
 
