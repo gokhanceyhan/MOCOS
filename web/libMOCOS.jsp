@@ -4,6 +4,11 @@
     Author     : gokhanceyhan
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
+<% Class.forName("org.apache.derby.jdbc.ClientDriver"); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +21,7 @@
         <meta name="author" content="">
 
         <title>libMOCO-S</title>
-        
+
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -50,7 +55,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.jsp">Home</a></li>
-                        <li><a href="about">About</a></li>
+                        <li><a href="about.jsp">About</a></li>
                         <li><a href="contact">Contact</a></li>
                         <li><a href="libMOCOS.jsp">Library</a></li>
                         <li class="dropdown">
@@ -71,13 +76,13 @@
             </div>
         </nav>
         <div class="jumbotron"> 
-            <img class="img-rounded center-block" src="lib-logo-1.png" alt="logo" width="100" height="100">
+            <img class="img-rounded center-block" src="lib-logo-2.png" alt="logo" width="200" height="100">
             <h2 class="bg-primary text-center" > Library for Multi Objective Combinatorial Optimization</h2>
         </div>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Tables</h1>
+                    <h1 class="page-header">Instances</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -86,35 +91,41 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            DataTables Advanced Tables
+                            Knapsack Problem
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <%
+                                    Connection connection = DriverManager.getConnection(
+                                            "jdbc:derby://localhost:1527/mocoDB", "moco", "mocodb2016");
+
+                                    Statement statement = connection.createStatement();
+                                    ResultSet resultset
+                                            = statement.executeQuery("select * from Ins_Knapsack");
+                                %>
                                 <thead>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                        <th>Instance Id</th>
+                                        <th>Number of Objectives</th>
+                                        <th>Number of Knapsacks </th>
+                                        <th>Number of Items</th>
+                                        <th>Number of Nondominated Points</th>
+                                        <th>File</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr class="odd gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td>Win 95+</td>
-                                        <td class="center">4</td>
-                                        <td class="center">X</td>
+                                <tbody> 
+                                    <% while (resultset.next()) {%>
+                                    <tr>    
+                                        <td> <%= resultset.getString(1)%></td>
+                                        <td> <%= resultset.getString(2)%></td>
+                                        <td> <%= resultset.getString(3)%></td>
+                                        <td> <%= resultset.getString(4)%></td>
+                                        <td> <%= resultset.getString(5)%></td>
+                                        <td> <a href="KP_3obj_25items_input.txt" role="button"><span class="glyphicon glyphicon-save-file"></span></a></td>
                                     </tr>
-                                    <tr class="even gradeC">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 5.0</td>
-                                        <td>Win 95+</td>
-                                        <td class="center">5</td>
-                                        <td class="center">C</td>
-                                    </tr>
+                                    <% }%>
+
 
                                 </tbody>
                             </table>
