@@ -50,18 +50,20 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="index.jsp">MOCO-S</a>
+                            <a class="navbar-brand" href="index.jsp">
+                                MOCO-S
+                            </a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="index.jsp">Home</a></li>
-                                <li><a href="about.jsp">About</a></li>
-                                <li><a href="contact.jsp">Contact</a></li>
-                                <li><a href="libMOCOS.jsp">Library</a></li>
+                                <li><a href="jsp/about.jsp">About</a></li>
+                                <li><a href="jsp/contact.jsp">Contact</a></li>
+                                <li><a href="jsp/libMOCO-S/libMOCO-S.jsp">Library</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="eMOCOS_InputPage.jsp">nMOCO-S</a></li>
+                                        <li><a href="jsp/nMOCO-S/nMOCO-S_InputPage.jsp">nMOCO-S</a></li>
                                         <li><a href="#">rMOCO-S</a></li>
                                         <li><a href="#">iMOCO-S</a></li>
 
@@ -93,7 +95,7 @@
                     <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
                     <div class="container">
                         <div class="carousel-caption">
-                            <img class="img-rounded" src="logo4.png" alt="logo" width="150" height="150">
+                            <img class="img-rounded" src="images/image11.PNG" alt="logo" width="150" height="150">
                             <h1 style="color: darkslateblue;">onlinemoco.web</h1>
                             <p>The first multi-objective combinatorial optimization solver on the web.</p>
 
@@ -107,7 +109,7 @@
                             <h1>nMOCO-S</h1>
                             <p>All Nondominated points by Multi-Objective Combinatorial Optimization Solver</p>
                             <p>Generate efficient solutions of your multi-objective combinatorial problem. Upload your file, compute on the cloud, download results. </p>
-                            <p><a class="btn btn-lg btn-primary" href="eMOCOS_InputPage.jsp" role="button">Try it!</a></p>
+                            <p><a class="btn btn-lg btn-primary" href="jsp/nMOCO-S/nMOCO-S_InputPage.jsp" role="button">Try it!</a></p>
                         </div>
                     </div>
                 </div>
@@ -166,17 +168,17 @@
             <!-- Three columns of text below the carousel -->
             <div class="row">
                 <div class="col-lg-4">
-                    <img class="img-circle" src="muratkoksalan.jpg" alt="muratkoksalan" width="140" height="140">
+                    <img class="img-circle" src="images/muratkoksalan.jpg" alt="muratkoksalan" width="140" height="140">
                     <h2>Murat Köksalan</h2>
                     <p><a class="btn btn-default" href="http://users.metu.edu.tr/koksalan/" target="_blank" role="button">View &raquo;</a></p>
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
-                    <img class="img-circle" src="banulokman.png" alt="banulokman" width="140" height="140">
+                    <img class="img-circle" src="images/banulokman.png" alt="banulokman" width="140" height="140">
                     <h2>Banu Lokman</h2>
                     <p><a class="btn btn-default" href="http://www.banulokman.com" target="_blank" role="button">View &raquo;</a></p>
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
-                    <img class="img-circle" src="gokhanceyhan.jpg" alt="gokhanceyhan" width="140" height="140">
+                    <img class="img-circle" src="images/gokhanceyhan.jpg" alt="gokhanceyhan" width="140" height="140">
                     <h2>Gökhan Ceyhan</h2>
                     <p><a class="btn btn-default" href="http://blog.metu.edu.tr/e162742/" target="_blank" role="button">View &raquo;</a></p>
                 </div><!-- /.col-lg-4 -->
@@ -193,7 +195,7 @@
                     <p class="lead"> See how much the efficient solutions can achieve at each criterion.  </p>
                 </div>
                 <div class="col-md-5">
-                    <img class="featurette-image img-responsive center-block" src="image11.PNG" alt="nondominatedPoints">
+                    <img class="featurette-image img-responsive center-block" src="images/image11.PNG" alt="nondominatedPoints">
                 </div>  
             </div>
 
@@ -205,7 +207,7 @@
                     <p class="lead">It is the place where you can find test instances and the corresponding nondominated point sets for different MOCO problems like knapsack, assignment, shortest path etc...</p>             
                 </div>
                 <div class="col-md-5 col-md-pull-7">
-                    <img class="featurette-image img-responsive center-block" src="lib-logo-1.png" alt="MOKP">
+                    <img class="featurette-image img-responsive center-block" src="images/lib-logo-2.png" alt="MOKP">
                 </div>
             </div>
 
