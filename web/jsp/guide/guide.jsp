@@ -143,13 +143,13 @@
 
                                 <h4 id="nMOCO-S_input">Problem upload</h4>
                                 <p>
-                                    Problem files can be submitted to <code>nMOCO-S</code> application
-                                    via two alternative ways listed in <code>Input Type</code> field. For a subset of problems,
-                                    <code>data file</code> upload option is available. These problems are multi-dimensional 0-1 knapsack,
-                                    assignment and shorthest path problems as listed under <code>Problem Type</code> field.
-                                    Apart from that, the user must fill the required fields that appear only when input type is
-                                    selected as <code>data file</code>. For any problem that cannot be submitted as a <code>data file</code>
-                                    through one of the available options, <code>model file(.lp)</code> option enables the user to upload
+                                    Problem files can be submitted to <mark>nMOCO-S</mark> application
+                                    via two alternative ways listed in <strong>Input Type</strong> field. For a subset of problems,
+                                    <code>Data File</code> upload option is available. These problems are multi-dimensional 0-1 knapsack,
+                                    assignment and shorthest path problems as listed under <strong>Problem Type</strong> field.
+                                    Apart from that, the user must fill the required fields that appear only when <strong>Input Type</strong> is
+                                    selected as <code>Data File</code>. For any problem that cannot be submitted as a <code>Data File</code>
+                                    through one of the available options, <code>Model File (.lp)</code> option enables the user to upload
                                     the problem in ".lp" format of IBM ILOG CPLEX software.                                     
                                 </p>
 
@@ -167,32 +167,43 @@
                                     <tbody>
                                         <tr>
                                             <td>Input Type</td>
-                                            <td></td>
-                                            <td>{"Model File(.lp)","Data File"}</td>
+                                            <td>Type of the data file to be uploaded.</td>
+                                            <td>{"Model File (.lp)","Data File"}</td>
                                         </tr>
                                         <tr>
                                             <td>Problem Type</td>
-                                            <td></td>
+                                            <td>Active only if the user selects <code>Data File</code> option in <strong>Input Type</strong> parameter.
+                                                Defines the type of the problem whose parameters are defined in the the uploaded data file.
+                                            </td>
                                             <td>{"Knapsack Problem", "Assignment Problem"}</td>
                                         </tr>
                                         <tr>
                                             <td>Number of objectives</td>
-                                            <td></td>
+                                            <td>Number of objective functions in the uploaded problem file.</td>
                                             <td>$\left\{n \in \mathbb{N} : n \geq 2 \right\}$</td>
                                         </tr>
                                         <tr>
                                             <td>Number of knapsacks</td>
-                                            <td></td>
+                                            <td>Active only if the user selects <code>Data File</code> option in <strong>Input Type</strong> parameter
+                                                and <code>Knapsack Problem</code> in the <strong>Problem Type</strong> parameter.
+                                                Specifies the number of knapsack constraints in the problem. 
+                                            </td>
                                             <td>$\left\{n \in \mathbb{N} : n \geq 1 \right\}$</td>
                                         </tr>
                                         <tr>
                                             <td>Number of items</td>
-                                            <td></td>
+                                            <td>Active only if the user selects <code>Data File</code> option in <strong>Input Type</strong> parameter
+                                                and <code>Knapsack Problem</code> in the <strong>Problem Type</strong> parameter.
+                                                Specifies the number of items to be placed in the knapsack. 
+                                            </td>
                                             <td>$\left\{n \in \mathbb{N} : n \geq 1 \right\}$</td>
                                         </tr>
                                         <tr>
                                             <td>Number of jobs</td>
-                                            <td></td>
+                                            <td>Active only if the user selects <code>Data File</code> option in <strong>Input Type</strong> parameter
+                                                and <code>Assignment Problem</code> in the <strong>Problem Type</strong> parameter.
+                                                Specifies the number of jobs (operators) each is to be assigned to exactly one operator (job). 
+                                            </td>
                                             <td>$\left\{n \in \mathbb{N} : n \geq 1 \right\}$</td>
                                         </tr>
                                     </tbody>
@@ -236,11 +247,11 @@
                                     </li>
                                 </ul>
 
-                                <p color="blue"> Example:</p>
+                                <p><i> Example:</i></p>
                                 <p>
                                     Consider a single-knapsack, 5-item bi-objective 0-1 knapsack problem. Let the criterion matrix be
                                     [[5, 2, 6, 8, 9];[3, 9, 7, 6, 4]] and the weight vector be [2, 9, 1, 5, 7]. Suppose the capacity of
-                                    the knapsack is 15. Then, the valid file format for <code>nMOCO-s</code> is shown below:
+                                    the knapsack is 15. Then, the valid file format for <mark>nMOCO-s</mark> is shown below:
                                 </p>
                                 <pre>
                                     Maximize
@@ -262,6 +273,11 @@
 
 
                                 <h4 id="nMOCO-S_output">Solver output</h4>
+                                <p>
+                                    If the solver <mark>nMOCO-S</mark> terminates successfully, the following outputs are displayed
+                                    when the user clicks on the button <kbd>Show results</kbd>.
+                                </p>
+                                
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -273,22 +289,24 @@
                                     <tbody>
                                         <tr>
                                             <td>Number of nondominated points</td>
-                                            <td></td>
+                                            <td>Specifies the number of nondominated points generated for the uploaded problem.</td>
                                             <td>$\left\{n \in \mathbb{N}\right\}$</td>
                                         </tr>
                                         <tr>
                                             <td>Number of calls to solver</td>
-                                            <td></td>
+                                            <td>The number of times the single objective solver is called during the process.</td>
                                             <td>$\left\{n \in \mathbb{N}\right\}$</td>
                                         </tr>
                                         <tr>
                                             <td>Total CPU time (secs)</td>
-                                            <td></td>
+                                            <td>The cpu time spent by the solver.</td>
                                             <td>$\left\{t \in \mathbb{R}_{>0}\right\}$</td>
                                         </tr>
-                                        
+
                                     </tbody>
                                 </table>
+                                
+                                <h4 id="nMOCO-S_exceptions">Solver exceptions</h4>
 
                                 <h3>rMOCO-S</h3>
 
