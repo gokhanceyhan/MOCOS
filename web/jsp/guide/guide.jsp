@@ -116,8 +116,8 @@
                                 <span class="glyphicon glyphicon-chevron-down   " aria-hidden="true"></span>
                             </a>
                             <div id="Probs" class="panel-collapse collapse">
-                                <a href="#" iclass="collapse">Knapsack</a>
-                                <a href="#" iclass="collapse">Assignment</a>
+                                <a href="#MOKP" iclass="collapse">Knapsack</a>
+                                <a href="#MOAP" iclass="collapse">Assignment</a>
                                 <a href="#" iclass="collapse">Shortest Path</a>
                             </div>                           
                         </li> 
@@ -140,13 +140,155 @@
 
                                 <h4>The algorithm</h4>
 
-                                <h4>Problem upload</h4>
+
+                                <h4 id="nMOCO-S_input">Problem upload</h4>
+                                <p>
+                                    Problem files can be submitted to <code>nMOCO-S</code> application
+                                    via two alternative ways listed in <code>Input Type</code> field. For a subset of problems,
+                                    <code>data file</code> upload option is available. These problems are multi-dimensional 0-1 knapsack,
+                                    assignment and shorthest path problems as listed under <code>Problem Type</code> field.
+                                    Apart from that, the user must fill the required fields that appear only when input type is
+                                    selected as <code>data file</code>. For any problem that cannot be submitted as a <code>data file</code>
+                                    through one of the available options, <code>model file(.lp)</code> option enables the user to upload
+                                    the problem in ".lp" format of IBM ILOG CPLEX software.                                     
+                                </p>
+
                                 <h5>Input parameters</h5>
+
+
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter Name</th>
+                                            <th>Definition</th>
+                                            <th>Set of values</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Input Type</td>
+                                            <td></td>
+                                            <td>{"Model File(.lp)","Data File"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Problem Type</td>
+                                            <td></td>
+                                            <td>{"Knapsack Problem", "Assignment Problem"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of objectives</td>
+                                            <td></td>
+                                            <td>$\left\{n \in \mathbb{N} : n \geq 2 \right\}$</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of knapsacks</td>
+                                            <td></td>
+                                            <td>$\left\{n \in \mathbb{N} : n \geq 1 \right\}$</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of items</td>
+                                            <td></td>
+                                            <td>$\left\{n \in \mathbb{N} : n \geq 1 \right\}$</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of jobs</td>
+                                            <td></td>
+                                            <td>$\left\{n \in \mathbb{N} : n \geq 1 \right\}$</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
                                 <h5>Data file format</h5>
+                                <p>    
+                                    The data file to define an instance of the available problem types must comply with the specifications
+                                    given in the links below:                                 
+                                </p>
+                                <ul>
+                                    <li>
+                                        <a href="#MOKP">Multi dimensional 0-1 knapsack problem</a>
+                                    </li>
+                                    <li>
+                                        <a href="#MOAP">Assignment problem</a>
+                                    </li>
+                                </ul>
+
                                 <h5>Model file format</h5>
-                                <h4>Solver output</h4>
-                                <h5>Output fields</h5>
-                                <h5>Output file format</h5>
+                                <p>
+                                    The user has the option to upload a multi-objective integer linear program (MILP) in LP file format used
+                                    by CPLEX solver with some minor modifications. You can have the necessary information about this input file
+                                    format <a href="http://www.ibm.com/support/knowledgecenter/en/SSSA5P_12.3.0/ilog.odms.cplex.help/Content/Optimization/Documentation/Optimization_Studio/_pubskel/ps_reffileformatscplex2159.html">here.</a>
+                                    First of all, we require the user has the associated LP file format of the single objective MILP problem.
+                                    Then, the user should follow the steps given below:
+                                </p>
+
+                                <ul>
+                                    <li>
+                                        Delete the expression following the <code>obj</code> keyword.
+                                    </li>
+                                    <li>
+                                        Let the problem has $m$ objectives. Define $m$ continuous variables. $z_1, z_2, ..., z_m$.
+                                    </li>
+                                    <li>
+                                        Create $m$ additional constraints right after the last constraint of the single objective problem.
+                                        Let $e_i$ be the expression for the criterion $i$. Then, subtract $z_i$ from this expression and add the 
+                                        constraint $e_i-z_i=0$ to the constraint set. Do this for all criteria.
+                                    </li>
+                                </ul>
+
+                                <p color="blue"> Example:</p>
+                                <p>
+                                    Consider a single-knapsack, 5-item bi-objective 0-1 knapsack problem. Let the criterion matrix be
+                                    [[5, 2, 6, 8, 9];[3, 9, 7, 6, 4]] and the weight vector be [2, 9, 1, 5, 7]. Suppose the capacity of
+                                    the knapsack is 15. Then, the valid file format for <code>nMOCO-s</code> is shown below:
+                                </p>
+                                <pre>
+                                    Maximize
+                                    obj: 
+                                    Subject To
+                                    c1: 2 x1 + 9 x2 + x3 + 5 x4 + 7 x5 <= 15
+                                    c2: 5 x1 + 2 x2 + 6 x3 + 8 x4 + 9 x5 - z1 = 0
+                                    c3: 3 x1 + 9 x2 + 7 x3 + 6 x4 + 4 x5 - z2 = 0
+                                    Bounds
+                                    0 <= x1 <= 1
+                                    0 <= x2 <= 1
+                                    0 <= x3 <= 1
+                                    0 <= x4 <= 1
+                                    0 <= x5 <= 1
+                                    General
+                                    x1 x2 x3 x4 x5
+                                    End
+                                </pre>
+
+
+                                <h4 id="nMOCO-S_output">Solver output</h4>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter Name</th>
+                                            <th>Definition</th>
+                                            <th>Set of values</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Number of nondominated points</td>
+                                            <td></td>
+                                            <td>$\left\{n \in \mathbb{N}\right\}$</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Number of calls to solver</td>
+                                            <td></td>
+                                            <td>$\left\{n \in \mathbb{N}\right\}$</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total CPU time (secs)</td>
+                                            <td></td>
+                                            <td>$\left\{t \in \mathbb{R}_{>0}\right\}$</td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
 
                                 <h3>rMOCO-S</h3>
 
@@ -180,7 +322,7 @@
                                 <p> $W_k$ is the capacity of knapsack $k$ and, </p>
                                 <p> $x_{j}$ is the decision variable which takes the value of 1 if it is included   , otherwise it is 0.</p>
 
-                                <h4>Input file format</h4>
+                                <h4 id="MOKP_input">Input file format</h4>
 
                                 <p>
                                     The following parameters are needed to define an instance of <code>MOKP</code>.
@@ -201,7 +343,6 @@
                                     at a separate line sequentially.
                                 </p>
 
-                                <h4>Output file format</h4>
 
                                 <h3 id="MOAP">Multi-objective assignment problem (MOAP)</h3>
 
@@ -222,10 +363,17 @@
                                 <p> $x_{jk}$ is the decision variable which takes value 1 if job $j$ is assigned to person $k$, otherwise it is 0.</p>
 
 
-                                <h4>Input file format</h4>
+                                <h4 id="MOAP_input">Input file format</h4>
 
-                                <h4>Output file format</h4>
+                                <h3>Output file format</h3>
+                                <p>
+                                    Each instance in <code>libMOCO-S</code> has an associated output file which presents the main results
+                                    returned by <code>nMOCO-S</code> application. The first entry gives the total number of nondominated points
+                                    <code>N</code>, the second entry shows the total number of times the backend single objective optimization solver is called.
+                                    Next <code>N</code> lines list all of the nondominated points of the associated problem. Each line gives 
+                                    the criterion values of a nondominated point separated by white spaces.
 
+                                </p>
 
 
 
