@@ -34,7 +34,7 @@
 
         <!-- Custom styles for this template -->
         <link href="../css/carousel.css" rel="stylesheet">
-        <link href="../css/libMOCO-S.css" rel="stylesheet">
+        <link href="../css/about.css" rel="stylesheet">
     </head>
     <!-- NAVBAR
     ================================================== -->
@@ -76,6 +76,7 @@
                     </div>
                 </div>
             </nav>
+
             <!-- Jumbotron Header -->
             <div class="jumbotron">
                 <h1 style="color: darkslateblue">The project</h1>
@@ -87,6 +88,7 @@
                 <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
             </div>
         </div>
+
 
 
 

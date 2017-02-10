@@ -74,9 +74,10 @@
                 </div>
             </nav>
             <div class="jumbotron">
+                
                 <form class="form-eMOCOS" method="post" action="UploadServlet" enctype="multipart/form-data">
 
-                    <legend> Input Parameters: </legend>
+                    <legend> Input Parameters: <a href="../guide/guide.jsp#nMOCO-S_Input"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a></legend>
                     <fieldset class="form-group" id="eMOCOS_InputParams" style="display: block">
 
                         <fieldset class="form-group" id="eMOCOS_InputParams1">

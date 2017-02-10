@@ -95,7 +95,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">                
                             <h2 class="panel-title"><a data-toggle="collapse" href="#KnapsackTable">Knapsack Problem <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></h2>
-                            <a href="">[Model]</a> <a href="">[Data Format]</a> <a href="">[Batch Download]</a>
+                            <a href="../guide/guide.jsp#MOKP_model">[Model]</a> <a href="../guide/guide.jsp#MOKP_input">[Data Format]</a> <a href="">[Batch Download]</a>
                         </div>
                         <!-- /.panel-heading -->
                         <div id="KnapsackTable" class="panel-collapse collapse">
@@ -137,7 +137,7 @@
 
                         <div class="panel-heading">                
                             <h2 class="panel-title"><a data-toggle="collapse" href="#AssignmentTable">Assignment Problem <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></h2>
-                            <a href="">[Model]</a> <a href="">[Data Format]</a> <a href="">[Batch Download]</a>
+                            <a href="../guide/guide.jsp#MOAP_model">[Model]</a> <a href="../guide/guide.jsp#MOAP_input">[Data Format]</a> <a href="">[Batch Download]</a>
                         </div>
                         <!-- /.panel-heading -->
                         <div id="AssignmentTable" class="panel-collapse collapse">

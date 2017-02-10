@@ -94,7 +94,7 @@
                         </button>
                     </form> 
                 </div>
-
+                
                 <div>
                     <form class="form-horizontal">
                         <div class="form-group">
@@ -121,8 +121,9 @@
                 </div>
 
                 <a class="btn btn-info" href="../../myFiles/Output_nd_points.txt" role="button">Download <span class="glyphicon glyphicon-save-file"></span></a>
+                <a class ="btn btn-warning" href="../guide/guide.jsp#nMOCO-S_output" role="button">Info <span class="glyphicon glyphicon-info-sign" ></span></a>
 
-
+                
 
             </div>
         </div> <!-- /container -->
