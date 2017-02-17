@@ -15,46 +15,30 @@ import java.io.ObjectOutput;
  *
  * @author gokhanceyhan
  */
-public class KnapsackProblem implements Externalizable {
+public class AssignmentProblem implements Externalizable {
 
     private static final int FIRST_VERSION = 0;
 
-    private int numOfKnapsacks;
-    private int numOfItems;
+    private int numOfJobs;
     private File inputFile;
 
-    public KnapsackProblem(int numOfKnapsacks, int numOfItems, File inputFile) {
-        this.numOfKnapsacks = numOfKnapsacks;
-        this.numOfItems = numOfItems;
+    public AssignmentProblem(int numOfJobs, File inputFile) {
+        this.numOfJobs = numOfJobs;
         this.inputFile = inputFile;
     }
 
     /**
-     * @return the numOfKnapsacks
+     * @return the numOfJobs
      */
-    public int getNumOfKnapsacks() {
-        return numOfKnapsacks;
+    public int getNumOfJobs() {
+        return numOfJobs;
     }
 
     /**
-     * @param numOfKnapsacks the numOfKnapsacks to set
+     * @param numOfJobs the numOfJobs to set
      */
-    public void setNumOfKnapsacks(int numOfKnapsacks) {
-        this.numOfKnapsacks = numOfKnapsacks;
-    }
-
-    /**
-     * @return the numOfItems
-     */
-    public int getNumOfItems() {
-        return numOfItems;
-    }
-
-    /**
-     * @param numOfItems the numOfItems to set
-     */
-    public void setNumOfItems(int numOfItems) {
-        this.numOfItems = numOfItems;
+    public void setNumOfJobs(int numOfJobs) {
+        this.numOfJobs = numOfJobs;
     }
 
     /**
@@ -77,8 +61,7 @@ public class KnapsackProblem implements Externalizable {
         out.writeInt(FIRST_VERSION);
 
         // now write the state
-        out.writeInt(numOfKnapsacks);
-        out.writeInt(numOfItems);
+        out.writeInt(numOfJobs);
         out.writeObject(inputFile);
     }
 
@@ -93,9 +76,8 @@ public class KnapsackProblem implements Externalizable {
             throw new IOException("Can't deserialize from the future.");
         }
 
-        numOfKnapsacks = in.readInt();
-        numOfItems = in.readInt();
+        numOfJobs = in.readInt();
         inputFile = (File) in.readObject();
-
     }
+
 }

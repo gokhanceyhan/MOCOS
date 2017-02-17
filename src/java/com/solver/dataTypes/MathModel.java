@@ -15,46 +15,14 @@ import java.io.ObjectOutput;
  *
  * @author gokhanceyhan
  */
-public class KnapsackProblem implements Externalizable {
-
+public class MathModel implements Externalizable{
+    
     private static final int FIRST_VERSION = 0;
 
-    private int numOfKnapsacks;
-    private int numOfItems;
     private File inputFile;
 
-    public KnapsackProblem(int numOfKnapsacks, int numOfItems, File inputFile) {
-        this.numOfKnapsacks = numOfKnapsacks;
-        this.numOfItems = numOfItems;
+    public MathModel(File inputFile) {
         this.inputFile = inputFile;
-    }
-
-    /**
-     * @return the numOfKnapsacks
-     */
-    public int getNumOfKnapsacks() {
-        return numOfKnapsacks;
-    }
-
-    /**
-     * @param numOfKnapsacks the numOfKnapsacks to set
-     */
-    public void setNumOfKnapsacks(int numOfKnapsacks) {
-        this.numOfKnapsacks = numOfKnapsacks;
-    }
-
-    /**
-     * @return the numOfItems
-     */
-    public int getNumOfItems() {
-        return numOfItems;
-    }
-
-    /**
-     * @param numOfItems the numOfItems to set
-     */
-    public void setNumOfItems(int numOfItems) {
-        this.numOfItems = numOfItems;
     }
 
     /**
@@ -77,8 +45,6 @@ public class KnapsackProblem implements Externalizable {
         out.writeInt(FIRST_VERSION);
 
         // now write the state
-        out.writeInt(numOfKnapsacks);
-        out.writeInt(numOfItems);
         out.writeObject(inputFile);
     }
 
@@ -93,9 +59,7 @@ public class KnapsackProblem implements Externalizable {
             throw new IOException("Can't deserialize from the future.");
         }
 
-        numOfKnapsacks = in.readInt();
-        numOfItems = in.readInt();
         inputFile = (File) in.readObject();
-
     }
+
 }
