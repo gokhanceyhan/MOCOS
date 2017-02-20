@@ -88,7 +88,7 @@
                 <div class="well well-lg" id="eMOCOS_log"></div>
 
                 <div>
-                    <form class="form-group" action="OutputServlet" method="POST">
+                    <form class="form-group" action="../../OutputServlet" method="POST">
                         <button type="submit" id="eMOCOS_getResultsButton"  class="btn btn-success" disabled="disabled" >Show results
                             <span class="glyphicon glyphicon-stats"></span>
                         </button>

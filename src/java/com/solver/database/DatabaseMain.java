@@ -23,7 +23,9 @@ public class DatabaseMain {
 
         try {
             Connection connection = ConnectionManager.setUpConnection();
-            showDatabaseMetaData(connection);
+            //addInputDataAsUDT(connection, "MOCO");
+            //showDatabaseMetaData(connection);
+            //deleteUDT(connection, "MOCO","JOBINPUT");           
             //alterJobQueueTable(connection);
 
             connection.commit();
@@ -37,7 +39,7 @@ public class DatabaseMain {
 
     public static void showDatabaseMetaData(Connection con) throws SQLException {
         DatabaseMetaData md = con.getMetaData();
-        
+
         // list of user defined types
         ResultSet rs = md.getUDTs(null, null, null, null);
         while (rs.next()) {
@@ -57,11 +59,26 @@ public class DatabaseMain {
     }
 
     public static void addColumnToTable(Connection con, String schemaName, String tableName, String columnName, String columnType) throws SQLException {
-        
+
         Statement statement = con.createStatement();
         String sql = "ALTER TABLE " + schemaName + "." + tableName + " ADD COLUMN " + columnName + " " + columnType;
         statement.execute(sql);
 
+    }
+
+    public static void addInputDataAsUDT(Connection con, String schemaName) throws SQLException {
+
+        Statement statement = con.createStatement();
+        String sql = "CREATE TYPE JOBINPUT\n"
+                + "EXTERNAL NAME 'com.solver.dataTypes.InputData'\n"
+                + "LANGUAGE JAVA";
+        statement.execute(sql);
+    }
+
+    public static void deleteUDT(Connection con, String schemaName, String udtName) throws SQLException {
+        Statement statement = con.createStatement();
+        String sql = "DROP TYPE " + schemaName + "." + udtName + " RESTRICT";
+        statement.execute(sql);
     }
 
 }

@@ -15,7 +15,7 @@
         <meta name="author" content="">
         <link rel="icon" href="favicon.ico">
 
-        <title>MOCOs</title>
+        <title>MOCO-S</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -38,8 +38,7 @@
         <script src="../js/contact_me.js"></script>
 
         <!-- Custom styles for this template -->
-        <link href="../css/carousel.css" rel="stylesheet">
-        <link href="../css/libMOCO-S.css" rel="stylesheet">
+        <link href="../css/contact.css" rel="stylesheet">
     </head>
     <!-- NAVBAR
     ================================================== -->
@@ -60,9 +59,9 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="../index.jsp">Home</a></li>
+                            <li><a href="../index.jsp">Home</a></li>
                             <li><a href="about.jsp">About</a></li>
-                            <li><a href="contact.jsp">Contact</a></li>
+                            <li class="active"><a href="contact.jsp">Contact</a></li>
                             <li><a href="libMOCO-S/libMOCO-S.jsp">Library</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
@@ -86,8 +85,8 @@
                 <!-- Page Heading/Breadcrumbs -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Contact
-                            <small>Subheading</small>
+                        <h1 class="page-header">
+                            MOCO-S Developer Team
                         </h1>
                         <!--ol class="breadcrumb">
                             <li><a href="index.html">Home</a>
@@ -109,15 +108,18 @@
                     <div class="col-md-4">
                         <h3>Contact Details</h3>
                         <p>
-                            3481 Melrose Place<br>Beverly Hills, CA 90210<br>
+                            Department of Industrial Engineering
+                            <br>Middle East Technical University <br>
+                            <br>Universiteler Mahallesi, Dumlupinar Bulvari No: 1 <br>
+                            <br>06800 Cankaya Ankara, Turkey<br>
                         </p>
                         <p><i class="fa fa-phone"></i> 
-                            <abbr title="Phone">P</abbr>: (123) 456-7890</p>
+                            <abbr title="Phone">P</abbr>: (+90) 312 210-2266</p>
                         <p><i class="fa fa-envelope-o"></i> 
-                            <abbr title="Email">E</abbr>: <a href="mailto:name@example.com">name@example.com</a>
+                            <abbr title="Email">E</abbr>: <a href="mailto:onlinemoco@gmail.com">onlinemoco@gmail.com</a>
                         </p>
-                        <p><i class="fa fa-clock-o"></i> 
-                            <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM</p>
+                        <!--p><i class="fa fa-clock-o"></i> 
+                            <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM</p-->
                         <ul class="list-unstyled list-inline list-social-icons">
                             <li>
                                 <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
@@ -140,7 +142,7 @@
                 <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
                 <div class="row">
                     <div class="col-md-8">
-                        <h3>Send us a Message</h3>
+                        <h3>Send us your message</h3>
                         <form name="sentMessage" id="contactForm" novalidate>
                             <div class="control-group form-group">
                                 <div class="controls">
@@ -149,12 +151,12 @@
                                     <p class="help-block"></p>
                                 </div>
                             </div>
-                            <div class="control-group form-group">
+                            <!--div class="control-group form-group">
                                 <div class="controls">
                                     <label>Phone Number:</label>
                                     <input type="tel" class="form-control" id="phone" required data-validation-required-message="Please enter your phone number.">
                                 </div>
-                            </div>
+                            </div-->
                             <div class="control-group form-group">
                                 <div class="controls">
                                     <label>Email Address:</label>
@@ -190,15 +192,6 @@
             </div>
             <!-- /.container -->
         </div>
-
-
-
-
-
-
-
-
-
 
 
     </body>

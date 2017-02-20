@@ -25,7 +25,7 @@ function solveModel()
     document.getElementById("eMOCOS_log").innerHTML = "Solving...";
 
     // send request to servlet
-    var url = "SolveServlet";
+    var url = "../../SolveServlet";
     req = initRequest();
     req.open("GET", url, true);
     req.onreadystatechange = Process;

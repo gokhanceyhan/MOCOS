@@ -15,7 +15,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>eMOCOs</title>
+        <title>nMOCO-S</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -74,63 +74,78 @@
                 </div>
             </nav>
             <div class="jumbotron">
-                
-                <form class="form-eMOCOS" method="post" action="UploadServlet" enctype="multipart/form-data">
 
-                    <legend> Input Parameters: <a href="../guide/guide.jsp#nMOCO-S_Input"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a></legend>
-                    <fieldset class="form-group" id="eMOCOS_InputParams" style="display: block">
+                <form class="form-eMOCOS" method="post" action="../../UploadServlet" enctype="multipart/form-data">
+                    <div class="container">
+                        <div class="row">           
+                            <div class="col-xs-6">
+                                <legend> Input Parameters: <a href="../guide/guide.jsp#nMOCO-S_Input"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a></legend>
+                                
+                                <fieldset class="form-group" id="eMOCOS_InputParams" style="display: block">
 
-                        <fieldset class="form-group" id="eMOCOS_InputParams1">
-                            <label for="eMOCOS_InputType">Input Type</label>
-                            <select class="form-control" id="eMOCOS_InputType" name="InputType" onchange="updateInputParamsLists();">
-                                <option value="" disabled="disabled" selected="selected">Select File Type</option>
-                                <option value="Model">Model File (.lp)</option>
-                                <option value="Data" >Data File</option>
-                            </select>
-                        </fieldset>
+                                    <fieldset class="form-group" id="eMOCOS_InputParams1">
+                                        <label for="eMOCOS_InputType">Input Type</label>
+                                        <select class="form-control" id="eMOCOS_InputType" name="InputType" onchange="updateInputParamsLists();">
+                                            <option value="" disabled="disabled" selected="selected">Select File Type</option>
+                                            <option value="Model">Model File (.lp)</option>
+                                            <option value="Data" >Data File</option>
+                                        </select>
+                                    </fieldset>
 
-                        <fieldset class="form-group" id="eMOCOS_InputParams2">
-                            <label for="eMOCOS_ProblemType">Problem Type</label>
-                            <select class="form-control" id="eMOCOS_ProblemType" name="ProblemType" onchange="updateInputParamsLists();">
-                                <option value="" disabled="disabled" selected="selected">Select Problem Type</option>
-                                <option value="Knapsack">Knapsack Problem</option>
-                                <option value="Assignment">Assignment Problem</option>
-                            </select>
-                        </fieldset>
+                                    <fieldset class="form-group" id="eMOCOS_InputParams2">
+                                        <label for="eMOCOS_ProblemType">Problem Type</label>
+                                        <select class="form-control" id="eMOCOS_ProblemType" name="ProblemType" onchange="updateInputParamsLists();">
+                                            <option value="" disabled="disabled" selected="selected">Select Problem Type</option>
+                                            <option value="Knapsack">Knapsack Problem</option>
+                                            <option value="Assignment">Assignment Problem</option>
+                                        </select>
+                                    </fieldset>
 
-                        <fieldset class="form-group" id="eMOCOS_InputParams3">
-                            <label for="eMOCOS_numOfObjectives">Number of Objectives</label>
-                            <input type="text" class="form-control" id="eMOCOS_numOfObjectives" name="numOfObj" placeholder="">
-                        </fieldset>
+                                    <fieldset class="form-group" id="eMOCOS_InputParams3">
+                                        <label for="eMOCOS_numOfObjectives">Number of Objectives</label>
+                                        <input type="text" class="form-control" id="eMOCOS_numOfObjectives" name="numOfObj" placeholder="">
+                                    </fieldset>
 
-                    </fieldset>
+                                </fieldset>
 
-                    <fieldset class="form-group" id="eMOCOS_ProblemParams" style="display: none">
-                        <legend> Problem Parameters:</legend>
+                                <fieldset class="form-group" id="eMOCOS_ProblemParams" style="display: none">
+                                    <legend> Problem Parameters:</legend>
 
-                        <fieldset class="form-group" id="eMOCOS_KnapsackParams1">
-                            <label for="eMOCOS_numOfKnapsacks">Number of Knapsacks</label>
-                            <input type="text" class="form-control" id="eMOCOS_numOfKnapsacks" name="numOfKnapsacks" placeholder="">
-                        </fieldset>
+                                    <fieldset class="form-group" id="eMOCOS_KnapsackParams1">
+                                        <label for="eMOCOS_numOfKnapsacks">Number of Knapsacks</label>
+                                        <input type="text" class="form-control" id="eMOCOS_numOfKnapsacks" name="numOfKnapsacks" placeholder="">
+                                    </fieldset>
 
-                        <fieldset class="form-group" id="eMOCOS_KnapsackParams2">
-                            <label for="eMOCOS_numOfItems">Number of Items</label>
-                            <input type="text" class="form-control" id="eMOCOS_numOfItems" name="numOfItems" placeholder="">
-                        </fieldset>
+                                    <fieldset class="form-group" id="eMOCOS_KnapsackParams2">
+                                        <label for="eMOCOS_numOfItems">Number of Items</label>
+                                        <input type="text" class="form-control" id="eMOCOS_numOfItems" name="numOfItems" placeholder="">
+                                    </fieldset>
 
-                        <fieldset class="form-group" id="eMOCOS_AssignmentParams1">
-                            <label for="eMOCOS_numOfJobs">Number of Jobs</label>
-                            <input type="text" class="form-control" id="eMOCOS_numOfJobs" name="numOfJobs" placeholder="">
-                        </fieldset>
+                                    <fieldset class="form-group" id="eMOCOS_AssignmentParams1">
+                                        <label for="eMOCOS_numOfJobs">Number of Jobs</label>
+                                        <input type="text" class="form-control" id="eMOCOS_numOfJobs" name="numOfJobs" placeholder="">
+                                    </fieldset>
 
-                    </fieldset>
+                                </fieldset>
 
-                    <fieldset class="form-group" id="eMOCOS_fileUpload">
-                        <label for="eMOCOS_InputFile">File Input</label>
-                        <input type="file" class="form-control-file" id="eMOCOS_InputFile" name="uploadFile">
-                    </fieldset>
+                                <fieldset class="form-group" id="eMOCOS_fileUpload">
+                                    <label for="eMOCOS_InputFile">File Input</label>
+                                    <input type="file" class="form-control-file" id="eMOCOS_InputFile" name="uploadFile">
+                                </fieldset>
+                            </div>
+                            <div class="col-xs-6">
+                                <legend>User info:</legend>
+                                <fieldset class="form-group" id="nMOCO-S_UserInfo">
+                                    
+                                </fieldset>
+                            </div>
+                            
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div>
 
-                    <button type="submit" class="btn btn-primary">Upload</button>
+
+                    
                 </form> 
             </div>
 

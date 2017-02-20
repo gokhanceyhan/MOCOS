@@ -21,6 +21,7 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig
 public class UploadServlet extends HttpServlet {
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -48,7 +49,7 @@ public class UploadServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // declare the workspace directory 
-        String uploadPath = "/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/web/myFiles";
+        String uploadPath = request.getContextPath() + "/nMOCO-S_Files/";
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
@@ -64,7 +65,7 @@ public class UploadServlet extends HttpServlet {
         }
 
         if (isInputvalid) {
-            response.sendRedirect("eMOCOS_SolvePage.jsp");
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/jsp/nMOCO-S/nMOCO-S_SolvePage.jsp"));
 
         } else {
             response.setContentType("text/html;charset=UTF-8");
@@ -78,7 +79,7 @@ public class UploadServlet extends HttpServlet {
             out.println("<h1> Upload not successfull! </h1>");
             out.print("<p> Chek your inputs! ");
             out.print("Return to homepage and click 'Solve'. </p>");
-            out.println("<p><a href='eMOCOS_InputPage.jsp'> Return to home page </a></p>");
+            out.println("<p><a href='nMOCO-S_InputPage.jsp'> Return to home page </a></p>");
             out.println("</body>");
             out.println("</html>");
             out.close();
@@ -170,6 +171,8 @@ public class UploadServlet extends HttpServlet {
                 }
                 break;
         }
+        
+        out_MainFile.close();
 
     }
 

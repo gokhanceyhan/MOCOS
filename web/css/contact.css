@@ -4,22 +4,23 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Jun 22, 2016, 8:15:56 PM
+    Created on : Feb 19, 2017, 3:03:18 PM
     Author     : gokhanceyhan
 */
-
 body {
   padding-top: 20px;
   padding-bottom: 20px;
-  /*background-color: #eee;*/
+  margin-left: 150px;
+  margin-right: 150px;
 }
 
-.form-eMOCOS {
-  max-width: 1000px;
-  padding: 15px;
-  margin: 0 auto;
+.navbar {
+  margin-bottom: 20px;
 }
 
-
-
-
+.jumbotron{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
