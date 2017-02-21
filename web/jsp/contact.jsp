@@ -143,6 +143,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <h3>Send us your message</h3>
+                        
                         <form name="sentMessage" id="contactForm" novalidate>
                             <div class="control-group form-group">
                                 <div class="controls">

@@ -44,7 +44,7 @@ function Process()
         // change the status bar into "Complete" which is in the response to solve request
         document.getElementById("eMOCOS_log").innerHTML = req.responseText;
         document.getElementById("eMOCOS_getResultsButton").disabled = false;
-        
+
     }
 }
 
@@ -80,3 +80,27 @@ function updateInputParamsLists() {
     }
 
 }
+$(function () {
+    $("input,textarea").not("[type=submit]").jqBootstrapValidation();
+});
+
+
+
+$(document).ready(function () {
+
+    // Update the value of "agree" input when clicking the Agree/Disagree button
+    $('#agreeButton, #disagreeButton').on('click', function () {
+        var whichButton = $(this).attr('id');
+
+        $('#uploadForm')
+                .find('[name="agree"]')
+                .val(whichButton === 'agreeButton' ? 'yes' : 'no')
+                .end();
+        // Revalidate the field manually
+        //.formValidation('revalidateField', 'agree');
+    });
+});
+
+
+
+

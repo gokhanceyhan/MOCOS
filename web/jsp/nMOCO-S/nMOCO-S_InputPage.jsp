@@ -21,6 +21,7 @@
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/jqBootstrapValidation.js"></script>
         <!--%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -28,6 +29,7 @@
 
         <!-- Custom styles for this template -->
         <link href="../../css/nMOCO-S_Input.css" rel="stylesheet">
+
 
         <!-- Custom javascript files -->
         <script src="../../js/nMOCO-S.js"></script>
@@ -75,7 +77,7 @@
             </nav>
             <div class="jumbotron">
 
-                <form id="uploadForm" class="form-eMOCOS" method="post" action="../../UploadServlet" enctype="multipart/form-data">
+                <form id="uploadForm" class="form-eMOCOS" method="post" action="../../UploadServlet" enctype="multipart/form-data" novalidate>
                     <div class="container">
                         <div class="row">           
                             <div class="col-md-6">
@@ -83,13 +85,16 @@
 
                                 <fieldset class="form-group" id="eMOCOS_InputParams" style="display: block">
 
-                                    <fieldset class="form-group" id="eMOCOS_InputParams1">
+                                    <fieldset class="control-group form-group" id="eMOCOS_InputParams1">
                                         <label for="eMOCOS_InputType">Input Type</label>
-                                        <select class="form-control" id="eMOCOS_InputType" name="InputType" onchange="updateInputParamsLists();">
+                                        <select class="form-control validation-field" id="eMOCOS_InputType" name="InputType" onchange="updateInputParamsLists();" 
+                                                required 
+                                                data-validation-required-message="Please choose an input type.">
                                             <option value="" disabled="disabled" selected="selected">Select File Type</option>
                                             <option value="Model">Model File (.lp)</option>
                                             <option value="Data" >Data File</option>
                                         </select>
+                                        <p class="help-block"></p>
                                     </fieldset>
 
                                     <fieldset class="form-group" id="eMOCOS_InputParams2">
@@ -101,9 +106,16 @@
                                         </select>
                                     </fieldset>
 
-                                    <fieldset class="form-group" id="eMOCOS_InputParams3">
+                                    <fieldset class="control-group form-group" id="eMOCOS_InputParams3">
                                         <label for="eMOCOS_numOfObjectives">Number of Objectives</label>
-                                        <input type="text" class="form-control" id="eMOCOS_numOfObjectives" name="numOfObj" placeholder="">
+                                        <input type="text" class="form-control" id="eMOCOS_numOfObjectives" name="numOfObj" placeholder="" 
+                                               required
+                                               data-validation-required-message="Please enter a positive integer value."
+                                               type="number"
+                                               min="1"
+                                               data-validation-number-message="Please enter a positive integer value."
+                                               />
+                                        <p class="help-block"></p>
                                     </fieldset>
 
                                 </fieldset>
@@ -128,60 +140,61 @@
 
                                 </fieldset>
 
-                                <fieldset class="form-group" id="eMOCOS_fileUpload">
+                                <fieldset class="control-group form-group" id="eMOCOS_fileUpload">
                                     <label for="eMOCOS_InputFile">File Input</label>
-                                    <input type="file" class="form-control-file" id="eMOCOS_InputFile" name="uploadFile">
+                                    <input type="file" class="form-control-file" id="eMOCOS_InputFile" name="uploadFile"
+                                           accept=".lp,.txt"
+                                           />
+                                </fieldset>
+
+                                <fieldset class="control-group form-group" id="eMOCOS_filePermission">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="allowFile"> Allow to store the uploaded input data in the library. 
+                                        </label>
+                                    </div>
                                 </fieldset>
                             </div>
                             <div class="col-md-6">
                                 <legend>User info:</legend>
 
                                 <div class="control-group form-group">
-                                    <div class="controls">
-                                        <label>Full Name:</label>
-                                        <input type="text" class="form-control" id="name" name="userName" required data-validation-required-message="Please enter your name.">
-                                        <p class="help-block"></p>
-                                    </div>
-                                    <div class="control-group form-group">
-                                        <div class="controls">
-                                            <label>Email Address:</label>
-                                            <input type="email" class="form-control" id="email" name="userMail" required data-validation-required-message="Please enter your email address.">
+
+                                    <fieldset class="control-group form-group">
+                                        <label for="eMOCOS_userinfo"></label>
+                                        <div class="input-group">                               
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input id="name" type="text" class="form-control" name="username" placeholder="Name" required data-validation-required-message="Please enter your name.">
                                         </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="name" type="text" class="form-control" name="username" placeholder="Name" required data-validation-required-message="Please enter your name.">
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                        <input id="email" type="text" class="form-control" name="email" placeholder="Email" required data-validation-required-message="Please enter your email address.">
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Store the input file
-                                        </label>
-                                    </div>
+                                        <p class="help-block"></p>
+                                    </fieldset>
+
+                                    <fieldset class="control-group form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                            <input id="email" type="email" class="form-control" name="email" placeholder="Email" required data-validation-required-message="Please enter your email address.">                                           
+                                        </div>
+                                        <p class="help-block"></p>
+                                    </fieldset>
                                 </div>
                             </div>
 
                         </div>
 
                         <div class="form-group">
-                            <div class="col-xs-6 col-xs-offset-3">
+                            <div>
                                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#termsModal">Agree with the terms and conditions</button>
                                 <input type="hidden" name="agree" value="no" />
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="col-xs-9 col-xs-offset-3">
+                            <div>
                                 <button type="submit" class="btn btn-primary" name="upload" value="upload">Submit</button>
                             </div>
                         </div>
 
                     </div>
-
-
 
                 </form>
 
@@ -194,8 +207,7 @@
                             </div>
 
                             <div class="modal-body">
-                                <p>Lorem ipsum dolor sit amet, veniam numquam has te. No suas nonumes recusabo mea, est ut graeci definitiones. His ne melius vituperata scriptorem, cum paulo copiosae conclusionemque at. Facer inermis ius in, ad brute nominati referrentur vis. Dicat erant sit ex. Phaedrum imperdiet scribentur vix no, ad latine similique forensibus vel.</p>
-                                <p>Dolore populo vivendum vis eu, mei quaestio liberavisse ex. Electram necessitatibus ut vel, quo at probatus oportere, molestie conclusionemque pri cu. Brute augue tincidunt vim id, ne munere fierent rationibus mei. Ut pro volutpat praesent qualisque, an iisque scripta intellegebat eam.</p>
+                                <p>CPLEX terms and conditions</p>
                             </div>
 
                             <div class="modal-footer">
