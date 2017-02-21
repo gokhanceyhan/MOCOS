@@ -52,7 +52,7 @@
 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="../../index.jsp">Home</a></li>
+                            <li><a href="../../index.jsp">Home</a></li>
                             <li><a href="../about.jsp">About</a></li>
                             <li><a href="../contact.jsp">Contact</a></li>
                             <li><a href="../libMOCO-S/libMOCO-S.jsp">Library</a></li>
@@ -75,12 +75,12 @@
             </nav>
             <div class="jumbotron">
 
-                <form class="form-eMOCOS" method="post" action="../../UploadServlet" enctype="multipart/form-data">
+                <form id="uploadForm" class="form-eMOCOS" method="post" action="../../UploadServlet" enctype="multipart/form-data">
                     <div class="container">
                         <div class="row">           
-                            <div class="col-xs-6">
+                            <div class="col-md-6">
                                 <legend> Input Parameters: <a href="../guide/guide.jsp#nMOCO-S_Input"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a></legend>
-                                
+
                                 <fieldset class="form-group" id="eMOCOS_InputParams" style="display: block">
 
                                     <fieldset class="form-group" id="eMOCOS_InputParams1">
@@ -133,24 +133,85 @@
                                     <input type="file" class="form-control-file" id="eMOCOS_InputFile" name="uploadFile">
                                 </fieldset>
                             </div>
-                            <div class="col-xs-6">
+                            <div class="col-md-6">
                                 <legend>User info:</legend>
-                                <fieldset class="form-group" id="nMOCO-S_UserInfo">
-                                    
-                                </fieldset>
+
+                                <div class="control-group form-group">
+                                    <div class="controls">
+                                        <label>Full Name:</label>
+                                        <input type="text" class="form-control" id="name" name="userName" required data-validation-required-message="Please enter your name.">
+                                        <p class="help-block"></p>
+                                    </div>
+                                    <div class="control-group form-group">
+                                        <div class="controls">
+                                            <label>Email Address:</label>
+                                            <input type="email" class="form-control" id="email" name="userMail" required data-validation-required-message="Please enter your email address.">
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="name" type="text" class="form-control" name="username" placeholder="Name" required data-validation-required-message="Please enter your name.">
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        <input id="email" type="text" class="form-control" name="email" placeholder="Email" required data-validation-required-message="Please enter your email address.">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"> Store the input file
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                            
+
                         </div>
-                        <button type="submit" class="btn btn-primary">Upload</button>
+
+                        <div class="form-group">
+                            <div class="col-xs-6 col-xs-offset-3">
+                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#termsModal">Agree with the terms and conditions</button>
+                                <input type="hidden" name="agree" value="no" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-9 col-xs-offset-3">
+                                <button type="submit" class="btn btn-primary" name="upload" value="upload">Submit</button>
+                            </div>
+                        </div>
+
                     </div>
 
 
-                    
-                </form> 
+
+                </form>
+
+                <!-- Terms and conditions modal -->
+                <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="Terms and conditions" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title">Terms and conditions</h3>
+                            </div>
+
+                            <div class="modal-body">
+                                <p>Lorem ipsum dolor sit amet, veniam numquam has te. No suas nonumes recusabo mea, est ut graeci definitiones. His ne melius vituperata scriptorem, cum paulo copiosae conclusionemque at. Facer inermis ius in, ad brute nominati referrentur vis. Dicat erant sit ex. Phaedrum imperdiet scribentur vix no, ad latine similique forensibus vel.</p>
+                                <p>Dolore populo vivendum vis eu, mei quaestio liberavisse ex. Electram necessitatibus ut vel, quo at probatus oportere, molestie conclusionemque pri cu. Brute augue tincidunt vim id, ne munere fierent rationibus mei. Ut pro volutpat praesent qualisque, an iisque scripta intellegebat eam.</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="agreeButton" data-dismiss="modal">Agree</button>
+                                <button type="button" class="btn btn-default" id="disagreeButton" data-dismiss="modal">Disagree</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div> <!-- /container -->
 
     </body>
 </html>
+
+
 
