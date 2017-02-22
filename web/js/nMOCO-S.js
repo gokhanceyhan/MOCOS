@@ -1,10 +1,14 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 var req;
+
+$(function () {
+    $("input,textarea").not("[type=submit]").jqBootstrapValidation();
+});
+
+
+$(document).ready(function () {
+
+});
 
 function initRequest() {
     var isIE;
@@ -22,7 +26,7 @@ function initRequest() {
 function solveModel()
 {
     // display status info as "Processing"
-    document.getElementById("eMOCOS_log").innerHTML = "Solving...";
+    document.getElementById("nMOCOS_log").innerHTML = "Solving...";
 
     // send request to servlet
     var url = "../../SolveServlet";
@@ -42,64 +46,43 @@ function Process()
     if (req.readyState === 4 && req.status === 200)
     {
         // change the status bar into "Complete" which is in the response to solve request
-        document.getElementById("eMOCOS_log").innerHTML = req.responseText;
-        document.getElementById("eMOCOS_getResultsButton").disabled = false;
+        document.getElementById("nMOCOS_log").innerHTML = req.responseText;
+        document.getElementById("nMOCOS_getResultsButton").disabled = false;
 
     }
 }
 
-
 function updateInputParamsLists() {
 
-    var dropdown1 = document.getElementById("eMOCOS_InputType");
+    var dropdown1 = document.getElementById("nMOCOS_InputType");
     var dropdown1_value = dropdown1.options[dropdown1.selectedIndex].value;
-    var dropdown2 = document.getElementById("eMOCOS_ProblemType");
+    var dropdown2 = document.getElementById("nMOCOS_ProblemType");
     var dropdown2_value = dropdown2.options[dropdown2.selectedIndex].value;
 
     if (dropdown1_value === 'Model') {
         dropdown2.selectedIndex = 0; // set the second dropdown list to default
-        document.getElementById("eMOCOS_ProblemType").style.display = "none";
-        document.getElementById("eMOCOS_ProblemParams").style.display = "none";
+        document.getElementById("nMOCOS_InputParams3").style.display = "none";
+        document.getElementById("nMOCOS_ProblemParams").style.display = "none";
     }
     if (dropdown1_value === 'Data')
     {
-        document.getElementById("eMOCOS_ProblemType").style.display = "block";
+        document.getElementById("nMOCOS_InputParams3").style.display = "block";
 
         if (dropdown2_value === 'Knapsack') {
-            document.getElementById("eMOCOS_ProblemParams").style.display = "block";
-            document.getElementById("eMOCOS_KnapsackParams1").style.display = "block";
-            document.getElementById("eMOCOS_KnapsackParams2").style.display = "block";
-            document.getElementById("eMOCOS_AssignmentParams1").style.display = "none";
+            document.getElementById("nMOCOS_ProblemParams").style.display = "block";
+            document.getElementById("nMOCOS_KnapsackParams1").style.display = "block";
+            document.getElementById("nMOCOS_KnapsackParams2").style.display = "block";
+            document.getElementById("nMOCOS_AssignmentParams1").style.display = "none";
         }
         if (dropdown2_value === 'Assignment') {
-            document.getElementById("eMOCOS_ProblemParams").style.display = "block";
-            document.getElementById("eMOCOS_KnapsackParams1").style.display = "none";
-            document.getElementById("eMOCOS_KnapsackParams2").style.display = "none";
-            document.getElementById("eMOCOS_AssignmentParams1").style.display = "block";
+            document.getElementById("nMOCOS_ProblemParams").style.display = "block";
+            document.getElementById("nMOCOS_KnapsackParams1").style.display = "none";
+            document.getElementById("nMOCOS_KnapsackParams2").style.display = "none";
+            document.getElementById("nMOCOS_AssignmentParams1").style.display = "block";
         }
     }
 
 }
-$(function () {
-    $("input,textarea").not("[type=submit]").jqBootstrapValidation();
-});
-
-
-
-$(document).ready(function () {
-
-    // Update the value of "agree" input when clicking the Agree/Disagree button
-    $('#agreeButton, #disagreeButton').on('click', function () {
-        var whichButton = $(this).attr('id');
-
-        $('#uploadForm')
-                .find('[name="agree"]')
-                .val(whichButton === 'agreeButton' ? 'yes' : 'no')
-                .end();
-        // Revalidate the field manually
-        //.formValidation('revalidateField', 'agree');
-    });
-});
 
 
 
