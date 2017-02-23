@@ -165,7 +165,7 @@
                                 <fieldset class="control-group form-group" id="nMOCOS_filePermission">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" id="nMOCO-S_LibraryPermission" name="filePermission"> Allow to store the uploaded input data in the library. 
+                                            <input type="checkbox" id="nMOCO-S_LibraryPermission" name="filePermission" value="yes"> Allow to store the uploaded input data in the library. 
                                         </label>
                                     </div>
                                 </fieldset>
@@ -214,7 +214,7 @@
 
                         <div class="form-group">
                             <div>
-                                <button type="submit" class="btn btn-primary" name="upload" value="upload">Submit</button>
+                                <button type="submit" class="btn btn-primary" name="upload" value="upload">Upload</button>
                             </div>
                         </div>
 

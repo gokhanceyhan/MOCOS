@@ -22,6 +22,12 @@ public class KnapsackProblem implements Externalizable {
     private int numOfKnapsacks;
     private int numOfItems;
     private File inputFile;
+    
+    public KnapsackProblem(){
+        numOfKnapsacks = 1;
+        numOfItems = 1;
+        inputFile = new File("");
+    }
 
     public KnapsackProblem(int numOfKnapsacks, int numOfItems, File inputFile) {
         this.numOfKnapsacks = numOfKnapsacks;

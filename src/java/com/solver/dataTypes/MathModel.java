@@ -20,6 +20,10 @@ public class MathModel implements Externalizable{
     private static final int FIRST_VERSION = 0;
 
     private File inputFile;
+    
+    public MathModel(){
+        inputFile = new File("");
+    }
 
     public MathModel(File inputFile) {
         this.inputFile = inputFile;

@@ -21,6 +21,11 @@ public class AssignmentProblem implements Externalizable {
 
     private int numOfJobs;
     private File inputFile;
+    
+    public AssignmentProblem(){
+        numOfJobs = 1;
+        inputFile = new File("");
+    }
 
     public AssignmentProblem(int numOfJobs, File inputFile) {
         this.numOfJobs = numOfJobs;

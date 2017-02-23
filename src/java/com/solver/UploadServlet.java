@@ -1,5 +1,8 @@
 package com.solver;
 
+import com.solver.dataTypes.InputData;
+import com.solver.dataTypes.InputType;
+import com.solver.dataTypes.ProblemType;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -21,6 +24,21 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig
 public class UploadServlet extends HttpServlet {
+
+    private String contextPath;
+    private String usermail;
+    private long jobId;
+    private InputData inputData;
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -48,24 +66,13 @@ public class UploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // declare the workspace directory 
-        String uploadPath = request.getContextPath() + "/nMOCO-S_Files/";
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdir();
-        }
-        cleanDirectory(uploadDir);
-        setupDirectory(uploadDir, request);
+        contextPath = request.getContextPath();
 
         // create and validate uploaded input file
         boolean isInputvalid = true;
-        String uploadResult = createInputFile(request, uploadDir);
-        if (!uploadResult.equals("")) {
-            isInputvalid = false;
-        }
 
         if (isInputvalid) {
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/jsp/nMOCO-S/nMOCO-S_SolvePage.jsp"));
+            response.sendRedirect(response.encodeRedirectURL(contextPath + "/jsp/nMOCO-S/nMOCO-S_SolvePage.jsp"));
 
         } else {
             response.setContentType("text/html;charset=UTF-8");
@@ -87,57 +94,94 @@ public class UploadServlet extends HttpServlet {
 
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
-
-    private void cleanDirectory(File uploadDir) {
-
-        // delete all the old files
-        File file = new File(uploadDir, "model.lp");
-        if (file.exists()) {
-            file.delete();
-        }
-
-        file = new File(uploadDir, "data.txt");
-        if (file.exists()) {
-            file.delete();
-        }
-
-        file = new File(uploadDir, "MainFile.txt");
-        if (file.exists()) {
-            file.delete();
-        }
-
-        file = new File(uploadDir, "Output_nd_points.txt");
-        if (file.exists()) {
-            file.delete();
-        }
-    }
-
-    private void setupDirectory(File uploadDir, HttpServletRequest request) throws IOException {
+    private void getInputParameters(HttpServletRequest request) {
 
         // getting the form parameters
-        String numofObj = request.getParameter("numOfObj");
-        String InputType = request.getParameter("InputType");
-        String ProblemType = request.getParameter("ProblemType");
-        String numofKnapsacks = request.getParameter("numofKnapsacks");
-        String numofItems = request.getParameter("numofItems");
-        String numofJobs = request.getParameter("numofJobs");
+        inputData = new InputData();
+        String inputType = request.getParameter("InputType");
+        if ("Model".equalsIgnoreCase(inputType)) {
+            inputData.setInputType(InputType.MODELFILE);
+        } else {
+            inputData.setInputType(InputType.DATAFILE);
+        }
+
+        inputData.setNumOfObjectives(Integer.parseInt(request.getParameter("numOfObj")));
+        inputData.getKnapsackProblem().setNumOfKnapsacks(Integer.parseInt(request.getParameter("numofKnapsacks")));
+        inputData.getKnapsackProblem().setNumOfItems(Integer.parseInt(request.getParameter("numofItems")));
+        inputData.getAssignmentProblem().setNumOfJobs(Integer.parseInt(request.getParameter("numofJobs")));
+
+    }
+
+    private void getProblemFile(HttpServletRequest request) throws IOException, ServletException {
+
+        Part uploadFile = request.getPart("uploadFile");
+
+        InputStream uploadFileContent = uploadFile.getInputStream();
+
+        File inputFile;
+        if (inputData.getInputType().equals(InputType.MODELFILE)) {
+            inputFile = new File("", "model.lp");
+        } else {
+            inputFile = new File("", "data.txt");
+        }
+
+        OutputStream out_InputFile = new FileOutputStream(inputFile);
+        byte[] buf = new byte[1024];
+        int len;
+        while ((len = uploadFileContent.read(buf)) > 0) {
+            out_InputFile.write(buf, 0, len);
+        }
+
+        if (inputData.getInputType().equals(InputType.MODELFILE)) {
+            inputData.getMathModel().setInputFile(inputFile);
+        } else {
+            if (inputData.getProblemType().equals(ProblemType.KNAPSACK)) {
+                inputData.getKnapsackProblem().setInputFile(inputFile);
+            }
+            if (inputData.getProblemType().equals(ProblemType.ASSIGNMENT)) {
+                inputData.getAssignmentProblem().setInputFile(inputFile);
+            }
+        }
+
+        uploadFile.delete();
+
+    }
+
+    private void getUserInfo(HttpServletRequest request) {
+        usermail = request.getParameter("email");
+    }
+
+    private boolean validateInputFile() {
+
+        return true;
+    }
+
+    private boolean validateUserJobLimit() {
+
+        return true;
+    }
+
+    private void generateJobId() {
+
+    }
+
+    private void setupDirectory(String path) {
+        String uploadPath = contextPath + path;
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdir();
+        }
+    }
+
+    private void generateParameterFile(File uploadDir) throws IOException {
 
         // create the "MainFile" and write the parameter values in it
         File MainFile = new File(uploadDir, "MainFile.txt");
 
         PrintWriter out_MainFile = new PrintWriter(new FileWriter(MainFile));
-        out_MainFile.println(numofObj);
-        switch (InputType) {
-            case "Model":
+        out_MainFile.println(inputData.getNumOfObjectives());
+        switch (inputData.getInputType().toString()) {
+            case "MODELFILE":
                 out_MainFile.println("M");
                 out_MainFile.println("NULL");
                 out_MainFile.println("0");
@@ -147,23 +191,23 @@ public class UploadServlet extends HttpServlet {
                 out_MainFile.println("model.lp");
                 out_MainFile.println("1");
                 break;
-            case "Data":
+            case "DATAFILE":
                 out_MainFile.println("D");
-                switch (ProblemType) {
-                    case "Knapsack":
+                switch (inputData.getProblemType().toString()) {
+                    case "KNAPSACK":
                         out_MainFile.println("KP");
-                        out_MainFile.println(numofKnapsacks);
-                        out_MainFile.println(numofItems);
+                        out_MainFile.println(inputData.getKnapsackProblem().getNumOfKnapsacks());
+                        out_MainFile.println(inputData.getKnapsackProblem().getNumOfItems());
                         out_MainFile.println("0");
                         out_MainFile.println("S");
                         out_MainFile.println("data.txt");
                         out_MainFile.println("1");
                         break;
-                    case "Assignment":
+                    case "ASSIGNMENT":
                         out_MainFile.println("AP");
                         out_MainFile.println("0");
                         out_MainFile.println("0");
-                        out_MainFile.println(numofJobs);
+                        out_MainFile.println(inputData.getAssignmentProblem().getNumOfJobs());
                         out_MainFile.println("S");
                         out_MainFile.println("data.txt");
                         out_MainFile.println("1");
@@ -171,42 +215,20 @@ public class UploadServlet extends HttpServlet {
                 }
                 break;
         }
-        
+
         out_MainFile.close();
+    }
+
+    private void generateProblemFile(File uploadDir) {
 
     }
 
-    private String createInputFile(HttpServletRequest request, File uploadDir) throws IOException, ServletException {
-        // copying the input file to the server
-        Part uploadFile = request.getPart("uploadFile"); // Retrieves <input type="file" name="uploadFile">
-
-        // copy the uploaded file to the input file (model.lp or data.txt)
-        try (InputStream uploadFileContent = uploadFile.getInputStream()) {
-
-            File InputFile;
-            if (request.getParameter("InputType").equalsIgnoreCase("Model")) {
-                InputFile = new File(uploadDir, "model.lp");
-            } else {
-                InputFile = new File(uploadDir, "data.txt");
-            }
-
-            try (OutputStream out_InputFile = new FileOutputStream(InputFile)) {
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = uploadFileContent.read(buf)) > 0) {
-                    out_InputFile.write(buf, 0, len);
-                }
-            }
-        }
-        uploadFile.delete();
-
-        return validateInputFile();
+    private boolean isInputFilePublic(HttpServletRequest request) {
+        return request.getParameter("filePermission").equalsIgnoreCase("yes");
     }
 
-    private String validateInputFile() {
-        String result = "";
+    private void insertJobToDataBase() {
 
-        return result;
     }
 
 }

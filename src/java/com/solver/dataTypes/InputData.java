@@ -27,6 +27,9 @@ public class InputData implements Externalizable {
     private MathModel mathModel;
 
     public InputData() {
+        knapsackProblem = new KnapsackProblem();
+        assignmentProblem = new AssignmentProblem();
+        mathModel = new MathModel();
     }
 
     public InputData(InputType inputType, ProblemType problemType, int numOfObjectives, KnapsackProblem knapsackProblem) {
