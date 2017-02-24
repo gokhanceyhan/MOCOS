@@ -28,10 +28,10 @@
         <link href="../../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="../../css/nMOCO-S_Solve.css" rel="stylesheet">
+        <link href="../../css/nMOCO-S_Analyzer.css" rel="stylesheet">
 
         <!-- Custom javascript files -->
-        <script src="../../js/nMOCO-S.js"></script>
+        <script src="../../js/nMOCO-S_Analyzer.js"></script>
 
     </head>
 

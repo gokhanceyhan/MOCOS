@@ -1,5 +1,5 @@
 <%-- 
-    Document   : nMOCO-S_home
+    Document   : nMOCO-S_JobQueue
     Created on : Feb 24, 2017, 6:33:30 PM
     Author     : gokhanceyhan
 --%>
@@ -22,6 +22,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
+        <script src="../../js/jqBootstrapValidation.js"></script>
         <!--%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         
         <!-- Font-awesome CSS-->
@@ -31,8 +32,10 @@
         <link href="../../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="../../css/nMOCO-S_Home.css" rel="stylesheet">
+        <link href="../../css/nMOCO-S_JobQueue.css" rel="stylesheet">
 
+        <!-- Custom javascript files -->
+        <script src="../../js/nMOCO-S_JobQueue.js"></script>
 
     </head>
 
@@ -76,36 +79,52 @@
                 </div>
             </nav>
 
-            <div class="jumbotron">
-                <div class="row">   
+            <div class="row">   
 
-                    <div class="col-md-4">
-                        <a class="btn btn-lg btn-primary" href="nMOCO-S_InputPage.jsp">
-                            <i class="fa fa-cloud-upload fa-5x fa-align-center pull-left"></i>SUBMIT<br>JOB TO<br>SERVER</a>
+                <div class="col-md-4">
+
+                    <div class="control-group form-group">
+                        <fieldset class="control-group form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                <input id="email" type="email" class="form-control" name="email" placeholder="Email" required data-validation-required-message="Please enter your email address.">                                           
+                            </div>
+                            <p class="help-block"></p>
+                        </fieldset>
                     </div>
+                </div>
 
-                    <div class="col-md-4">
-                        <a class="btn btn-lg btn-success" href="nMOCO-S_JobQueue.jsp">
-                            <i class="fa fa-database fa-5x fa-align-center pull-left"></i>SEARCH JOB</a>
-                    </div>
-
-                    <div class="col-md-4">
-                        <a class="btn btn-lg btn-info" href="nMOCO-S_Analyzer.jsp">
-                            <i class="fa fa-line-chart fa-5x fa-align-center pull-left"></i>ANALYZER</a>
+                <div class="col-md-4">
+                    <div class="control-group form-group">
+                        <fieldset class="control-group form-group">
+                            <div class="input-group">                               
+                                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                                <input id="JobID" type="text" class="form-control" name="JobID" placeholder="Job ID" required data-validation-required-message="Please enter the job ID number.">
+                            </div>
+                            <p class="help-block"></p>
+                        </fieldset>
                     </div>
 
                 </div>
 
-
-
-
-
+                <div class="col-md-4">
+                    <div class="control-group form-group">
+                        <p>
+                            <button type="submit" class="btn btn-primary" onclick=""><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                        </p>
+                    </div>
+                </div>
 
             </div>
+        </div>
+    </div>
 
 
-        </div> <!-- /container -->
 
-    </body>
+
+</div> <!-- /container -->
+
+</body>
 </html>
+
 

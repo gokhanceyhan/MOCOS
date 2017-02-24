@@ -28,11 +28,11 @@
         <link href="../../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="../../css/nMOCO-S_Input.css" rel="stylesheet">
+        <link href="../../css/nMOCO-S_InputPage.css" rel="stylesheet">
 
 
         <!-- Custom javascript files -->
-        <script src="../../js/nMOCO-S.js"></script>
+        <script src="../../js/nMOCO-S_InputPage.js"></script>
 
     </head>
 
