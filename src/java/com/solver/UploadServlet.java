@@ -25,6 +25,9 @@ import javax.servlet.http.Part;
 @MultipartConfig
 public class UploadServlet extends HttpServlet {
 
+    private final String MAIN_FILE_NAME = "MainFile.txt";
+    private final String DATA_FILE_NAME = "data.txt";
+    private final String MODEL_FILE_NAME = "model.lp";
     private String contextPath;
     private String usermail;
     private long jobId;
@@ -120,9 +123,9 @@ public class UploadServlet extends HttpServlet {
 
         File inputFile;
         if (inputData.getInputType().equals(InputType.MODELFILE)) {
-            inputFile = new File("", "model.lp");
+            inputFile = new File("", MODEL_FILE_NAME);
         } else {
-            inputFile = new File("", "data.txt");
+            inputFile = new File("", DATA_FILE_NAME);
         }
 
         OutputStream out_InputFile = new FileOutputStream(inputFile);
@@ -176,7 +179,7 @@ public class UploadServlet extends HttpServlet {
     private void generateParameterFile(File uploadDir) throws IOException {
 
         // create the "MainFile" and write the parameter values in it
-        File MainFile = new File(uploadDir, "MainFile.txt");
+        File MainFile = new File(uploadDir, MAIN_FILE_NAME);
 
         PrintWriter out_MainFile = new PrintWriter(new FileWriter(MainFile));
         out_MainFile.println(inputData.getNumOfObjectives());
@@ -188,7 +191,7 @@ public class UploadServlet extends HttpServlet {
                 out_MainFile.println("0");
                 out_MainFile.println("0");
                 out_MainFile.println("S");
-                out_MainFile.println("model.lp");
+                out_MainFile.println(MODEL_FILE_NAME);
                 out_MainFile.println("1");
                 break;
             case "DATAFILE":
@@ -200,7 +203,7 @@ public class UploadServlet extends HttpServlet {
                         out_MainFile.println(inputData.getKnapsackProblem().getNumOfItems());
                         out_MainFile.println("0");
                         out_MainFile.println("S");
-                        out_MainFile.println("data.txt");
+                        out_MainFile.println(DATA_FILE_NAME);
                         out_MainFile.println("1");
                         break;
                     case "ASSIGNMENT":
@@ -209,7 +212,7 @@ public class UploadServlet extends HttpServlet {
                         out_MainFile.println("0");
                         out_MainFile.println(inputData.getAssignmentProblem().getNumOfJobs());
                         out_MainFile.println("S");
-                        out_MainFile.println("data.txt");
+                        out_MainFile.println(DATA_FILE_NAME);
                         out_MainFile.println("1");
                         break;
                 }

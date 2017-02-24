@@ -1,11 +1,10 @@
 <%-- 
-    Document   : eMOCOS_SolvePage
-    Created on : Jun 23, 2016, 8:45:50 PM
+    Document   : nMOCO-S_home
+    Created on : Feb 24, 2017, 6:33:30 PM
     Author     : gokhanceyhan
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,15 +19,19 @@
 
         <!-- Bootstrap core CSS -->
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
         <!--%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        
+        <!-- Font-awesome CSS-->
+        <link rel="stylesheet" href="../../css/font-awesome-4.7.0/css/font-awesome.min.css">
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <link href="../../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="../../css/nMOCO-S_Solve.css" rel="stylesheet">
+        <link href="../../css/nMOCO-S_Home.css" rel="stylesheet">
 
         <!-- Custom javascript files -->
         <script src="../../js/nMOCO-S.js"></script>
@@ -76,57 +79,24 @@
             </nav>
 
             <div class="jumbotron">
-                <div class="alert alert-success" role="alert">Upload successful! 
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                </div>
-                <div>
-                    <p>
-                        <button type="submit" class="btn btn-primary" onclick="solveModel();">Solve</button>
-                    </p>
-                </div>
+                <a class="btn btn-lg btn-success" href="#">
+                    <i class="fa fa-cogs fa-5x pull-left"></i>SUBMIT<br>JOB TO<br>SERVER</a>
 
-                <div class="well well-lg" id="eMOCOS_log"></div>
+                <a class="btn btn-lg btn-primary" href="#">
+                    <i class="fa fa-cloud-upload fa-5x pull-left"></i>SUBMIT<br>JOB TO<br>SERVER</a>
+                    
+                    <a class="btn btn-lg btn-info" href="#">
+                    <i class="fa fa-database fa-5x pull-left"></i>SEARCH JOB</a>
+                    
+                    <a class="btn btn-lg btn-info" href="#">
+                    <i class="fa fa-line-chart fa-5x pull-left"></i>ANALYZER</a>
 
-                <div>
-                    <form class="form-group" action="../../OutputServlet" method="POST">
-                        <button type="submit" id="eMOCOS_getResultsButton"  class="btn btn-success" disabled="disabled" >Show results
-                            <span class="glyphicon glyphicon-stats"></span>
-                        </button>
-                    </form> 
-                </div>
-                
-                <div>
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="eMOCOS_numOfPoints" class="col-lg-3">Number of nondominated points:</label>
-                            <div class="col-lg-2">
-                                <input type="text" class="form-control" id="eMOCOS_numOfPoints" value="${numofP}" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="eMOCOS_numOfModels" class="col-lg-3">Number of calls to solver:</label>
-                            <div class="col-lg-2">
-                                <input type="text" class="form-control" id="eMOCOS_numOfModels" value="${numofM}" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="eMOCOS_cpu" class="col-lg-3">Total CPU time (secs):</label>
-                            <div class="col-lg-2">
-                                <input type="text" class="form-control" id="eMOCOS_cpu" value="${cpu}" placeholder="">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <a class="btn btn-info" href="../../myFiles/Output_nd_points.txt" role="button">Download <span class="glyphicon glyphicon-save-file"></span></a>
-                <a class ="btn btn-warning" href="../guide/guide.jsp#nMOCO-S_output" role="button">Info <span class="glyphicon glyphicon-info-sign" ></span></a>
-
-                
 
             </div>
+
+
         </div> <!-- /container -->
 
     </body>
 </html>
+

@@ -63,7 +63,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="jsp/nMOCO-S/nMOCO-S_InputPage.jsp">nMOCO-S</a></li>
+                                        <li><a href="jsp/nMOCO-S/nMOCO-S_Home.jsp">nMOCO-S</a></li>
                                         <li><a href="#">rMOCO-S</a></li>
                                         <li><a href="#">iMOCO-S</a></li>
 
@@ -110,7 +110,7 @@
                             <h1>nMOCO-S</h1>
                             <p>All Nondominated points by Multi-Objective Combinatorial Optimization Solver</p>
                             <p>Generate efficient solutions of your multi-objective combinatorial problem. Upload your file, compute on the cloud, download results. </p>
-                            <p><a class="btn btn-lg btn-primary" href="jsp/nMOCO-S/nMOCO-S_InputPage.jsp" role="button">Try it!</a></p>
+                            <p><a class="btn btn-lg btn-primary" href="jsp/nMOCO-S/nMOCO-S_Home.jsp" role="button">Try it!</a></p>
                         </div>
                     </div>
                 </div>
