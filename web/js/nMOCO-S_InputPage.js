@@ -7,7 +7,7 @@ $(function () {
 
 
 $(document).ready(function () {
-
+    
 });
 
 function initRequest() {
@@ -53,26 +53,6 @@ function updateInputParamsLists() {
         }
     }
 
-}
-
-function upload()
-{
-    var formData = new FormData(document.forms.namedItem("uploadForm"));
-    // send request to servlet
-    var url = "../../UploadServlet";
-    req = initRequest();
-    req.open("POST", url, true);
-    req.onreadystatechange = Process;
-    req.send(formData);
-}
-
-function Process()
-{
-    if (req.readyState === 4 && req.status === 200)
-    {
-        document.getElementById("nMOCOS_validationResult").innerHTML = req.responseText;
-
-    }
 }
 
 

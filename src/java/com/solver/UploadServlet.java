@@ -4,13 +4,10 @@ import com.solver.dataTypes.InputData;
 import com.solver.dataTypes.InputType;
 import com.solver.dataTypes.ProblemType;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 
@@ -80,25 +77,18 @@ public class UploadServlet extends HttpServlet {
 
         // validate the input and the user limit
         boolean valid = validateInputFile() & validateUserJobLimit();
-        System.out.println(validationResult);
 
-        // assign the validation result to response object
-        //RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/nMOCO-S/nMOCO-S_InputPage.jsp");
-        //request.setAttribute("validationResult", "<p>" + validationResult + "</p>");
         if (valid) {
             //generateJobId();
             //setupDirectory("");
             //generateParameterFile("");
             //generateProblemFile("");
-            //insertJobToDataBase();  
+            //insertJobToDataBase(); 
+            sendSucessResponse(response);
         }
-
-        // send the response to the requester
-        response.setHeader("Content-Type", "text/plain");
-        response.getWriter().write(validationResult);
-        //response.sendRedirect(response.encodeRedirectURL(contextPath + "/jsp/nMOCO-S/nMOCO-S_InputPage.jsp"));
-        //dispatcher.forward(request, response);
-
+        else
+            sendFailResponse(response);
+        
     }
 
     private void getInputParameters(HttpServletRequest request) {
@@ -231,4 +221,42 @@ public class UploadServlet extends HttpServlet {
 
     }
 
+    private void sendSucessResponse(HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Upload Info</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1> Upload result: </h1>");
+        out.println("<p>" + validationResult + "</p>");
+        out.println("<p><strong>Job Id:</strong> " + jobId + " (Keep this number to be able to query the status of your job!)</p>");
+        out.println("<p>An email will be sent to the mail address <strong>" + usermail + "</strong> as soon as the job is completed.</p>");
+        out.println("<p><a href='jsp/nMOCO-S/nMOCO-S_Home.jsp'> Return to nMOCO-S home page.</a></p>");
+        out.println("<p><a href='jsp/nMOCO-S/nMOCO-S_JobQueue.jsp'> See the server queue and the status of your job.</a></p>");
+        out.println("</body>");
+        out.println("</html>");
+        out.close();
+        validationResult = "";
+    }
+    
+    private void sendFailResponse(HttpServletResponse response) throws IOException{
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Upload Info</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1> Upload result: </h1>");
+        out.println("<p>" + validationResult + "</p>");
+        out.println("<p><a href='jsp/nMOCO-S/nMOCO-S_InputPage.jsp'> Return to nMOCO-S input page.</a></p>");
+        out.println("</body>");
+        out.println("</html>");
+        out.close();
+        validationResult = "";
+    }
 }

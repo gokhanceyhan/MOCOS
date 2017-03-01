@@ -77,7 +77,7 @@
             </nav>
             <div class="jumbotron">
 
-                <form id="uploadForm" name="uploadForm" method="post" class="form-nMOCOS" enctype="multipart/form-data" novalidate>
+                <form id="uploadForm" name="uploadForm" method="post" action="../../UploadServlet" class="form-nMOCOS" enctype="multipart/form-data" novalidate>
 
                     <div class="container">
 
@@ -214,7 +214,7 @@
 
                         <div class="form-group">
                             <div>
-                                <button type="submit" class="btn btn-primary" name="upload" value="upload" onclick="upload();">Upload</button>
+                                <button type="submit" class="btn btn-primary" id="uploadBtn" name="upload" value="upload">Upload</button>
                             </div>
                         </div>
 
@@ -236,9 +236,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="well well-lg" id="nMOCOS_validationResult">
-                    
-                </div>
+                
 
 
             </div>
