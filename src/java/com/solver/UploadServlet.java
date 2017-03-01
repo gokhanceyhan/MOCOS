@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 
@@ -32,6 +33,7 @@ public class UploadServlet extends HttpServlet {
     private String usermail;
     private long jobId;
     private InputData inputData;
+    private String validationResult = "Validation Status:\n";
 
     /**
      * Returns a short description of the servlet.
@@ -40,7 +42,7 @@ public class UploadServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Creates a new job and add it to the mocoDB if appropriate.";
     }
 
     /**
@@ -71,29 +73,31 @@ public class UploadServlet extends HttpServlet {
 
         contextPath = request.getContextPath();
 
-        // create and validate uploaded input file
-        boolean isInputvalid = true;
+        // get uploaded form parameters
+        getInputParameters(request);
+        getProblemFile(request);
+        getUserInfo(request);
 
-        if (isInputvalid) {
-            response.sendRedirect(response.encodeRedirectURL(contextPath + "/jsp/nMOCO-S/nMOCO-S_SolvePage.jsp"));
+        // validate the input and the user limit
+        boolean valid = validateInputFile() & validateUserJobLimit();
+        System.out.println(validationResult);
 
-        } else {
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Upload Info</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1> Upload not successfull! </h1>");
-            out.print("<p> Chek your inputs! ");
-            out.print("Return to homepage and click 'Solve'. </p>");
-            out.println("<p><a href='nMOCO-S_InputPage.jsp'> Return to home page </a></p>");
-            out.println("</body>");
-            out.println("</html>");
-            out.close();
+        // assign the validation result to response object
+        //RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/nMOCO-S/nMOCO-S_InputPage.jsp");
+        //request.setAttribute("validationResult", "<p>" + validationResult + "</p>");
+        if (valid) {
+            //generateJobId();
+            //setupDirectory("");
+            //generateParameterFile("");
+            //generateProblemFile("");
+            //insertJobToDataBase();  
         }
+
+        // send the response to the requester
+        response.setHeader("Content-Type", "text/plain");
+        response.getWriter().write(validationResult);
+        //response.sendRedirect(response.encodeRedirectURL(contextPath + "/jsp/nMOCO-S/nMOCO-S_InputPage.jsp"));
+        //dispatcher.forward(request, response);
 
     }
 
@@ -109,9 +113,9 @@ public class UploadServlet extends HttpServlet {
         }
 
         inputData.setNumOfObjectives(Integer.parseInt(request.getParameter("numOfObj")));
-        inputData.getKnapsackProblem().setNumOfKnapsacks(Integer.parseInt(request.getParameter("numofKnapsacks")));
-        inputData.getKnapsackProblem().setNumOfItems(Integer.parseInt(request.getParameter("numofItems")));
-        inputData.getAssignmentProblem().setNumOfJobs(Integer.parseInt(request.getParameter("numofJobs")));
+        inputData.getKnapsackProblem().setNumOfKnapsacks(Integer.parseInt(request.getParameter("numOfKnapsacks")));
+        inputData.getKnapsackProblem().setNumOfItems(Integer.parseInt(request.getParameter("numOfItems")));
+        inputData.getAssignmentProblem().setNumOfJobs(Integer.parseInt(request.getParameter("numOfJobs")));
 
     }
 
@@ -120,20 +124,7 @@ public class UploadServlet extends HttpServlet {
         Part uploadFile = request.getPart("uploadFile");
 
         InputStream uploadFileContent = uploadFile.getInputStream();
-
-        File inputFile;
-        if (inputData.getInputType().equals(InputType.MODELFILE)) {
-            inputFile = new File("", MODEL_FILE_NAME);
-        } else {
-            inputFile = new File("", DATA_FILE_NAME);
-        }
-
-        OutputStream out_InputFile = new FileOutputStream(inputFile);
-        byte[] buf = new byte[1024];
-        int len;
-        while ((len = uploadFileContent.read(buf)) > 0) {
-            out_InputFile.write(buf, 0, len);
-        }
+        String inputFile = uploadFileContent.toString();
 
         if (inputData.getInputType().equals(InputType.MODELFILE)) {
             inputData.getMathModel().setInputFile(inputFile);
@@ -155,7 +146,7 @@ public class UploadServlet extends HttpServlet {
     }
 
     private boolean validateInputFile() {
-
+        validationResult += "Input data is valid!\n";
         return true;
     }
 
@@ -176,10 +167,11 @@ public class UploadServlet extends HttpServlet {
         }
     }
 
-    private void generateParameterFile(File uploadDir) throws IOException {
+    private void generateParameterFile(String path) throws IOException {
 
+        String uploadPath = contextPath + path + MAIN_FILE_NAME;
         // create the "MainFile" and write the parameter values in it
-        File MainFile = new File(uploadDir, MAIN_FILE_NAME);
+        File MainFile = new File(uploadPath);
 
         PrintWriter out_MainFile = new PrintWriter(new FileWriter(MainFile));
         out_MainFile.println(inputData.getNumOfObjectives());
@@ -222,11 +214,16 @@ public class UploadServlet extends HttpServlet {
         out_MainFile.close();
     }
 
-    private void generateProblemFile(File uploadDir) {
-
+    private void generateProblemFile(String path) {
+        String uploadPath = contextPath + path;
+        if (inputData.getInputType().equals(InputType.DATAFILE)) {
+            uploadPath += DATA_FILE_NAME;
+        } else {
+            uploadPath += MODEL_FILE_NAME;
+        }
     }
 
-    private boolean isInputFilePublic(HttpServletRequest request) {
+    private boolean canInputFileBePublic(HttpServletRequest request) {
         return request.getParameter("filePermission").equalsIgnoreCase("yes");
     }
 

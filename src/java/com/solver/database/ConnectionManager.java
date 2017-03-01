@@ -8,7 +8,8 @@ package com.solver.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+import javax.naming.NamingException;
+    
 /**
  *
  * @author gokhanceyhan
@@ -20,12 +21,12 @@ public class ConnectionManager {
     private static final String USER_NAME = "moco";
     private static final String PASSWORD = "mocodb2016";
 
-    public static Connection setUpConnection() throws SQLException, ClassNotFoundException {
+    public static Connection setUpConnection() throws SQLException, ClassNotFoundException, NamingException {
 
         Class.forName(DRIVER_NAME);
         Connection con = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
         return con;
-        
+
     }
 
 }

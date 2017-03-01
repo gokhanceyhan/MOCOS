@@ -6,7 +6,6 @@
 package com.solver.dataTypes;
 
 import java.io.Externalizable;
-import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
@@ -19,23 +18,23 @@ public class Output implements Externalizable {
 
     private static final int FIRST_VERSION = 0;
     
-    private File outputFile;
+    private String outputFile;
 
-    public Output(File outputFile) {
+    public Output(String outputFile) {
         this.outputFile = outputFile;
     }
 
     /**
      * @return the outputFile
      */
-    public File getOutputFile() {
+    public String getOutputFile() {
         return outputFile;
     }
 
     /**
      * @param outputFile the outputFile to set
      */
-    public void setOutputFile(File outputFile) {
+    public void setOutputFile(String outputFile) {
         this.outputFile = outputFile;
     }
 
@@ -59,7 +58,7 @@ public class Output implements Externalizable {
             throw new IOException("Can't deserialize from the future.");
         }
 
-        outputFile = (File) in.readObject();
+        outputFile = (String) in.readObject();
     }
 
 }

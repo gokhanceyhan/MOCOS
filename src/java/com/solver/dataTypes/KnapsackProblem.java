@@ -6,7 +6,6 @@
 package com.solver.dataTypes;
 
 import java.io.Externalizable;
-import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
@@ -21,15 +20,15 @@ public class KnapsackProblem implements Externalizable {
 
     private int numOfKnapsacks;
     private int numOfItems;
-    private File inputFile;
+    private String inputFile;
     
     public KnapsackProblem(){
         numOfKnapsacks = 1;
         numOfItems = 1;
-        inputFile = new File("");
+        inputFile = "";
     }
 
-    public KnapsackProblem(int numOfKnapsacks, int numOfItems, File inputFile) {
+    public KnapsackProblem(int numOfKnapsacks, int numOfItems, String inputFile) {
         this.numOfKnapsacks = numOfKnapsacks;
         this.numOfItems = numOfItems;
         this.inputFile = inputFile;
@@ -66,14 +65,14 @@ public class KnapsackProblem implements Externalizable {
     /**
      * @return the inputFile
      */
-    public File getInputFile() {
+    public String getInputFile() {
         return inputFile;
     }
 
     /**
      * @param inputFile the inputFile to set
      */
-    public void setInputFile(File inputFile) {
+    public void setInputFile(String inputFile) {
         this.inputFile = inputFile;
     }
 
@@ -101,7 +100,7 @@ public class KnapsackProblem implements Externalizable {
 
         numOfKnapsacks = in.readInt();
         numOfItems = in.readInt();
-        inputFile = (File) in.readObject();
+        inputFile = (String) in.readObject();
 
     }
 }

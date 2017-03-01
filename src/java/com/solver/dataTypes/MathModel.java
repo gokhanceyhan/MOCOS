@@ -6,7 +6,6 @@
 package com.solver.dataTypes;
 
 import java.io.Externalizable;
-import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
@@ -19,27 +18,27 @@ public class MathModel implements Externalizable{
     
     private static final int FIRST_VERSION = 0;
 
-    private File inputFile;
+    private String inputFile;
     
     public MathModel(){
-        inputFile = new File("");
+        inputFile = "";
     }
 
-    public MathModel(File inputFile) {
+    public MathModel(String inputFile) {
         this.inputFile = inputFile;
     }
 
     /**
      * @return the inputFile
      */
-    public File getInputFile() {
+    public String getInputFile() {
         return inputFile;
     }
 
     /**
      * @param inputFile the inputFile to set
      */
-    public void setInputFile(File inputFile) {
+    public void setInputFile(String inputFile) {
         this.inputFile = inputFile;
     }
 
@@ -63,7 +62,7 @@ public class MathModel implements Externalizable{
             throw new IOException("Can't deserialize from the future.");
         }
 
-        inputFile = (File) in.readObject();
+        inputFile = (String) in.readObject();
     }
 
 }

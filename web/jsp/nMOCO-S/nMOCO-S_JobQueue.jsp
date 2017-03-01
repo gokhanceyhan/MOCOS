@@ -116,15 +116,15 @@
                 </div>
 
             </div>
-        </div>
-    </div>
 
 
 
 
-</div> <!-- /container -->
 
-</body>
+
+        </div> <!-- /container -->
+
+    </body>
 </html>
 
 

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 
 /**
  *
@@ -23,15 +24,14 @@ public class DatabaseMain {
 
         try {
             Connection connection = ConnectionManager.setUpConnection();
-            //addInputDataAsUDT(connection, "MOCO");
-            //showDatabaseMetaData(connection);
-            //deleteUDT(connection, "MOCO","JOBINPUT");           
-            //alterJobQueueTable(connection);
+            
+            
+            
 
             connection.commit();
             connection.close();
 
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException | NamingException ex) {
             Logger.getLogger(DatabaseMain.class.getName()).log(Level.SEVERE, null, ex);
         }
 

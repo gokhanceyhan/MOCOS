@@ -20,14 +20,14 @@ public class AssignmentProblem implements Externalizable {
     private static final int FIRST_VERSION = 0;
 
     private int numOfJobs;
-    private File inputFile;
+    private String inputFile;
     
     public AssignmentProblem(){
         numOfJobs = 1;
-        inputFile = new File("");
+        inputFile = "";
     }
 
-    public AssignmentProblem(int numOfJobs, File inputFile) {
+    public AssignmentProblem(int numOfJobs, String inputFile) {
         this.numOfJobs = numOfJobs;
         this.inputFile = inputFile;
     }
@@ -49,14 +49,14 @@ public class AssignmentProblem implements Externalizable {
     /**
      * @return the inputFile
      */
-    public File getInputFile() {
+    public String getInputFile() {
         return inputFile;
     }
 
     /**
      * @param inputFile the inputFile to set
      */
-    public void setInputFile(File inputFile) {
+    public void setInputFile(String inputFile) {
         this.inputFile = inputFile;
     }
 
@@ -82,7 +82,7 @@ public class AssignmentProblem implements Externalizable {
         }
 
         numOfJobs = in.readInt();
-        inputFile = (File) in.readObject();
+        inputFile = (String) in.readObject();
     }
 
 }
