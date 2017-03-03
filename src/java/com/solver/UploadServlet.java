@@ -2,12 +2,22 @@ package com.solver;
 
 import com.solver.dataTypes.InputData;
 import com.solver.dataTypes.InputType;
+import com.solver.dataTypes.JobStatus;
 import com.solver.dataTypes.ProblemType;
+import com.solver.database.ConnectionManager;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 
@@ -79,16 +89,60 @@ public class UploadServlet extends HttpServlet {
         boolean valid = validateInputFile() & validateUserJobLimit();
 
         if (valid) {
-            //generateJobId();
-            //setupDirectory("");
-            //generateParameterFile("");
-            //generateProblemFile("");
-            //insertJobToDataBase(); 
+            try {
+                insertJobToDataBase();
+            } catch (SQLException | ClassNotFoundException | NamingException ex) {
+                Logger.getLogger(UploadServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             sendSucessResponse(response);
-        }
-        else
+        } else {
             sendFailResponse(response);
+        }
+
+    }
+    
+        private void insertJobToDataBase() throws SQLException, ClassNotFoundException, NamingException, IOException {
+
+        // create connection
+        java.sql.Connection con = ConnectionManager.setUpConnection();
+
+        // prepare initial insert statement
+        String INSERT_SQL = "INSERT INTO JOBQUEUE (jobcreationtime, issuer, processor, jobinput, jobparam,"
+                + " jobstatus, completiontime, joboutput, processtime)"
+                + " VALUES()";
+
+        PreparedStatement statement = con.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
+        statement.setTimestamp(1, new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
+        statement.setString(2, usermail);
+        statement.setString(3, "nMOCO-S");
+        statement.setString(6, JobStatus.TO_DO.toString());
+
+        // execute the statement
+        int affectedRows = statement.executeUpdate();
+        if (affectedRows == 0) {
+            throw new SQLException("Creating job failed, no rows affected.");
+        }
+
+        // fetch the job id assigned
+        try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                jobId = generatedKeys.getLong(1);
+            } else {
+                throw new SQLException("Creating job failed, no ID obtained.");
+            }
+        }
+
+        // update the record
+        String jobPath = generateJobPath();
+        setupDirectory(jobPath);
+        String jobParamFilePath = generateParameterFile(jobPath);
+        String jobInputFilePath = generateProblemFile(jobPath);
         
+
+        // safely close the connection
+        statement.close();
+        con.commit();
+        con.close();
     }
 
     private void getInputParameters(HttpServletRequest request) {
@@ -145,19 +199,19 @@ public class UploadServlet extends HttpServlet {
         return true;
     }
 
-    private void generateJobId() {
-
+    private String generateJobPath() {
+        return usermail + "/" + jobId + "/";
     }
 
     private void setupDirectory(String path) {
-        String uploadPath = contextPath + path;
+        String uploadPath = contextPath + "Jobs/" + path;
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
     }
 
-    private void generateParameterFile(String path) throws IOException {
+    private String generateParameterFile(String path) throws IOException {
 
         String uploadPath = contextPath + path + MAIN_FILE_NAME;
         // create the "MainFile" and write the parameter values in it
@@ -202,23 +256,21 @@ public class UploadServlet extends HttpServlet {
         }
 
         out_MainFile.close();
+        return uploadPath;
     }
 
-    private void generateProblemFile(String path) {
+    private String generateProblemFile(String path) {
         String uploadPath = contextPath + path;
         if (inputData.getInputType().equals(InputType.DATAFILE)) {
             uploadPath += DATA_FILE_NAME;
         } else {
             uploadPath += MODEL_FILE_NAME;
         }
+        return uploadPath;
     }
 
     private boolean canInputFileBePublic(HttpServletRequest request) {
         return request.getParameter("filePermission").equalsIgnoreCase("yes");
-    }
-
-    private void insertJobToDataBase() {
-
     }
 
     private void sendSucessResponse(HttpServletResponse response) throws IOException {
@@ -232,8 +284,10 @@ public class UploadServlet extends HttpServlet {
         out.println("<body>");
         out.println("<h1> Upload result: </h1>");
         out.println("<p>" + validationResult + "</p>");
-        out.println("<p><strong>Job Id:</strong> " + jobId + " (Keep this number to be able to query the status of your job!)</p>");
-        out.println("<p>An email will be sent to the mail address <strong>" + usermail + "</strong> as soon as the job is completed.</p>");
+        out.println("<p><strong>Job Id:</strong> " + jobId + " "
+                + "(Keep this number to be able to query the status of your job!)</p>");
+        out.println("<p>An email will be sent to the mail address <strong>" + usermail
+                + "</strong> as soon as the job is completed.</p>");
         out.println("<p><a href='jsp/nMOCO-S/nMOCO-S_Home.jsp'> Return to nMOCO-S home page.</a></p>");
         out.println("<p><a href='jsp/nMOCO-S/nMOCO-S_JobQueue.jsp'> See the server queue and the status of your job.</a></p>");
         out.println("</body>");
@@ -241,8 +295,8 @@ public class UploadServlet extends HttpServlet {
         out.close();
         validationResult = "";
     }
-    
-    private void sendFailResponse(HttpServletResponse response) throws IOException{
+
+    private void sendFailResponse(HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.println("<!DOCTYPE html>");
