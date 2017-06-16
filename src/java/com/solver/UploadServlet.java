@@ -37,6 +37,7 @@ public class UploadServlet extends HttpServlet {
     private final String DATA_FILE_NAME = "data.txt";
     private final String MODEL_FILE_NAME = "model.lp";
     private String contextPath;
+    private final String absolutePath = "/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/";
     private String usermail;
     private long jobId;
     private InputData inputData;
@@ -78,7 +79,7 @@ public class UploadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        contextPath = request.getContextPath();
+        contextPath = request.getContextPath() + "/";
 
         // get uploaded form parameters
         getInputParameters(request);
@@ -90,7 +91,7 @@ public class UploadServlet extends HttpServlet {
 
         if (valid) {
             try {
-                insertJobToDataBase();
+                insertJobToDatabase();
             } catch (SQLException | ClassNotFoundException | NamingException ex) {
                 Logger.getLogger(UploadServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -100,8 +101,8 @@ public class UploadServlet extends HttpServlet {
         }
 
     }
-    
-        private void insertJobToDataBase() throws SQLException, ClassNotFoundException, NamingException, IOException {
+
+    private void insertJobToDatabase() throws SQLException, ClassNotFoundException, NamingException, IOException {
 
         // create connection
         java.sql.Connection con = ConnectionManager.setUpConnection();
@@ -109,13 +110,18 @@ public class UploadServlet extends HttpServlet {
         // prepare initial insert statement
         String INSERT_SQL = "INSERT INTO JOBQUEUE (jobcreationtime, issuer, processor, jobinput, jobparam,"
                 + " jobstatus, completiontime, joboutput, processtime)"
-                + " VALUES()";
+                + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement statement = con.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
         statement.setTimestamp(1, new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
         statement.setString(2, usermail);
         statement.setString(3, "nMOCO-S");
+        statement.setString(4, "");
+        statement.setString(5, "");
         statement.setString(6, JobStatus.TO_DO.toString());
+        statement.setTimestamp(7, new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
+        statement.setString(8, "");
+        statement.setDouble(9, 0.0);
 
         // execute the statement
         int affectedRows = statement.executeUpdate();
@@ -131,16 +137,21 @@ public class UploadServlet extends HttpServlet {
                 throw new SQLException("Creating job failed, no ID obtained.");
             }
         }
+        statement.close();
 
         // update the record
-        String jobPath = generateJobPath();
-        setupDirectory(jobPath);
-        String jobParamFilePath = generateParameterFile(jobPath);
-        String jobInputFilePath = generateProblemFile(jobPath);
-        
+        String uploadPath = setupDirectory();
+        String jobParamFilePath = generateParameterFile(uploadPath);
+        String jobInputFilePath = generateProblemFile(uploadPath);
+
+        String UPDATE_SQL = "UPDATE JOBQUEUE SET JOBINPUT = " + jobInputFilePath + ", JOBPARAM = " + jobParamFilePath
+                + " WHERE JOBID = " + jobId;
+
+        Statement updateStatement = con.createStatement();
+        updateStatement.execute(UPDATE_SQL);
+        updateStatement.close();
 
         // safely close the connection
-        statement.close();
         con.commit();
         con.close();
     }
@@ -154,6 +165,14 @@ public class UploadServlet extends HttpServlet {
             inputData.setInputType(InputType.MODELFILE);
         } else {
             inputData.setInputType(InputType.DATAFILE);
+        }
+
+        String problemType = request.getParameter("ProblemType");
+        if ("Knapsack".equalsIgnoreCase(problemType)) {
+            inputData.setProblemType(ProblemType.KNAPSACK);
+        }
+        if ("Assignment".equalsIgnoreCase(problemType)) {
+            inputData.setProblemType(ProblemType.ASSIGNMENT);
         }
 
         inputData.setNumOfObjectives(Integer.parseInt(request.getParameter("numOfObj")));
@@ -198,24 +217,32 @@ public class UploadServlet extends HttpServlet {
 
         return true;
     }
-
-    private String generateJobPath() {
-        return usermail + "/" + jobId + "/";
-    }
-
-    private void setupDirectory(String path) {
-        String uploadPath = contextPath + "Jobs/" + path;
+    
+    private String setupDirectory(){
+        String uploadPath = absolutePath + "Jobs";
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
+        
+        String userPath = uploadPath + "/" + usermail;
+        File userDir = new File(userPath);
+        if (!userDir.exists()) {
+            userDir.mkdir();
+        }
+        
+        String jobPath = userPath + "/" + jobId;
+        File jobDir = new File(jobPath);
+        if(!jobDir.exists())
+            jobDir.mkdir();
+        
+        return jobPath;
     }
 
-    private String generateParameterFile(String path) throws IOException {
+    private String generateParameterFile(String uploadPath) throws IOException {
 
-        String uploadPath = contextPath + path + MAIN_FILE_NAME;
         // create the "MainFile" and write the parameter values in it
-        File MainFile = new File(uploadPath);
+        File MainFile = new File(uploadPath, MAIN_FILE_NAME);
 
         PrintWriter out_MainFile = new PrintWriter(new FileWriter(MainFile));
         out_MainFile.println(inputData.getNumOfObjectives());
@@ -260,7 +287,7 @@ public class UploadServlet extends HttpServlet {
     }
 
     private String generateProblemFile(String path) {
-        String uploadPath = contextPath + path;
+        String uploadPath = path;
         if (inputData.getInputType().equals(InputType.DATAFILE)) {
             uploadPath += DATA_FILE_NAME;
         } else {
