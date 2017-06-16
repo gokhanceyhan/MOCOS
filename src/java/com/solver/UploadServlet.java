@@ -6,10 +6,15 @@ import com.solver.dataTypes.JobStatus;
 import com.solver.dataTypes.ProblemType;
 import com.solver.database.ConnectionManager;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +30,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import sun.misc.IOUtils;
 
 /**
  *
@@ -33,11 +39,7 @@ import javax.servlet.http.Part;
 @MultipartConfig
 public class UploadServlet extends HttpServlet {
 
-    private final String MAIN_FILE_NAME = "MainFile.txt";
-    private final String DATA_FILE_NAME = "data.txt";
-    private final String MODEL_FILE_NAME = "model.lp";
     private String contextPath;
-    private final String absolutePath = "/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/";
     private String usermail;
     private long jobId;
     private InputData inputData;
@@ -141,10 +143,11 @@ public class UploadServlet extends HttpServlet {
 
         // update the record
         String uploadPath = setupDirectory();
-        String jobParamFilePath = generateParameterFile(uploadPath);
-        String jobInputFilePath = generateProblemFile(uploadPath);
+        generateParameterFile(uploadPath);
+        String inputFileName = generateProblemFile(uploadPath);
 
-        String UPDATE_SQL = "UPDATE JOBQUEUE SET JOBINPUT = " + jobInputFilePath + ", JOBPARAM = " + jobParamFilePath
+        String UPDATE_SQL = "UPDATE JOBQUEUE SET JOBINPUT = " + "'"+ inputFileName + "'"
+                + ", JOBPARAM = " + "'" + Constants.MAIN_FILE_NAME + "'"
                 + " WHERE JOBID = " + jobId;
 
         Statement updateStatement = con.createStatement();
@@ -185,9 +188,20 @@ public class UploadServlet extends HttpServlet {
     private void getProblemFile(HttpServletRequest request) throws IOException, ServletException {
 
         Part uploadFile = request.getPart("uploadFile");
-
         InputStream uploadFileContent = uploadFile.getInputStream();
-        String inputFile = uploadFileContent.toString();
+
+        StringBuilder out = new StringBuilder();
+        Reader in = new InputStreamReader(uploadFileContent, "UTF-8");
+        int bufferSize = 1024;
+        char[] buffer = new char[bufferSize];
+        for (;;) {
+            int rsz = in.read(buffer, 0, buffer.length);
+            if (rsz < 0) {
+                break;
+            }
+            out.append(buffer, 0, rsz);
+        }
+        String inputFile = out.toString();
 
         if (inputData.getInputType().equals(InputType.MODELFILE)) {
             inputData.getMathModel().setInputFile(inputFile);
@@ -217,32 +231,33 @@ public class UploadServlet extends HttpServlet {
 
         return true;
     }
-    
-    private String setupDirectory(){
-        String uploadPath = absolutePath + "Jobs";
+
+    private String setupDirectory() {
+        String uploadPath = Constants.ABSOLUTE_PATH + "jobs";
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();
         }
-        
+
         String userPath = uploadPath + "/" + usermail;
         File userDir = new File(userPath);
         if (!userDir.exists()) {
             userDir.mkdir();
         }
-        
+
         String jobPath = userPath + "/" + jobId;
         File jobDir = new File(jobPath);
-        if(!jobDir.exists())
+        if (!jobDir.exists()) {
             jobDir.mkdir();
-        
+        }
+
         return jobPath;
     }
 
-    private String generateParameterFile(String uploadPath) throws IOException {
+    private void generateParameterFile(String uploadPath) throws IOException {
 
         // create the "MainFile" and write the parameter values in it
-        File MainFile = new File(uploadPath, MAIN_FILE_NAME);
+        File MainFile = new File(uploadPath, Constants.MAIN_FILE_NAME);
 
         PrintWriter out_MainFile = new PrintWriter(new FileWriter(MainFile));
         out_MainFile.println(inputData.getNumOfObjectives());
@@ -254,7 +269,7 @@ public class UploadServlet extends HttpServlet {
                 out_MainFile.println("0");
                 out_MainFile.println("0");
                 out_MainFile.println("S");
-                out_MainFile.println(MODEL_FILE_NAME);
+                out_MainFile.println(Constants.MODEL_FILE_NAME);
                 out_MainFile.println("1");
                 break;
             case "DATAFILE":
@@ -266,7 +281,7 @@ public class UploadServlet extends HttpServlet {
                         out_MainFile.println(inputData.getKnapsackProblem().getNumOfItems());
                         out_MainFile.println("0");
                         out_MainFile.println("S");
-                        out_MainFile.println(DATA_FILE_NAME);
+                        out_MainFile.println(Constants.DATA_FILE_NAME);
                         out_MainFile.println("1");
                         break;
                     case "ASSIGNMENT":
@@ -275,7 +290,7 @@ public class UploadServlet extends HttpServlet {
                         out_MainFile.println("0");
                         out_MainFile.println(inputData.getAssignmentProblem().getNumOfJobs());
                         out_MainFile.println("S");
-                        out_MainFile.println(DATA_FILE_NAME);
+                        out_MainFile.println(Constants.DATA_FILE_NAME);
                         out_MainFile.println("1");
                         break;
                 }
@@ -283,17 +298,34 @@ public class UploadServlet extends HttpServlet {
         }
 
         out_MainFile.close();
-        return uploadPath;
     }
 
-    private String generateProblemFile(String path) {
-        String uploadPath = path;
+    private String generateProblemFile(String uploadPath) throws IOException {
+        String fileName;
         if (inputData.getInputType().equals(InputType.DATAFILE)) {
-            uploadPath += DATA_FILE_NAME;
+            fileName = Constants.DATA_FILE_NAME;
+            File inputFile = new File(uploadPath, Constants.DATA_FILE_NAME);
+            PrintWriter out_InputFile = new PrintWriter(new FileWriter(inputFile));
+
+            switch (inputData.getProblemType().toString()) {
+                case "KNAPSACK":
+                    out_InputFile.print(inputData.getKnapsackProblem().getInputFile());
+                    break;
+                case "ASSIGNMENT":
+                    out_InputFile.print(inputData.getAssignmentProblem().getInputFile());
+                    break;
+            }
+            out_InputFile.close();
+
         } else {
-            uploadPath += MODEL_FILE_NAME;
+            fileName = Constants.MODEL_FILE_NAME;
+            File inputFile = new File(uploadPath, Constants.MODEL_FILE_NAME);
+            PrintWriter out_InputFile = new PrintWriter(new FileWriter(inputFile));
+            out_InputFile.print(inputData.getMathModel().getInputFile());
+            out_InputFile.close();
         }
-        return uploadPath;
+
+        return fileName;
     }
 
     private boolean canInputFileBePublic(HttpServletRequest request) {
