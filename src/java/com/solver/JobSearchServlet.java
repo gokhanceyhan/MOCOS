@@ -5,10 +5,15 @@
  */
 package com.solver;
 
+import com.solver.dataTypes.MocoJob;
 import com.solver.database.ConnectionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -40,7 +45,7 @@ public class JobSearchServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet JobSearchServlet</title>");            
+            out.println("<title>Servlet JobSearchServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet JobSearchServlet at " + request.getContextPath() + "</h1>");
@@ -75,15 +80,42 @@ public class JobSearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         try {
             // create connection
-            java.sql.Connection con = ConnectionManager.setUpConnection();
-            
-            
-            
-            
-            
+            java.sql.Connection connection = ConnectionManager.setUpConnection();
+
+            // get search parameters
+            String usermail = request.getParameter("email");
+            String jobId = request.getParameter("JobID");
+
+            String SELECT_SQL = "SELECT * FROM MOCO.JOBQUEUE WHERE ISSUER = "
+                    + "'" + usermail + "'" + " and " + "JOBDID = " + jobId;
+
+            PreparedStatement statement = connection.prepareStatement(SELECT_SQL);
+            ResultSet resultSet = statement.executeQuery();
+
+            List<MocoJob> jobs = new ArrayList<>();
+
+            while (resultSet.next()) {
+                MocoJob job = new MocoJob();
+                job.setJobId(resultSet.getLong("JOBID"));
+                job.setJobCreationTime(resultSet.getTimestamp("JOBCREATIONTIME"));
+                job.setIssuer(resultSet.getString("ISSUER"));
+                job.setProcessor(resultSet.getString("PROCESSOR"));
+                job.setJobInput(resultSet.getString("JOBINPUT"));
+                job.setJobParam(resultSet.getString("JOBPARAM"));
+                job.setJobStatus(resultSet.getString("JOBSTATUS"));
+                job.setCompletionTime(resultSet.getTimestamp("COMPLETIONTIME"));
+                job.setJobOutput(resultSet.getString("JOBOUTPUT"));
+                job.setProcessTime(resultSet.getDouble("PROCESSTIME"));
+                jobs.add(job);
+            }
+
+            request.setAttribute("jobs", jobs); // Will be available as ${jobs} in JSP
+            String contextPath = request.getContextPath() + "/";
+            request.getRequestDispatcher(contextPath + "nMOCO-S_JobQueue.jsp").forward(request, response);
+
         } catch (SQLException | ClassNotFoundException | NamingException ex) {
             Logger.getLogger(JobSearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
