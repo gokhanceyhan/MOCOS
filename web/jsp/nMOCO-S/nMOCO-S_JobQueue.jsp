@@ -23,8 +23,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="../../js/bootstrap.min.js"></script>
         <script src="../../js/jqBootstrapValidation.js"></script>
-        <!--%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-        
+
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
         <!-- Font-awesome CSS-->
         <link rel="stylesheet" href="../../css/font-awesome-4.7.0/css/font-awesome.min.css">
 
@@ -79,50 +80,58 @@
                 </div>
             </nav>
 
-            <div class="row">   
+            <form id="searchForm" name="searchForm" method="post" action="../../JobSearchServlet" class="form-nMOCOS" enctype="multipart/form-data" novalidate>
 
-                <div class="col-md-4">
+                <div class="row">   
 
-                    <div class="control-group form-group">
-                        <fieldset class="control-group form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                <input id="email" type="email" class="form-control" name="email" placeholder="Email" required data-validation-required-message="Please enter your email address.">                                           
-                            </div>
-                            <p class="help-block"></p>
-                        </fieldset>
-                    </div>
-                </div>
+                    <div class="col-md-4">
 
-                <div class="col-md-4">
-                    <div class="control-group form-group">
-                        <fieldset class="control-group form-group">
-                            <div class="input-group">                               
-                                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                                <input id="JobID" type="text" class="form-control" name="JobID" placeholder="Job ID" required data-validation-required-message="Please enter the job ID number.">
-                            </div>
-                            <p class="help-block"></p>
-                        </fieldset>
+                        <div class="control-group form-group">
+                            <fieldset class="control-group form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                    <input id="email" type="email" class="form-control" name="email" placeholder="Email" required data-validation-required-message="Please enter your email address.">                                           
+                                </div>
+                                <p class="help-block"></p>
+                            </fieldset>
+                        </div>
                     </div>
 
-                </div>
+                    <div class="col-md-4">
+                        <div class="control-group form-group">
+                            <fieldset class="control-group form-group">
+                                <div class="input-group">                               
+                                    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                                    <input id="JobID" type="text" class="form-control" name="JobID" placeholder="Job ID" required data-validation-required-message="Please enter the job ID number.">
+                                </div>
+                                <p class="help-block"></p>
+                            </fieldset>
+                        </div>
 
-                <div class="col-md-4">
-                    <div class="control-group form-group">
-                        <p>
-                            <button type="submit" class="btn btn-primary" onclick=""><i class="fa fa-search" aria-hidden="true"></i> Search</button>
-                        </p>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="control-group form-group">
+                            <p>
+                                <button type="submit" class="btn btn-primary" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
 
-            </div>
-
-
-
-
-
+            </form>
 
         </div> <!-- /container -->
+
+        <table>
+            <c:forEach items="${jobs}" var="job">
+                <tr>
+                    <td>${job.jobId}</td>
+                    <td>${job.joCreationTime}</td>       
+                </tr>
+            </c:forEach>
+        </table>
 
     </body>
 </html>

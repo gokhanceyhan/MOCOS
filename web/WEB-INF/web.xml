@@ -12,6 +12,10 @@
         <servlet-name>OutputServlet</servlet-name>
         <servlet-class>com.solver.OutputServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>JobSearchServlet</servlet-name>
+        <servlet-class>com.solver.JobSearchServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UploadServlet</servlet-name>
         <url-pattern>/UploadServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>OutputServlet</servlet-name>
         <url-pattern>/OutputServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JobSearchServlet</servlet-name>
+        <url-pattern>/JobSearchServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

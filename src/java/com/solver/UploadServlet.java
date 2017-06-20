@@ -1,20 +1,18 @@
 package com.solver;
 
+import com.solver.dataTypes.Constants;
 import com.solver.dataTypes.InputData;
 import com.solver.dataTypes.InputType;
 import com.solver.dataTypes.JobStatus;
 import com.solver.dataTypes.ProblemType;
 import com.solver.database.ConnectionManager;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Reader;
-import java.nio.charset.StandardCharsets;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,7 +28,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import sun.misc.IOUtils;
 
 /**
  *
