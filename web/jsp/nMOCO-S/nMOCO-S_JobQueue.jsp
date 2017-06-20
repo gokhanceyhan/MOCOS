@@ -18,25 +18,25 @@
         <title>nMOCO-S</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/web/css/sample.css" rel="stylesheet">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="../../js/bootstrap.min.js"></script>
-        <script src="../../js/jqBootstrapValidation.js"></script>
+        <script src="${pageContext.request.contextPath}/web/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/web/js/jqBootstrapValidation.js"></script>
 
         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
         <!-- Font-awesome CSS-->
-        <link rel="stylesheet" href="../../css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/web/css/font-awesome-4.7.0/css/font-awesome.min.css">
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="../../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/web/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="../../css/nMOCO-S_JobQueue.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/web/css/nMOCO-S_JobQueue.css" rel="stylesheet">
 
         <!-- Custom javascript files -->
-        <script src="../../js/nMOCO-S_JobQueue.js"></script>
+        <script src="${pageContext.request.contextPath}/web/js/nMOCO-S_JobQueue.js"></script>
 
     </head>
 
@@ -128,7 +128,7 @@
             <c:forEach items="${jobs}" var="job">
                 <tr>
                     <td>${job.jobId}</td>
-                    <td>${job.joCreationTime}</td>       
+                    <td>${job.jobCreationTime}</td>       
                 </tr>
             </c:forEach>
         </table>

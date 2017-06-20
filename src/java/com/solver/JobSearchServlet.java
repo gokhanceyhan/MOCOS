@@ -81,16 +81,16 @@ public class JobSearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        // get search parameters
+        String usermail = "gokhanceyhan01@gmail.com"; //= request.getParameter("email");
+        String jobId = "5"; //request.getParameter("JobID");
+
         try {
             // create connection
             java.sql.Connection connection = ConnectionManager.setUpConnection();
 
-            // get search parameters
-            String usermail = request.getParameter("email");
-            String jobId = request.getParameter("JobID");
-
             String SELECT_SQL = "SELECT * FROM MOCO.JOBQUEUE WHERE ISSUER = "
-                    + "'" + usermail + "'" + " and " + "JOBDID = " + jobId;
+                    + "'" + usermail + "'" + " and " + "JOBID = " + jobId;
 
             PreparedStatement statement = connection.prepareStatement(SELECT_SQL);
             ResultSet resultSet = statement.executeQuery();
@@ -113,8 +113,7 @@ public class JobSearchServlet extends HttpServlet {
             }
 
             request.setAttribute("jobs", jobs); // Will be available as ${jobs} in JSP
-            String contextPath = request.getContextPath() + "/";
-            request.getRequestDispatcher(contextPath + "nMOCO-S_JobQueue.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/nMOCO-S/nMOCO-S_JobQueue.jsp").forward(request, response);
 
         } catch (SQLException | ClassNotFoundException | NamingException ex) {
             Logger.getLogger(JobSearchServlet.class.getName()).log(Level.SEVERE, null, ex);
