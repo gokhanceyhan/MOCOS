@@ -82,8 +82,10 @@ public class JobSearchServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // get search parameters
-        String usermail = "gokhanceyhan01@gmail.com"; //= request.getParameter("email");
-        String jobId = "5"; //request.getParameter("JobID");
+        String usermail = request.getParameter("email");
+        String jobId = request.getParameter("JobID");
+        System.out.println(usermail);
+        System.out.println(jobId);
 
         try {
             // create connection

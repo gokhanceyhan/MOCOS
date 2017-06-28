@@ -18,25 +18,25 @@
         <title>nMOCO-S</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="${pageContext.request.contextPath}/web/css/sample.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath}/web/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/web/js/jqBootstrapValidation.js"></script>
+        <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jqBootstrapValidation.js"></script>
 
         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
         <!-- Font-awesome CSS-->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/web/css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font-awesome-4.7.0/css/font-awesome.min.css">
 
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="${pageContext.request.contextPath}/web/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="${pageContext.request.contextPath}/web/css/nMOCO-S_JobQueue.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/nMOCO-S_JobQueue.css" rel="stylesheet">
 
         <!-- Custom javascript files -->
-        <script src="${pageContext.request.contextPath}/web/js/nMOCO-S_JobQueue.js"></script>
+        <script src="${pageContext.request.contextPath}/js/nMOCO-S_JobQueue.js"></script>
 
     </head>
 
@@ -53,19 +53,19 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="../../index.jsp">MOCO-S</a>
+                        <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">MOCO-S</a>
                     </div>
 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="../../index.jsp">Home</a></li>
-                            <li><a href="../about.jsp">About</a></li>
-                            <li><a href="../contact.jsp">Contact</a></li>
-                            <li><a href="../libMOCO-S/libMOCO-S.jsp">Library</a></li>
+                            <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+                            <li><a href="${pageContext.request.contextPath}/jsp/about.jsp">About</a></li>
+                            <li><a href="${pageContext.request.contextPath}/jsp/contact.jsp">Contact</a></li>
+                            <li><a href="${pageContext.request.contextPath}/jsp/libMOCO-S/libMOCO-S.jsp">Library</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="nMOCO-S_Home.jsp">nMOCO-S</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/jsp/nMOCO-S/nMOCO-S_Home.jsp">nMOCO-S</a></li>
                                     <li><a href="#">rMOCO-S</a></li>
                                     <li><a href="#">iMOCO-S</a></li>
 
@@ -80,12 +80,11 @@
                 </div>
             </nav>
 
-            <form id="searchForm" name="searchForm" method="post" action="../../JobSearchServlet" class="form-nMOCOS" enctype="multipart/form-data" novalidate>
+            <form id="searchForm" name="searchForm" method="post" action="${pageContext.request.contextPath}/JobSearchServlet" class="form-nMOCOS" enctype="multipart/form-data" novalidate>
 
                 <div class="row">   
 
                     <div class="col-md-4">
-
                         <div class="control-group form-group">
                             <fieldset class="control-group form-group">
                                 <div class="input-group">
@@ -107,7 +106,6 @@
                                 <p class="help-block"></p>
                             </fieldset>
                         </div>
-
                     </div>
 
                     <div class="col-md-4">
@@ -122,16 +120,37 @@
 
             </form>
 
-        </div> <!-- /container -->
+            <div id="page-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">                
+                                <h2 class="panel-title">Search Results</h2>
+                            </div>
+                            <div class="panel-body">
+                                <table width="100%" class="table table-striped table-bordered table-hover" id="job_search_results">
+                                    <thead>
+                                        <tr>
+                                            <th>Job Id</th>
+                                            <th>Job Creation Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${jobs}" var="job">
+                                            <tr>
+                                                <td>${job.jobId}</td>
+                                                <td>${job.jobCreationTime}</td>       
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <table>
-            <c:forEach items="${jobs}" var="job">
-                <tr>
-                    <td>${job.jobId}</td>
-                    <td>${job.jobCreationTime}</td>       
-                </tr>
-            </c:forEach>
-        </table>
+        </div> <!-- /container -->
 
     </body>
 </html>
