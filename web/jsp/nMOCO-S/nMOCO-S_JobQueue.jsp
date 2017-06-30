@@ -89,7 +89,7 @@
                             <fieldset class="control-group form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                    <input id="email" type="email" class="form-control" name="email" placeholder="Email" required data-validation-required-message="Please enter your email address.">                                           
+                                    <input id="user_email" type="email" class="form-control" name="search_email" placeholder="Email" required data-validation-required-message="Please enter your email address.">                                           
                                 </div>
                                 <p class="help-block"></p>
                             </fieldset>
@@ -101,7 +101,7 @@
                             <fieldset class="control-group form-group">
                                 <div class="input-group">                               
                                     <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                                    <input id="JobID" type="text" class="form-control" name="JobID" placeholder="Job ID" required data-validation-required-message="Please enter the job ID number.">
+                                    <input id="queue_id" type="text" class="form-control" name="search_jobId" placeholder="Job ID" required data-validation-required-message="Please enter the job ID number.">
                                 </div>
                                 <p class="help-block"></p>
                             </fieldset>
@@ -109,10 +109,10 @@
                     </div>
 
                     <div class="col-md-4">
-                        <div class="control-group form-group">
-                            <p>
-                                <button type="submit" class="btn btn-primary" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
-                            </p>
+                        <div class="form-group">
+                            <div>
+                                <button type="submit" class="btn btn-primary" id="searchBtn" name="search" value="upload">Search</button>
+                            </div>
                         </div>
                     </div>
 
@@ -132,14 +132,22 @@
                                     <thead>
                                         <tr>
                                             <th>Job Id</th>
+                                            <th>Issuer</th>
                                             <th>Job Creation Time</th>
+                                            <th>Job Status</th>
+                                            <th>Job Completion Time</th>
+                                            <th>Job Output</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <c:forEach items="${jobs}" var="job">
                                             <tr>
                                                 <td>${job.jobId}</td>
-                                                <td>${job.jobCreationTime}</td>       
+                                                <td>${job.issuer}</td>
+                                                <td>${job.jobCreationTime}</td>
+                                                <td>${job.jobStatus}</td>
+                                                <td>${job.completionTime}</td>
+                                                <td>${job.jobOutput}</td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>

@@ -118,7 +118,7 @@ public class UploadServlet extends HttpServlet {
         statement.setString(4, "");
         statement.setString(5, "");
         statement.setString(6, JobStatus.TO_DO.toString());
-        statement.setTimestamp(7, new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
+        statement.setTimestamp(7, null);
         statement.setString(8, "");
         statement.setDouble(9, 0.0);
 
