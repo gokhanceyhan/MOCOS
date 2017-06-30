@@ -13,11 +13,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author gokhanceyhan
  */
+@MultipartConfig
 public class JobSearchServlet extends HttpServlet {
 
     /**
@@ -82,10 +85,9 @@ public class JobSearchServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // get search parameters
-        String usermail = request.getParameter("email");
-        String jobId = request.getParameter("JobID");
-        System.out.println(usermail);
-        System.out.println(jobId);
+        String usermail = request.getParameter("search_email");
+        String jobId = request.getParameter("search_jobId");
+
 
         try {
             // create connection
