@@ -85,8 +85,8 @@
                         <h2 style="color: darkslateblue">DB Listener</h2>
                         <div class="row">
                             <div class="col-md-2">
-                                <form action="${pageContext.request.contextPath}/SolveServlet" method="POST">
-                                    <button type="submit" class="btn btn-success" id="listenerStartBtn" name="listen">Start</button>
+                                <form action="${pageContext.request.contextPath}/SolveServlet" method="POST" enctype="multipart/form-data">
+                                    <button type="submit" class="btn btn-success" id="listenerStartBtn" name="listen" value="upload">Start</button>
                                 </form>
                             </div>
                             <div class="col-md-2">

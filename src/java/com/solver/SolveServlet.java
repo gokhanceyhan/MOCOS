@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author gokhan
  */
+@MultipartConfig
 public class SolveServlet extends HttpServlet {
 
     /**
@@ -43,6 +45,7 @@ public class SolveServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("heyy!");
 
         try {
             // create connection
@@ -69,8 +72,8 @@ public class SolveServlet extends HttpServlet {
                 }
                 if (anyJob) {
                     processJob(issuer, jobId, processor);
-
                 }
+                break;
 
             }
 
@@ -85,12 +88,12 @@ public class SolveServlet extends HttpServlet {
 
         if (processor.equalsIgnoreCase(Processors.NMOCOS.toString())) {
             callNMOCOS(jobFolder);
-
         } else {
 
         }
     }
 
+    @SuppressWarnings("empty-statement")
     private void callNMOCOS(String jobFolder) {
         try {
             Runtime runtime = Runtime.getRuntime();
