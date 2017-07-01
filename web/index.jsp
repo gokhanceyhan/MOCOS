@@ -55,7 +55,7 @@
                             </a>
                         </div>
                         <div id="navbar" class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav">
+                            <ul class="nav navbar-nav" id="menu">
                                 <li class="active"><a href="index.jsp">Home</a></li>
                                 <li><a href="jsp/about.jsp">About</a></li>
                                 <li><a href="jsp/contact.jsp">Contact</a></li>
@@ -74,11 +74,11 @@
                                     </ul>
                                 </li>
                                 <li><a href="jsp/guide/guide.jsp">Guide</a></li>
+                                <li><a href="jsp/admin.jsp"><button class="btn btn-danger"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Admin</button></a></li>
                             </ul>
-                        </div>
-                    </div>
-                </nav>
-
+                        </div>                       
+                    </div>                   
+                </nav>                  
             </div>
         </div>
 

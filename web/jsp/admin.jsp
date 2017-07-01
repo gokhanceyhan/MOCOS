@@ -1,6 +1,6 @@
 <%-- 
-    Document   : about
-    Created on : Aug 23, 2016, 9:45:23 PM
+    Document   : admin
+    Created on : Jul 1, 2017, 1:42:48 PM
     Author     : gokhanceyhan
 --%>
 
@@ -34,7 +34,8 @@
 
         <!-- Custom styles for this template -->
         <link href="../css/carousel.css" rel="stylesheet">
-        <link href="../css/about.css" rel="stylesheet">
+        <link href="../css/admin.css" rel="stylesheet">
+
     </head>
     <!-- NAVBAR
     ================================================== -->
@@ -56,7 +57,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="../index.jsp">Home</a></li>
-                            <li class="active"><a href="about.jsp">About</a></li>
+                            <li><a href="about.jsp">About</a></li>
                             <li><a href="contact.jsp">Contact</a></li>
                             <li><a href="libMOCO-S/libMOCO-S.jsp">Library</a></li>
                             <li class="dropdown">
@@ -77,17 +78,27 @@
                 </div>
             </nav>
 
-            <!-- Jumbotron Header -->
             <div class="jumbotron">
-                <h1 style="color: darkslateblue">The project</h1>
-                <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+                <div class="row">   
+
+                    <div class="col-md-4">
+                        <h2 style="color: darkslateblue">DB Listener</h2>
+                        <button type="submit" action="${pageContext.request.contextPath}/SolveServlet" class="btn btn-success" id="listenerStartBtn" name="listen">Start</button>
+                        <button class="btn btn-warning" id="listenerSettingsBtn" name="listenSettings">Settings</button>                    
+                    </div>
+
+                    <div class="col-md-4">
+                        <h2 style="color: darkslateblue">nMOCO-S</h2>
+                        <button class="btn btn-warning" id="nMOCO-S_SettingsBtn" name="nMOCO-S_Settings">Settings</button>                    
+                    </div>
+
+                </div>  
+
             </div>
-            <hr>
-            <div class="jumbotron">
-                <h1 style="color: darkred">The software</h1>
-                <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
-            </div>
+
+
         </div>
-        
+
     </body>
+
 

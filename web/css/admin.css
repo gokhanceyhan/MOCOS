@@ -4,17 +4,17 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Feb 24, 2017, 6:37:37 PM
+    Created on : Jul 1, 2017, 1:52:25 PM
     Author     : gokhanceyhan
 */
 
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 150px;
+  margin-right: 150px;
 }
 
 .navbar {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-
-

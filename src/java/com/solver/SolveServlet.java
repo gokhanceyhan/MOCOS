@@ -23,29 +23,16 @@ public class SolveServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println(getServletInfo());
+        
+        
+        
+        
+        
+        
+        
 
-        // we need to invoke our algorithm
-        try {
 
-            // start the solver
-//            Runtime runtime = Runtime.getRuntime();
-//            String solverPath = "/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/web/myFiles/MOIP_software.exe";
-//            String folderPath = "/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/web/myFiles";
-//            Process p = runtime.exec(solverPath, null, new File(folderPath));
-//
-//            InputStream stderr = p.getInputStream();
-//            InputStreamReader isr = new InputStreamReader(stderr);
-//            BufferedReader br = new BufferedReader(isr);
-//            String line = null;
-//            while ((line = br.readLine()) != null);
-//            p.waitFor();
-            // display "Complete" on the page
-            response.setHeader("Content-Type", "text/plain");
-            response.getWriter().write("Finished!");
-
-        } catch (Throwable t) {
-            t.printStackTrace();
-        }
 
     }
 
@@ -62,7 +49,7 @@ public class SolveServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Starts listening the JOBQUEUE table in the MOCO database.";
     }
 
 }
