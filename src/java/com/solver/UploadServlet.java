@@ -5,6 +5,7 @@ import com.solver.dataTypes.InputData;
 import com.solver.dataTypes.InputType;
 import com.solver.dataTypes.JobStatus;
 import com.solver.dataTypes.ProblemType;
+import com.solver.dataTypes.Processors;
 import com.solver.database.ConnectionManager;
 import java.io.File;
 import java.io.FileWriter;
@@ -114,7 +115,7 @@ public class UploadServlet extends HttpServlet {
         PreparedStatement statement = con.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
         statement.setTimestamp(1, new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
         statement.setString(2, usermail);
-        statement.setString(3, "nMOCO-S");
+        statement.setString(3, Processors.NMOCOS.toString());
         statement.setString(4, "");
         statement.setString(5, "");
         statement.setString(6, JobStatus.TO_DO.toString());
@@ -143,7 +144,7 @@ public class UploadServlet extends HttpServlet {
         generateParameterFile(uploadPath);
         String inputFileName = generateProblemFile(uploadPath);
 
-        String UPDATE_SQL = "UPDATE JOBQUEUE SET JOBINPUT = " + "'"+ inputFileName + "'"
+        String UPDATE_SQL = "UPDATE JOBQUEUE SET JOBINPUT = " + "'" + inputFileName + "'"
                 + ", JOBPARAM = " + "'" + Constants.MAIN_FILE_NAME + "'"
                 + " WHERE JOBID = " + jobId;
 
