@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -76,6 +75,7 @@ public class SolveServlet extends HttpServlet {
                         break;
                     }
                 }
+                statement.close();
                 if (anyJob) {
                     processJob(issuer, jobId, processor, creationTime);
                 }
@@ -91,11 +91,11 @@ public class SolveServlet extends HttpServlet {
 
     private void processJob(String issuer, Long jobId, String processor, Timestamp jobCreationTime)
             throws InterruptedException, IOException, SQLException {
-        
+
         assignJobStatus(jobId, JobStatus.IN_PROGRESS.toString());
         String jobFolder = Constants.JOBS_PATH + issuer + "/" + jobId;
 
-        boolean success = callNMOCOS(jobFolder);
+        boolean success = true; //callNMOCOS(jobFolder);
         if (success) {
             assignJobOutput(jobId, jobCreationTime, JobStatus.FINISHED_SUCCESS.toString(), Constants.RESULT_FILE_NAME);
         } else {
