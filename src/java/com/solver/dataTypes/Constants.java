@@ -13,11 +13,13 @@ public class Constants {
     
     public static final String ABSOLUTE_PATH = "/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/";
     public static final String JOBS_PATH = "/Users/gokhanceyhan/Dropbox/akademik/Ph.D/Solver_on_Web/MOIP/jobs/";
-    public static final String nMOCOS_PATH = "web/nMOCO-S_Files/MOIP_software.exe";
+    public static final String NMOCOS_PATH = "web/nMOCO-S_Files/MOIP_software.exe";
 
     public static final String MAIN_FILE_NAME = "MainFile.txt";
     public static final String DATA_FILE_NAME = "data.txt";
     public static final String MODEL_FILE_NAME = "model.lp";
+    public static final String RESULT_FILE_NAME = "result.txt";
+    public static final String LOG_FILE_NAME = "log.txt";
 
     private Constants() {
 

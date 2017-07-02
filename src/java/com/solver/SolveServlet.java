@@ -9,14 +9,18 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +29,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author gokhan
  */
-@MultipartConfig
 public class SolveServlet extends HttpServlet {
 
     /**
@@ -36,6 +39,9 @@ public class SolveServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    // define connection
+    java.sql.Connection connection;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,11 +51,9 @@ public class SolveServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("heyy!");
 
         try {
-            // create connection
-            java.sql.Connection connection = ConnectionManager.setUpConnection();
+            connection = ConnectionManager.setUpConnection();
             while (true) {
                 // query jobqueue table and check if there is a job to do.
                 String SELECT_SQL = "SELECT * FROM MOCO.JOBQUEUE WHERE JOBSTATUS = "
@@ -60,6 +64,7 @@ public class SolveServlet extends HttpServlet {
                 String issuer = "";
                 Long jobId = (long) 0;
                 String processor = Processors.NMOCOS.toString();
+                Timestamp creationTime = null;
                 while (resultSet.next()) {
                     String jobStatus = resultSet.getString("JOBSTATUS");
                     if (jobStatus.equalsIgnoreCase(JobStatus.TO_DO.toString())) {
@@ -67,47 +72,74 @@ public class SolveServlet extends HttpServlet {
                         issuer = resultSet.getString("ISSUER");
                         jobId = resultSet.getLong("JOBID");
                         processor = resultSet.getString("PROCESSOR");
+                        creationTime = resultSet.getTimestamp("JOBCREATIONTIME");
                         break;
                     }
                 }
                 if (anyJob) {
-                    processJob(issuer, jobId, processor);
+                    processJob(issuer, jobId, processor, creationTime);
                 }
                 break;
 
             }
 
-        } catch (SQLException | ClassNotFoundException | NamingException ex) {
+        } catch (SQLException | ClassNotFoundException | NamingException | InterruptedException ex) {
             Logger.getLogger(SolveServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    private void processJob(String issuer, Long jobId, String processor) {
+    private void processJob(String issuer, Long jobId, String processor, Timestamp jobCreationTime)
+            throws InterruptedException, IOException, SQLException {
+        
+        assignJobStatus(jobId, JobStatus.IN_PROGRESS.toString());
         String jobFolder = Constants.JOBS_PATH + issuer + "/" + jobId;
 
-        if (processor.equalsIgnoreCase(Processors.NMOCOS.toString())) {
-            callNMOCOS(jobFolder);
+        boolean success = callNMOCOS(jobFolder);
+        if (success) {
+            assignJobOutput(jobId, jobCreationTime, JobStatus.FINISHED_SUCCESS.toString(), Constants.RESULT_FILE_NAME);
         } else {
-
+            assignJobOutput(jobId, jobCreationTime, JobStatus.FINISHED_FAIL.toString(), Constants.LOG_FILE_NAME);
         }
+
     }
 
     @SuppressWarnings("empty-statement")
-    private void callNMOCOS(String jobFolder) {
-        try {
-            Runtime runtime = Runtime.getRuntime();
-            Process p = runtime.exec(Constants.nMOCOS_PATH, null, new File(jobFolder));
+    private boolean callNMOCOS(String jobFolder) throws IOException, InterruptedException {
 
-            InputStream stderr = p.getInputStream();
-            InputStreamReader isr = new InputStreamReader(stderr);
-            BufferedReader br = new BufferedReader(isr);
-            String line = null;
-            while ((line = br.readLine()) != null);
-            p.waitFor();
-        } catch (IOException | InterruptedException ex) {
-            Logger.getLogger(SolveServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Runtime runtime = Runtime.getRuntime();
+        Process p = runtime.exec(Constants.ABSOLUTE_PATH + Constants.NMOCOS_PATH, null, new File(jobFolder));
+
+        InputStream stderr = p.getInputStream();
+        InputStreamReader isr = new InputStreamReader(stderr);
+        BufferedReader br = new BufferedReader(isr);
+        String line = null;
+        while ((line = br.readLine()) != null);
+        p.waitFor();
+
+        return true;
+    }
+
+    private void assignJobStatus(Long jobId, String status) throws SQLException {
+        String UPDATE_SQL = "UPDATE JOBQUEUE SET JOBSTATUS = " + "'" + status + "'"
+                + " WHERE JOBID = " + jobId;
+        Statement updateStatement = connection.createStatement();
+        updateStatement.execute(UPDATE_SQL);
+        updateStatement.close();
+    }
+
+    private void assignJobOutput(Long jobId, Timestamp jobCreationTime, String status, String jobOutputFile) throws
+            SQLException {
+
+        Timestamp completionTime = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+        double processTime = completionTime.getTime() - jobCreationTime.getTime();
+
+        String UPDATE_SQL = "UPDATE JOBQUEUE SET JOBSTATUS = " + "'" + status + "'"
+                + ", COMPLETIONTIME = " + completionTime + ", JOBOUTPUT = " + "'" + jobOutputFile + "'"
+                + ", PROCESSTIME = " + processTime + " WHERE JOBID = " + jobId;
+        Statement updateStatement = connection.createStatement();
+        updateStatement.execute(UPDATE_SQL);
+        updateStatement.close();
     }
 
     /**
@@ -118,6 +150,23 @@ public class SolveServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Starts listening the JOBQUEUE table in the MOCO database.";
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SolveServlet</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SolveServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
 }

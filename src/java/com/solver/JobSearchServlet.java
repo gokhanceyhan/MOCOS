@@ -87,7 +87,6 @@ public class JobSearchServlet extends HttpServlet {
         String usermail = request.getParameter("search_email");
         String jobId = request.getParameter("search_jobId");
 
-
         try {
             // create connection
             java.sql.Connection connection = ConnectionManager.setUpConnection();
