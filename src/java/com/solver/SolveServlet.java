@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -61,24 +62,24 @@ public class SolveServlet extends HttpServlet {
                 ResultSet resultSet = statement.executeQuery();
                 boolean anyJob = false;
                 String issuer = "";
-                Long jobId = (long) 0;
-                String processor = Processors.NMOCOS.toString();
-                Timestamp creationTime = null;
+                int jobId = 0;
+                String processor = null;
+                Long creationTime = null;
                 while (resultSet.next()) {
                     String jobStatus = resultSet.getString("JOBSTATUS");
                     if (jobStatus.equalsIgnoreCase(JobStatus.TO_DO.toString())) {
                         anyJob = true;
                         issuer = resultSet.getString("ISSUER");
-                        jobId = resultSet.getLong("JOBID");
+                        jobId = resultSet.getInt("JOBID");
                         processor = resultSet.getString("PROCESSOR");
-                        creationTime = resultSet.getTimestamp("JOBCREATIONTIME");
+                        creationTime = resultSet.getTimestamp("JOBCREATIONTIME").getTime();
                         break;
                     }
                 }
-                statement.close();
                 if (anyJob) {
                     processJob(issuer, jobId, processor, creationTime);
                 }
+                statement.close();
                 break;
 
             }
@@ -89,7 +90,7 @@ public class SolveServlet extends HttpServlet {
 
     }
 
-    private void processJob(String issuer, Long jobId, String processor, Timestamp jobCreationTime)
+    private void processJob(String issuer, int jobId, String processor, Long jobCreationTime)
             throws InterruptedException, IOException, SQLException {
 
         assignJobStatus(jobId, JobStatus.IN_PROGRESS.toString());
@@ -120,7 +121,7 @@ public class SolveServlet extends HttpServlet {
         return true;
     }
 
-    private void assignJobStatus(Long jobId, String status) throws SQLException {
+    private void assignJobStatus(int jobId, String status) throws SQLException {
         String UPDATE_SQL = "UPDATE JOBQUEUE SET JOBSTATUS = " + "'" + status + "'"
                 + " WHERE JOBID = " + jobId;
         Statement updateStatement = connection.createStatement();
@@ -128,11 +129,11 @@ public class SolveServlet extends HttpServlet {
         updateStatement.close();
     }
 
-    private void assignJobOutput(Long jobId, Timestamp jobCreationTime, String status, String jobOutputFile) throws
+    private void assignJobOutput(int jobId, Long jobCreationTime, String status, String jobOutputFile) throws
             SQLException {
 
         Timestamp completionTime = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
-        double processTime = completionTime.getTime() - jobCreationTime.getTime();
+        double processTime = completionTime.getTime() - jobCreationTime;
 
         String UPDATE_SQL = "UPDATE JOBQUEUE SET JOBSTATUS = " + "'" + status + "'"
                 + ", COMPLETIONTIME = " + completionTime + ", JOBOUTPUT = " + "'" + jobOutputFile + "'"
