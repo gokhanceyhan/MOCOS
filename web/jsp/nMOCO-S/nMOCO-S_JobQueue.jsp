@@ -136,6 +136,7 @@
                                             <th>Job Creation Time</th>
                                             <th>Job Status</th>
                                             <th>Job Completion Time</th>
+                                            <th>Processing Time (secs)</th>
                                             <th>Job Output</th>
                                         </tr>
                                     </thead>
@@ -147,6 +148,7 @@
                                                 <td>${job.jobCreationTime}</td>
                                                 <td>${job.jobStatus}</td>
                                                 <td>${job.completionTime}</td>
+                                                <td>${job.processTime}</td>
                                                 <td>${job.jobOutput}</td>
                                             </tr>
                                         </c:forEach>
