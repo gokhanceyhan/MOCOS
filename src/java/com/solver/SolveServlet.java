@@ -2,7 +2,6 @@ package com.solver;
 
 import com.solver.dataTypes.Constants;
 import com.solver.dataTypes.JobStatus;
-import com.solver.dataTypes.Processors;
 import com.solver.database.ConnectionManager;
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -78,8 +76,8 @@ public class SolveServlet extends HttpServlet {
                 if (anyJob) {
                     processJob(issuer, jobId, processor);
                 } else {
-                    // sleep for a while
-                    Thread.sleep(60000);
+                    // sleep for a while (10 mins)
+                    Thread.sleep(600000);
                 }
             }
 
