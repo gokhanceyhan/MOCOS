@@ -74,7 +74,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="jsp/guide/guide.jsp">Guide</a></li>
-                                <li><a href="jsp/admin.jsp"><button class="btn btn-danger"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Admin</button></a></li>
+                                <!--li><a href="jsp/admin.jsp"><button class="btn btn-danger"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Admin</button></a></li-->
                             </ul>
                         </div>                       
                     </div>                   
