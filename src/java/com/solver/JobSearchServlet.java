@@ -91,7 +91,7 @@ public class JobSearchServlet extends HttpServlet {
             // create connection
             java.sql.Connection connection = ConnectionManager.setUpConnection();
 
-            String SELECT_SQL = "SELECT * FROM MOCO.JOBQUEUE WHERE ISSUER = "
+            String SELECT_SQL = "SELECT * FROM MOCOSERVER.JOBQUEUE WHERE ISSUER = "
                     + "'" + usermail + "'" + " and " + "JOBID = " + jobId;
 
             PreparedStatement statement = connection.prepareStatement(SELECT_SQL);

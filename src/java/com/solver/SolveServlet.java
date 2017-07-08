@@ -54,21 +54,21 @@ public class SolveServlet extends HttpServlet {
             connection = ConnectionManager.setUpConnection();
             while (true) {
                 // query jobqueue table and check if there is a job to do.
-                String SELECT_SQL = "SELECT * FROM MOCO.JOBQUEUE WHERE JOBSTATUS = "
+                String SELECT_SQL = "SELECT * FROM MOCOSERVER.JOBQUEUE WHERE JOBSTATUS = "
                         + "'" + JobStatus.TO_DO.toString() + "'";
                 PreparedStatement statement = connection.prepareStatement(SELECT_SQL);
                 ResultSet resultSet = statement.executeQuery();
                 boolean anyJob = false;
                 String issuer = null;
                 Long jobId = null;
-                String processor = null;                
+                String processor = null;
                 while (resultSet.next()) {
                     String jobStatus = resultSet.getString("JOBSTATUS");
                     if (jobStatus.equalsIgnoreCase(JobStatus.TO_DO.toString())) {
                         anyJob = true;
                         issuer = resultSet.getString("ISSUER");
                         jobId = resultSet.getLong("JOBID");
-                        processor = resultSet.getString("PROCESSOR");                        
+                        processor = resultSet.getString("PROCESSOR");
                         statement.close();
                         break;
                     }
@@ -91,10 +91,10 @@ public class SolveServlet extends HttpServlet {
             throws InterruptedException, IOException, SQLException {
 
         assignJobStatus(jobId, JobStatus.IN_PROGRESS.toString());
-        String jobFolder = Constants.JOBS_PATH + issuer + "/" + jobId;
+        String jobFolder = Constants.JOBS_PATH + issuer + "/" + jobId + "/";
         Timestamp jobStartTime = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
 
-        boolean success = true; //callNMOCOS(jobFolder);
+        boolean success = callNMOCOS(jobFolder);
         if (success) {
             assignJobOutput(jobId, jobStartTime, JobStatus.FINISHED_SUCCESS.toString(), Constants.RESULT_FILE_NAME);
         } else {
@@ -107,8 +107,11 @@ public class SolveServlet extends HttpServlet {
     private boolean callNMOCOS(String jobFolder) throws IOException, InterruptedException {
 
         Runtime runtime = Runtime.getRuntime();
-        Process p = runtime.exec(Constants.ABSOLUTE_PATH + Constants.NMOCOS_PATH, null, new File(jobFolder));
-
+        String[] cmdArray= new String[2];
+        cmdArray[0]=Constants.ABSOLUTE_PATH + Constants.NMOCOS_PATH;
+        cmdArray[1]=jobFolder;
+        
+        Process p = runtime.exec(cmdArray, null, new File(jobFolder));
         InputStream stderr = p.getInputStream();
         InputStreamReader isr = new InputStreamReader(stderr);
         BufferedReader br = new BufferedReader(isr);

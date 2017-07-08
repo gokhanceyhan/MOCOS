@@ -18,7 +18,7 @@ public class ConnectionManager {
 
     private static final String URL = "jdbc:derby://localhost:1527/mocoDB";
     private static final String DRIVER_NAME = "org.apache.derby.jdbc.EmbeddedDriver";
-    private static final String USER_NAME = "moco";
+    private static final String USER_NAME = "mocoserver";
     private static final String PASSWORD = "mocodb2016";
 
     public static Connection setUpConnection() throws SQLException, ClassNotFoundException, NamingException {
