@@ -124,8 +124,8 @@
                                             <td> <%= resultset.getString(3)%></td>
                                             <td> <%= resultset.getString(4)%></td>
                                             <td> <%= resultset.getString(5)%></td>
-                                            <td> <a href=file:///D:/library/Knapsack/<%= resultset.getString(2)%>/<%= resultset.getString(3)%>/<%= resultset.getString(4)%>/<%= resultset.getString(6)%> download target="_blank" role="button"><span class="glyphicon glyphicon-save-file"></span></a></td>                                  
-                                            <td> <a href=file:///D:/library/Knapsack/<%= resultset.getString(2)%>/<%= resultset.getString(3)%>/<%= resultset.getString(4)%>/<%= resultset.getString(7)%> download target="_blank" role="button"><span class="glyphicon glyphicon-save-file"></span></a></td>                             
+                                            <td> <a href=file://D:/library/Knapsack/<%= resultset.getString(2)%>/<%= resultset.getString(3)%>/<%= resultset.getString(4)%>/<%= resultset.getString(6)%> download target="_blank" role="button"><span class="glyphicon glyphicon-save-file"></span></a></td>                                  
+                                            <td> <a href=file://D:/library/Knapsack/<%= resultset.getString(2)%>/<%= resultset.getString(3)%>/<%= resultset.getString(4)%>/<%= resultset.getString(7)%> download target="_blank" role="button"><span class="glyphicon glyphicon-save-file"></span></a></td>                             
                                         </tr>
                                         <% }%>
                                     </tbody>
