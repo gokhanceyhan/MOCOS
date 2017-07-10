@@ -76,8 +76,8 @@ public class SolveServlet extends HttpServlet {
                 if (anyJob) {
                     processJob(issuer, jobId, processor);
                 } else {
-                    // sleep for a while (10 mins)
-                    Thread.sleep(600000);
+                    // sleep for a while (1 min)
+                    Thread.sleep(60000);
                 }
             }
 
