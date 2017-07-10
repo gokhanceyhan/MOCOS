@@ -76,6 +76,7 @@
                                     <li><a href="#">One more separated link</a></li-->
                                 </ul>
                             </li>
+                            <li><a href="guide/guide.jsp">Guide</a></li>
                         </ul>
                     </div>
                 </div>

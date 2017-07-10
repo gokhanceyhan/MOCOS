@@ -79,7 +79,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="../nMOCO-S/nMOCO-S_InputPage.jsp">nMOCO-S</a></li>
+                                    <li><a href="../nMOCO-S/nMOCO-S_Home.jsp">nMOCO-S</a></li>
                                     <li><a href="#">rMOCO-S</a></li>
                                     <li><a href="#">iMOCO-S</a></li>
 
