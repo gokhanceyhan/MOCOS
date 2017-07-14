@@ -5,6 +5,7 @@
  */
 package com.solver;
 
+import com.solver.dataTypes.JobStatus;
 import com.solver.dataTypes.MocoJob;
 import com.solver.database.ConnectionManager;
 import java.io.IOException;
@@ -111,6 +112,7 @@ public class JobSearchServlet extends HttpServlet {
                 job.setCompletionTime(resultSet.getTimestamp("COMPLETIONTIME"));
                 job.setJobOutput(resultSet.getString("JOBOUTPUT"));
                 job.setProcessTime(resultSet.getDouble("PROCESSTIME"));
+                job = findSequenceAndWaitingTimeOfJob(job, connection);
                 jobs.add(job);
             }
 
@@ -120,6 +122,37 @@ public class JobSearchServlet extends HttpServlet {
         } catch (SQLException | ClassNotFoundException | NamingException ex) {
             Logger.getLogger(JobSearchServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private MocoJob findSequenceAndWaitingTimeOfJob(MocoJob job, java.sql.Connection connection) {
+
+        MocoJob updatedJob = new MocoJob(job);
+        long jobId = updatedJob.getJobId();
+        int sequence = 0;
+        if (job.getJobStatus().equals(JobStatus.TO_DO.toString())) {
+            sequence++;
+            try {
+                String SELECT_SQL = "SELECT * FROM MOCOSERVER.JOBQUEUE WHERE JOBSTATUS = "
+                        + "'" + JobStatus.TO_DO.toString() + "'";
+                PreparedStatement statement;
+                statement = connection.prepareStatement(SELECT_SQL);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    if (resultSet.getLong("JOBID") == jobId) {
+                        break;
+                    } else {
+                        sequence++;
+                    }
+                }
+                statement.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(JobSearchServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        updatedJob.setSequenceNumber(sequence);
+        updatedJob.setWaitingTime(sequence * 0.0);
+
+        return updatedJob;
     }
 
     /**

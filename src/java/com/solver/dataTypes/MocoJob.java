@@ -23,9 +23,34 @@ public class MocoJob {
     private Timestamp completionTime;
     private String jobOutput;
     private double processTime;
+    private int sequenceNumber;
+    private double waitingTime;
 
     public MocoJob() {
 
+    }
+
+    public MocoJob(Long jobId, Timestamp jobCreationTime, String issuer, String processor, String jobInput,
+            String jobParam, String jobStatus, Timestamp completionTime, String jobOutput,
+            double processTİme, int sequenceNumber, double waitingTime) {
+        this.jobId = jobId;
+        this.jobCreationTime = jobCreationTime;
+        this.issuer = issuer;
+        this.processor = processor;
+        this.jobInput = jobInput;
+        this.jobParam = jobParam;
+        this.jobStatus = jobStatus;
+        this.completionTime = completionTime;
+        this.jobOutput = jobOutput;
+        this.processTime = processTİme;
+        this.sequenceNumber = sequenceNumber;
+        this.waitingTime = waitingTime;
+    }
+
+    public MocoJob(MocoJob that) {
+        this(that.jobId, that.jobCreationTime, that.issuer, that.processor, that.jobInput,
+                that.jobParam, that.jobStatus, that.completionTime, that.jobOutput,
+                that.processTime, that.sequenceNumber, that.waitingTime);
     }
 
     /**
@@ -166,6 +191,34 @@ public class MocoJob {
      */
     public void setProcessTime(double processTime) {
         this.processTime = processTime;
+    }
+
+    /**
+     * @return the sequenceNumber
+     */
+    public int getSequenceNumber() {
+        return sequenceNumber;
+    }
+
+    /**
+     * @param sequenceNumber the sequenceNumber to set
+     */
+    public void setSequenceNumber(int sequenceNumber) {
+        this.sequenceNumber = sequenceNumber;
+    }
+
+    /**
+     * @return the waitingTime
+     */
+    public double getWaitingTime() {
+        return waitingTime;
+    }
+
+    /**
+     * @param waitingTime the waitingTime to set
+     */
+    public void setWaitingTime(double waitingTime) {
+        this.waitingTime = waitingTime;
     }
 
 }

@@ -135,11 +135,10 @@
                                             <th>Issuer</th>
                                             <th>Job Creation Time</th>
                                             <th>Seq. Number</th>
-                                            <th>Est. Time for Start</th>
+                                            <th>Est. Waiting Time</th>
                                             <th>Job Status</th>
                                             <th>Job Completion Time</th>
                                             <th>Processing Time (secs)</th>
-                                            <th>Job Output</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -148,8 +147,8 @@
                                                 <td>${job.jobId}</td>
                                                 <td>${job.issuer}</td>
                                                 <td>${job.jobCreationTime}</td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>${job.sequenceNumber}</td>
+                                                <td>${job.waitingTime}</td>
                                                 <td>${job.jobStatus}</td>
                                                 <td>${job.completionTime}</td>
                                                 <td>${job.processTime}</td>
