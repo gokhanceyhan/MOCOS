@@ -18,7 +18,7 @@ public class Constants {
     public static final String MAIN_FILE_NAME = "MainFile.txt";
     public static final String DATA_FILE_NAME = "data.txt";
     public static final String MODEL_FILE_NAME = "model.lp";
-    public static final String RESULT_FILE_NAME = "result.txt";
+    public static final String RESULT_FILE_NAME = "Output_nd_points.txt";
     public static final String LOG_FILE_NAME = "log.txt";
 
     private Constants() {

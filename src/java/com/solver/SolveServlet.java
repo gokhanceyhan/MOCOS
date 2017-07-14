@@ -40,6 +40,7 @@ public class SolveServlet extends HttpServlet {
     // define connection
     java.sql.Connection connection;
 
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -100,6 +101,8 @@ public class SolveServlet extends HttpServlet {
         } else {
             assignJobOutput(jobId, jobStartTime, JobStatus.FINISHED_FAIL.toString(), Constants.LOG_FILE_NAME);
         }
+        EmailSender eSender = new EmailSender();
+        eSender.sendEmail(issuer, jobId);
 
     }
 
@@ -107,10 +110,10 @@ public class SolveServlet extends HttpServlet {
     private boolean callNMOCOS(String jobFolder) throws IOException, InterruptedException {
 
         Runtime runtime = Runtime.getRuntime();
-        String[] cmdArray= new String[2];
-        cmdArray[0]=Constants.ABSOLUTE_PATH + Constants.NMOCOS_PATH;
-        cmdArray[1]=jobFolder;
-        
+        String[] cmdArray = new String[2];
+        cmdArray[0] = Constants.ABSOLUTE_PATH + Constants.NMOCOS_PATH;
+        cmdArray[1] = jobFolder;
+
         Process p = runtime.exec(cmdArray, null, new File(jobFolder));
         InputStream stderr = p.getInputStream();
         InputStreamReader isr = new InputStreamReader(stderr);
@@ -170,5 +173,4 @@ public class SolveServlet extends HttpServlet {
             out.println("</html>");
         }
     }
-
 }

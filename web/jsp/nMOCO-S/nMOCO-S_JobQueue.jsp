@@ -134,6 +134,8 @@
                                             <th>Job Id</th>
                                             <th>Issuer</th>
                                             <th>Job Creation Time</th>
+                                            <th>Seq. Number</th>
+                                            <th>Est. Time for Start</th>
                                             <th>Job Status</th>
                                             <th>Job Completion Time</th>
                                             <th>Processing Time (secs)</th>
@@ -146,10 +148,11 @@
                                                 <td>${job.jobId}</td>
                                                 <td>${job.issuer}</td>
                                                 <td>${job.jobCreationTime}</td>
+                                                <td></td>
+                                                <td></td>
                                                 <td>${job.jobStatus}</td>
                                                 <td>${job.completionTime}</td>
                                                 <td>${job.processTime}</td>
-                                                <td>${job.jobOutput}</td>
                                             </tr>
                                         </c:forEach>
                                     </tbody>
