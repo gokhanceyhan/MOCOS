@@ -76,19 +76,7 @@
                             <li><a href="../about.jsp">About</a></li>
                             <li><a href="../contact.jsp">Contact</a></li>
                             <li><a href="../libMOCO-S/libMOCO-S.jsp">Library</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="../nMOCO-S/nMOCO-S_Home.jsp">nMOCO-S</a></li>
-                                    <li><a href="#">rMOCO-S</a></li>
-                                    <li><a href="#">iMOCO-S</a></li>
-
-                                    <!--li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li-->
-                                </ul>
-                            </li>
+                            <li><a href="../nMOCO-S/nMOCO-S_Home.jsp">Solvers</a></li>
                             <li class="active"><a href="guide.jsp">Guide</a></li>
                         </ul>
                     </div>
@@ -226,10 +214,10 @@
 
                                 <h5>Model file format</h5>
                                 <p>
-                                    The user has the option to upload a multi-objective integer linear program (MILP) in LP file format used
-                                    by CPLEX solver with some minor modifications. You can have the necessary information about this input file
+                                    The user has the option to upload a multi-objective integer program (MIP) in LP file format used
+                                    by IBM ILOG CPLEX solver with some minor modifications. You can have the necessary information about this input file
                                     format <a href="http://www.ibm.com/support/knowledgecenter/en/SSSA5P_12.3.0/ilog.odms.cplex.help/Content/Optimization/Documentation/Optimization_Studio/_pubskel/ps_reffileformatscplex2159.html">here.</a>
-                                    First of all, we require the user has the associated LP file format of the single objective MILP problem.
+                                    First of all, we require the user has the associated LP file format of the single objective MIP problem.
                                     Then, the user should follow the steps given below:
                                 </p>
 
@@ -238,7 +226,10 @@
                                         Delete the expression following the <code>obj</code> keyword.
                                     </li>
                                     <li>
-                                        Let the problem has $m$ objectives. Define $m$ continuous variables. $z_1, z_2, ..., z_m$.
+                                        Let the problem has $m$ objectives. Define $m$ continuous variables, $z_1, z_2, ..., z_m$.
+                                    </li>
+                                    <li>
+                                        First $(m-1)$ objective function variables must be multiplied with $\epsilon = 1e-4$.
                                     </li>
                                     <li>
                                         Create $m$ additional constraints right after the last constraint of the single objective problem.
@@ -255,7 +246,7 @@
                                 </p>
                                 <pre>
                                     Maximize
-                                    obj: 
+                                    obj: 0.0001z1 + z2
                                     Subject To
                                     c1: 2 x1 + 9 x2 + x3 + 5 x4 + 7 x5 <= 15
                                     c2: 5 x1 + 2 x2 + 6 x3 + 8 x4 + 9 x5 - z1 = 0

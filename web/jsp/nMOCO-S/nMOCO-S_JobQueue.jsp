@@ -62,19 +62,8 @@
                             <li><a href="${pageContext.request.contextPath}/jsp/about.jsp">About</a></li>
                             <li><a href="${pageContext.request.contextPath}/jsp/contact.jsp">Contact</a></li>
                             <li><a href="${pageContext.request.contextPath}/jsp/libMOCO-S/libMOCO-S.jsp">Library</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="${pageContext.request.contextPath}/jsp/nMOCO-S/nMOCO-S_Home.jsp">nMOCO-S</a></li>
-                                    <li><a href="#">rMOCO-S</a></li>
-                                    <li><a href="#">iMOCO-S</a></li>
-
-                                    <!--li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li-->
-                                </ul>
-                            </li>
+                            <li><a href="${pageContext.request.contextPath}/jsp/nMOCO-S/nMOCO-S_Home.jsp">Solvers</a></li>
+                            <li><a href="${pageContext.request.contextPath}/jsp/guide/guide.jsp">Guide</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>

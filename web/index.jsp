@@ -60,19 +60,7 @@
                                 <li><a href="jsp/about.jsp">About</a></li>
                                 <li><a href="jsp/contact.jsp">Contact</a></li>
                                 <li><a href="jsp/libMOCO-S/libMOCO-S.jsp">Library</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="jsp/nMOCO-S/nMOCO-S_Home.jsp">nMOCO-S</a></li>
-                                        <li><a href="#">rMOCO-S</a></li>
-                                        <li><a href="#">iMOCO-S</a></li>
-
-                                        <!--li role="separator" class="divider"></li>
-                                        <li class="dropdown-header">Nav header</li>
-                                        <li><a href="#">Separated link</a></li>
-                                        <li><a href="#">One more separated link</a></li-->
-                                    </ul>
-                                </li>
+                                <li><a href="jsp/nMOCO-S/nMOCO-S_Home.jsp">Solvers</a></li>                           
                                 <li><a href="jsp/guide/guide.jsp">Guide</a></li>
                                 <!--li><a href="jsp/admin.jsp"><button class="btn btn-danger"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Admin</button></a></li-->
                             </ul>
@@ -96,9 +84,9 @@
                     <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
                     <div class="container">
                         <div class="carousel-caption">
-                            <img class="img-rounded" src="images/image11.PNG" alt="logo" width="150" height="150">
+                            <img class="img-rounded" src="images/image11.PNG" alt="logo" width="200" height="200">
                             <h1 style="color: darkslateblue;">onlinemoco.web</h1>
-                            <p>The first multi-objective combinatorial optimization solver on the web.</p>
+                            <p>A multi-objective optimization solver on the web.</p>
 
                         </div>
                     </div>
@@ -107,9 +95,9 @@
                     <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1>nMOCO-S</h1>
-                            <p>All Nondominated points by Multi-Objective Combinatorial Optimization Solver</p>
-                            <p>Generate efficient solutions of your multi-objective combinatorial problem. Upload your file, compute on the cloud, download results. </p>
+                            <h1 style="color: Orange;">nMOCO-S</h1>
+                            <p>All nondominated points by Multi-Objective Combinatorial Optimization Solver</p>
+                            <p>Generate all nondominated points of your MOCO or MOIP problem. Upload your file, compute on the cloud, download results. </p>
                             <p><a class="btn btn-lg btn-primary" href="jsp/nMOCO-S/nMOCO-S_Home.jsp" role="button">Try it!</a></p>
                         </div>
                     </div>
@@ -118,33 +106,23 @@
                     <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1>rMOCO-S</h1>
+                            <h1 style="color: Orange;">rMOCO-S</h1>
                             <p>Representative nondominated points by Multi-objective Combinatorial Optimization Solver</p>
-                            <p>Represent the objective space of your problem with a few points in an efficient manner.</p>          
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more.</a></p>
+                            <p>Represent the criterion space of your problem with a subset of nondominated points in an efficient manner.</p> 
+                            <p>Can be used for both MOIPs and MOMIPs</p>
+                            <p><a class="btn btn-lg btn-primary" href="jsp/about.jsp" role="button">Learn more.</a></p>
                         </div>
                     </div>
-                </div>
-                <div class="item">
-                    <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>iMOCO-S</h1>
-                            <p>Interactive Multi-objective Combinatorial Optimization Solver</p>
-                            <p>Set parameter values interactively, display results, monitor your solutions.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more.</a></p>
-                        </div>
-                    </div>
-                </div>    
+                </div>   
                 <div class="item">
                     <img class="fourth-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1>libMOCO-S</h1>
+                            <h1 style="color: Orange;">libMOCO-S</h1>
                             <p>Library for Multi-objective Combinatorial Optimization Solver</p>
-                            <p>Hundreds of instances in an easy format.</p>
-                            <p>Do you have a MOCO solver? Test it on our instances, compare with nMOCO-S.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse library.</a></p>
+                            <p>A collection of instances in an easy format.</p>
+                            <p>Do you have your own algorithm? Test it on our instances and verify both nMOCO-S and your own algorithm.</p>
+                            <p><a class="btn btn-lg btn-primary" href="jsp/libMOCO-S/libMOCO-S.jsp" role="button">Browse library.</a></p>
                         </div>
                     </div>
                 </div>
@@ -192,7 +170,7 @@
 
             <div class="row featurette">
                 <div class="col-md-7">
-                    <h2 class="featurette-heading">nMOCO-S. <span class="text-muted">Find all nondominated points of your MOCO problem.</span></h2>
+                    <h2 class="featurette-heading">nMOCO-S. <span class="text-muted">Find all nondominated points of your problem.</span></h2>
                     <p class="lead"> See how much the efficient solutions can achieve at each criterion.  </p>
                 </div>
                 <div class="col-md-5">
@@ -205,7 +183,7 @@
             <div class="row featurette">
                 <div class="col-md-7 col-md-push-5">
                     <h2 class="featurette-heading">libMOCO-S. <span class="text-muted">Explore our MOCO library.</span></h2>
-                    <p class="lead">It is the place where you can find test instances and the corresponding nondominated point sets for different MOCO problems like knapsack, assignment, shortest path etc...</p>             
+                    <p class="lead">It is the place where you can find test instances and the corresponding nondominated point sets for different MOCO problems like knapsack, assignment, etc...</p>             
                 </div>
                 <div class="col-md-5 col-md-pull-7">
                     <img class="featurette-image img-responsive center-block" src="images/lib-logo-2.png" alt="MOKP">
@@ -213,17 +191,12 @@
             </div>
 
             <hr class="featurette-divider">
-
-            <!--div class="row featurette">
-                <div class="col-md-7">
-                    <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-                </div>
-                <div class="col-md-5">
-                    <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-                </div>
-            </div-->
-
+            <div>
+                <p style> <b>Terms of use:</b> </p>
+                <p>
+                    
+                </p>
+            </div>
             <hr class="featurette-divider">
 
             <!-- /END THE FEATURETTES -->
@@ -232,7 +205,7 @@
             <!-- FOOTER -->
             <footer>
                 <p class="pull-right"><a href="#">Back to top</a></p>
-                <p>Supported by The Scientific and Technological Research Council of Turkey &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+                <p>Supported by The Scientific and Technological Research Council of Turkey</p>
             </footer>
 
         </div><!-- /.container -->

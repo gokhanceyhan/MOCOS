@@ -58,19 +58,8 @@
                             <li><a href="../about.jsp">About</a></li>
                             <li><a href="../contact.jsp">Contact</a></li>
                             <li><a href="../libMOCO-S/libMOCO-S.jsp">Library</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Applications <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="nMOCO-S_Home.jsp">nMOCO-S</a></li>
-                                    <li><a href="#">rMOCO-S</a></li>
-                                    <li><a href="#">iMOCO-S</a></li>
-
-                                    <!--li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li-->
-                                </ul>
-                            </li>
+                            <li><a href="nMOCO-S_Home.jsp">Solvers</a></li>
+                            <li><a href="../guide/guide.jsp">Guide</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -79,19 +68,14 @@
             <div class="jumbotron">
                 <div class="row">   
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <a class="btn btn-lg btn-primary" href="nMOCO-S_InputPage.jsp">
                             <i class="fa fa-cloud-upload fa-5x fa-align-center pull-left"></i>SUBMIT<br>JOB TO<br>SERVER</a>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <a class="btn btn-lg btn-success" href="nMOCO-S_JobQueue.jsp">
                             <i class="fa fa-database fa-5x fa-align-center pull-left"></i>SEARCH JOB</a>
-                    </div>
-
-                    <div class="col-md-4">
-                        <a class="btn btn-lg btn-info" href="nMOCO-S_Analyzer.jsp">
-                            <i class="fa fa-line-chart fa-5x fa-align-center pull-left"></i>ANALYZER</a>
                     </div>
 
                 </div>
