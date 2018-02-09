@@ -70,12 +70,74 @@
 
                     <div class="container">
 
-                        <div class="row">   
+                        <div class="row">  
 
                             <div class="col-md-6">
+                                <legend> Solver Parameters: <a href="../guide/guide.jsp#nMOCO-S_Input"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a></legend>
+                                <fieldset class="control-group form-group" id="nMOCOS_SolverParams">
+                                    <label for="nMOCOS_SolverType">Solver Type</label>
+                                    <select class="form-control" id="nMOCOS_SolverType" name="SolverType" onchange="updateSolverParamsLists();">
+                                        <option value="nMOCO-S" selected="selected">nMOCO-S: Generate all nondominated points</option>
+                                        <option value="rMOCO-S_sba">rMOCO-S1: Subset Based Algorithm (SBA)</option>
+                                        <option value="rMOCO-S_tda">rMOCO-S2: Territory Defining Algorithm (TDA)</option>
+                                    </select>
+                                    <p class="help-block"></p>
+                                </fieldset>
+                                <fieldset class="control-group form-group" id="nMOCOS_TimeLimit">
+                                    <label for="nMOCOS_TimeLimit">Time Limit in seconds (Default = 600)</label>
+                                    <input type="number" class="form-control" id="nMOCOS_timeLimit" name="TimeLimit" placeholder=""
+                                           value="600"
+                                           min="0"
+                                           max="600"
+                                           />
+                                    <p class="help-block"></p>
+                                </fieldset>
+                                <fieldset class="control-group form-group" id="nMOCOS_PointLimit" style="display: none">
+                                    <label for="nMOCOS_PointLimit">Number of points to generate (Default = -1(ALL))</label>
+                                    <input type="number" class="form-control" id="nMOCOS_pointLimit" name="PointLimit" placeholder=""
+                                           value="-1"
+                                           min="-1"
+                                           step="1"
+                                           data-validation-integer ="true"
+                                           data-validation-integer-message="The value is not an integer" 
+                                           />
+                                    <p class="help-block"></p>
+                                </fieldset>
+                                <fieldset class="control-group form-group" id="nMOCOS_Delta" style="display: none">
+                                    <label for="nMOCOS_Delta">Coverage gap target (Default = 0.1)</label>
+                                    <input type="number" class="form-control" id="nMOCOS_delta" name="delta" placeholder=""
+                                           value="0.1"
+                                           min="0"
+                                           max="1"                          
+                                           />
+                                    <p class="help-block"></p>
+                                </fieldset>
+                                <fieldset class="control-group form-group" >
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        <input id="email" type="email" class="form-control" name="email" placeholder="Email" required data-validation-required-message="Please enter your email address.">                                           
+                                    </div>
+                                    <p class="help-block"></p>
+                                </fieldset>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="nMOCOS_agreement" name="aggrement"
+                                               required 
+                                               data-validation-required-message=
+                                               "You must agree to the terms and conditions"
+                                               >
+                                        I agree with the <a data-toggle="modal" data-target="#termsModal">terms and conditions</a> 
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <button type="submit" class="btn btn-primary" id="uploadBtn" name="upload" value="upload">Upload</button>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="col-md-6">
                                 <legend> Input Parameters: <a href="../guide/guide.jsp#nMOCO-S_Input"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a></legend>
-
                                 <fieldset class="control-group form-group" id="nMOCOS_InputParams1">
                                     <label for="nMOCOS_InputType">Input Type</label>
                                     <select class="form-control" id="nMOCOS_InputType" name="InputType" onchange="updateInputParamsLists();">
@@ -89,9 +151,10 @@
                                     <label for="nMOCOS_numOfObjectives">Number of Objectives</label>
                                     <input type="number" class="form-control" id="nMOCOS_numOfObjectives" name="numOfObj" placeholder="" 
                                            required
-                                           min="2"
+                                           min="3"
                                            step="1"
-                                           data-validation-number-message="Please enter an integer value larger than 1."
+                                           data-validation-integer ="true"
+                                           data-validation-integer-message="The value is not an integer"
                                            />
                                     <p class="help-block"></p>
                                 </fieldset>
@@ -113,7 +176,8 @@
                                                value="1"
                                                min="1"
                                                step="1"
-                                               data-validation-number-message="Please enter a positive integer value."
+                                               data-validation-integer ="true"
+                                               data-validation-integer-message="The value is not an integer"
                                                />
                                         <p class="help-block"></p>
                                     </fieldset>
@@ -124,7 +188,8 @@
                                                value="1"
                                                min="1"
                                                step="1"
-                                               data-validation-number-message="Please enter a positive integer value."
+                                               data-validation-integer ="true"
+                                               data-validation-integer-message="The value is not an integer"
                                                />
                                         <p class="help-block"></p>
                                     </fieldset>
@@ -135,7 +200,8 @@
                                                value="1"
                                                min="1"
                                                step="1"
-                                               data-validation-number-message="Please enter a positive integer value."
+                                               data-validation-integer ="true"
+                                               data-validation-integer-message="The value is not an integer"
                                                />
                                         <p class="help-block"></p>
                                     </fieldset>
@@ -161,50 +227,6 @@
 
                             </div>
 
-                            <div class="col-md-6">
-                                <legend>User info:</legend>
-
-                                <div class="control-group form-group">
-
-                                    <fieldset class="control-group form-group">
-                                        <label for="nMOCOS_userinfo"></label>
-                                        <div class="input-group">                               
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input id="name" type="text" class="form-control" name="username" placeholder="Name" required data-validation-required-message="Please enter your name.">
-                                        </div>
-                                        <p class="help-block"></p>
-                                    </fieldset>
-
-                                    <fieldset class="control-group form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                            <input id="email" type="email" class="form-control" name="email" placeholder="Email" required data-validation-required-message="Please enter your email address.">                                           
-                                        </div>
-                                        <p class="help-block"></p>
-                                    </fieldset>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <fieldset class="control-group form-group" >
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" id="nMOCOS_agreement" name="aggrement"
-                                           required 
-                                           data-validation-required-message=
-                                           "You must agree to the terms and conditions"
-                                           >
-                                    I agree with the <a data-toggle="modal" data-target="#termsModal">terms and conditions</a> 
-                                </label>
-                            </div>
-                            <p class="help-block"></p>
-                        </fieldset>
-
-                        <div class="form-group">
-                            <div>
-                                <button type="submit" class="btn btn-primary" id="uploadBtn" name="upload" value="upload">Upload</button>
-                            </div>
                         </div>
 
                     </div>
@@ -225,7 +247,7 @@
                         </div>
                     </div>
                 </div>
-                
+
 
 
             </div>

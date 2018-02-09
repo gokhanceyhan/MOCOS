@@ -6,6 +6,7 @@ import com.solver.dataTypes.InputType;
 import com.solver.dataTypes.JobStatus;
 import com.solver.dataTypes.ProblemType;
 import com.solver.dataTypes.Processors;
+import com.solver.dataTypes.SolverType;
 import com.solver.database.ConnectionManager;
 import java.io.File;
 import java.io.FileWriter;
@@ -161,6 +162,15 @@ public class UploadServlet extends HttpServlet {
 
         // getting the form parameters
         inputData = new InputData();
+        String solverType = request.getParameter("SolverType");
+        if ("nMOCO-S".equalsIgnoreCase(solverType)) {
+            inputData.setSolverType(SolverType.ALL);
+        } else if ("rMOCO-S_sba".equalsIgnoreCase(solverType)) {
+            inputData.setSolverType(SolverType.SBA);
+        }
+        else
+            inputData.setSolverType(SolverType.TDA);
+        
         String inputType = request.getParameter("InputType");
         if ("Model".equalsIgnoreCase(inputType)) {
             inputData.setInputType(InputType.MODELFILE);
@@ -175,7 +185,11 @@ public class UploadServlet extends HttpServlet {
         if ("Assignment".equalsIgnoreCase(problemType)) {
             inputData.setProblemType(ProblemType.ASSIGNMENT);
         }
-
+        
+        inputData.setTimeLimit(Double.parseDouble(request.getParameter("TimeLimit")));
+        inputData.setPointLimit(Integer.parseInt(request.getParameter("PointLimit")));
+        inputData.setDelta(Double.parseDouble(request.getParameter("delta")));
+        
         inputData.setNumOfObjectives(Integer.parseInt(request.getParameter("numOfObj")));
         inputData.getKnapsackProblem().setNumOfKnapsacks(Integer.parseInt(request.getParameter("numOfKnapsacks")));
         inputData.getKnapsackProblem().setNumOfItems(Integer.parseInt(request.getParameter("numOfItems")));
@@ -258,7 +272,23 @@ public class UploadServlet extends HttpServlet {
         File MainFile = new File(uploadPath, Constants.MAIN_FILE_NAME);
 
         PrintWriter out_MainFile = new PrintWriter(new FileWriter(MainFile));
+        switch (inputData.getSolverType().toString()) {
+            case "ALL":
+                out_MainFile.println(1);
+                break;
+            case "SBA":
+                out_MainFile.println(2);
+                break;
+            case "TDA":
+                out_MainFile.println(3);
+                break;
+        }
+        
         out_MainFile.println(inputData.getNumOfObjectives());
+        out_MainFile.println(inputData.getTimeLimit());
+        out_MainFile.println(inputData.getPointLimit());
+        out_MainFile.println(Constants.BOUND_TOLERANCE); 
+        out_MainFile.println(inputData.getDelta());
         switch (inputData.getInputType().toString()) {
             case "MODELFILE":
                 out_MainFile.println("M");
@@ -266,9 +296,7 @@ public class UploadServlet extends HttpServlet {
                 out_MainFile.println("0");
                 out_MainFile.println("0");
                 out_MainFile.println("0");
-                out_MainFile.println("S");
                 out_MainFile.println(Constants.MODEL_FILE_NAME);
-                out_MainFile.println("1");
                 break;
             case "DATAFILE":
                 out_MainFile.println("D");
@@ -278,18 +306,14 @@ public class UploadServlet extends HttpServlet {
                         out_MainFile.println(inputData.getKnapsackProblem().getNumOfKnapsacks());
                         out_MainFile.println(inputData.getKnapsackProblem().getNumOfItems());
                         out_MainFile.println("0");
-                        out_MainFile.println("S");
                         out_MainFile.println(Constants.DATA_FILE_NAME);
-                        out_MainFile.println("1");
                         break;
                     case "ASSIGNMENT":
                         out_MainFile.println("AP");
                         out_MainFile.println("0");
                         out_MainFile.println("0");
                         out_MainFile.println(inputData.getAssignmentProblem().getNumOfJobs());
-                        out_MainFile.println("S");
                         out_MainFile.println(Constants.DATA_FILE_NAME);
-                        out_MainFile.println("1");
                         break;
                 }
                 break;

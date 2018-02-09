@@ -106,6 +106,7 @@ public class SolveServlet extends HttpServlet {
 
     }
 
+    
     @SuppressWarnings("empty-statement")
     private boolean callNMOCOS(String jobFolder) throws IOException, InterruptedException {
 

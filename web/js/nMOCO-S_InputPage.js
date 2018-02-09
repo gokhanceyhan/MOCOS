@@ -55,4 +55,26 @@ function updateInputParamsLists() {
 
 }
 
+function updateSolverParamsLists() {
+
+    var dropdown1 = document.getElementById("nMOCOS_SolverType");
+    var dropdown1_value = dropdown1.options[dropdown1.selectedIndex].value;
+
+    if (dropdown1_value === 'nMOCO-S') {
+        document.getElementById("nMOCOS_PointLimit").style.display = "none";
+        document.getElementById("nMOCOS_Delta").style.display = "none";
+    }
+    if (dropdown1_value === 'rMOCO-S_sba')
+    {
+        document.getElementById("nMOCOS_PointLimit").style.display = "block";
+        document.getElementById("nMOCOS_Delta").style.display = "none";
+    }
+    if (dropdown1_value === 'rMOCO-S_tda')
+    {
+        document.getElementById("nMOCOS_Delta").style.display = "block";
+        document.getElementById("nMOCOS_PointLimit").style.display = "none";
+    }
+
+}
+
 

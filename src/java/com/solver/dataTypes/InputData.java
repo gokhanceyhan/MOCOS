@@ -19,6 +19,10 @@ public class InputData implements Externalizable {
     // initial version id
     private static final int FIRST_VERSION = 0;
 
+    private SolverType solverType;
+    private double timeLimit;
+    private int pointLimit;
+    private double delta;
     private InputType inputType;
     private ProblemType problemType;
     private int numOfObjectives;
@@ -32,25 +36,93 @@ public class InputData implements Externalizable {
         mathModel = new MathModel();
     }
 
-    public InputData(InputType inputType, ProblemType problemType, int numOfObjectives, KnapsackProblem knapsackProblem) {
+    public InputData(SolverType solverType, double timeLimit, int pointLimit, double delta, InputType inputType, ProblemType problemType, int numOfObjectives, KnapsackProblem knapsackProblem) {
+        this.solverType = solverType;
+        this.timeLimit = timeLimit;
+        this.pointLimit = pointLimit;
+        this.delta = delta;
         this.inputType = inputType;
         this.problemType = problemType;
         this.numOfObjectives = numOfObjectives;
         this.knapsackProblem = knapsackProblem;
     }
 
-    public InputData(InputType inputType, ProblemType problemType, int numOfObjectives, AssignmentProblem assignmentProblem) {
+    public InputData(SolverType solverType, double timeLimit, int pointLimit, double delta, InputType inputType, ProblemType problemType, int numOfObjectives, AssignmentProblem assignmentProblem) {
+        this.solverType = solverType;
+        this.timeLimit = timeLimit;
+        this.pointLimit = pointLimit;
+        this.delta = delta;
         this.inputType = inputType;
         this.problemType = problemType;
         this.numOfObjectives = numOfObjectives;
         this.assignmentProblem = assignmentProblem;
     }
 
-    public InputData(InputType inputType, ProblemType problemType, int numOfObjectives, MathModel mathModel) {
+    public InputData(SolverType solverType, double timeLimit, int pointLimit, double delta, InputType inputType, ProblemType problemType, int numOfObjectives, MathModel mathModel) {
+        this.solverType = solverType;
+        this.timeLimit = timeLimit;
+        this.pointLimit = pointLimit;
+        this.delta = delta;
         this.inputType = inputType;
         this.problemType = problemType;
         this.numOfObjectives = numOfObjectives;
         this.mathModel = mathModel;
+    }
+
+    /**
+     * @return the solverType
+     */
+    public SolverType getSolverType() {
+        return solverType;
+    }
+
+    /**
+     * @param solverType the solverType to set
+     */
+    public void setSolverType(SolverType solverType) {
+        this.solverType = solverType;
+    }
+
+    /**
+     * @return the timeLimit
+     */
+    public double getTimeLimit() {
+        return timeLimit;
+    }
+
+    /**
+     * @param timeLimit the timeLimit to set
+     */
+    public void setTimeLimit(double timeLimit) {
+        this.timeLimit = timeLimit;
+    }
+
+    /**
+     * @return the pointLimit
+     */
+    public int getPointLimit() {
+        return pointLimit;
+    }
+
+    /**
+     * @param pointLimit the pointLimit to set
+     */
+    public void setPointLimit(int pointLimit) {
+        this.pointLimit = pointLimit;
+    }
+
+    /**
+     * @return the delta
+     */
+    public double getDelta() {
+        return delta;
+    }
+
+    /**
+     * @param delta the delta to set
+     */
+    public void setDelta(double delta) {
+        this.delta = delta;
     }
 
     /**
@@ -143,6 +215,10 @@ public class InputData implements Externalizable {
         out.writeInt(FIRST_VERSION);
 
         // now write the state
+        out.writeObject(solverType);
+        out.writeObject(timeLimit);
+        out.writeObject(pointLimit);
+        out.writeObject(delta);
         out.writeObject(inputType);
         out.writeObject(problemType);
         out.writeObject(numOfObjectives);
@@ -162,7 +238,11 @@ public class InputData implements Externalizable {
         if (oldVersion > FIRST_VERSION) {
             throw new IOException("Can't deserialize from the future.");
         }
-
+        
+        solverType = (SolverType) in.readObject();
+        timeLimit =  in.readDouble();
+        pointLimit = in.readInt();
+        delta = in.readDouble();
         inputType = (InputType) in.readObject();
         problemType = (ProblemType) in.readObject();
         numOfObjectives = in.readInt();

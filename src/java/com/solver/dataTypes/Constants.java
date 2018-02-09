@@ -20,6 +20,7 @@ public class Constants {
     public static final String MODEL_FILE_NAME = "model.lp";
     public static final String RESULT_FILE_NAME = "Output_nd_points.txt";
     public static final String LOG_FILE_NAME = "log.txt";
+    public static final double BOUND_TOLERANCE = 0.0001;
 
     private Constants() {
 
