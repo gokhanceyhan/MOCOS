@@ -8,6 +8,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114316991-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-114316991-1');
+        </script>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +27,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>nMOCO-S</title>
+        <title>Job Submission</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -122,8 +134,9 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" id="nMOCOS_agreement" name="aggrement"
-                                               required 
-                                               data-validation-required-message=
+                                               checked
+                                               minchecked="1"
+                                               data-validation-checkone-message=
                                                "You must agree to the terms and conditions"
                                                >
                                         I agree with the <a data-toggle="modal" data-target="#termsModal">terms and conditions</a> 
@@ -217,14 +230,6 @@
                                     <p class="help-block"></p>
                                 </fieldset>
 
-                                <fieldset class="control-group form-group" id="nMOCOS_filePermission">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" id="nMOCO-S_LibraryPermission" name="filePermission" value="yes"> Allow to store the uploaded input data in the library. 
-                                        </label>
-                                    </div>
-                                </fieldset>
-
                             </div>
 
                         </div>
@@ -242,7 +247,12 @@
                             </div>
 
                             <div class="modal-body">
-                                <p>CPLEX terms and conditions</p>
+                                <p>
+                                    You understand and agree that in using the provided solvers, 
+                                    IBM authorizes You to use IBM ILOG CPLEX solely for academic, non-commercial research purposes,
+                                    and that IBM shall have the right to enforce any violation of this
+                                    limitation directly against You.
+                                </p>
                             </div>
                         </div>
                     </div>

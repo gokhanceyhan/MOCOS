@@ -98,6 +98,13 @@ public class EmailSender {
             messageBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(filename);
             multipart.addBodyPart(messageBodyPart);
+            
+            BodyPart attachment2 = new MimeBodyPart();
+            String modelFileName = "model.lp";
+            DataSource modelFile = new FileDataSource(Constants.JOBS_PATH + to + "/" + jobId + "/" + "model.lp");
+            attachment2.setDataHandler(new DataHandler(modelFile));
+            attachment2.setFileName(modelFileName);
+            multipart.addBodyPart(attachment2);
 
             // Send the complete message parts
             message.setContent(multipart);

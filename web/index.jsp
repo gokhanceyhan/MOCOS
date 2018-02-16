@@ -7,6 +7,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114316991-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-114316991-1');
+        </script>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -97,7 +109,7 @@
                         <div class="carousel-caption">
                             <h1 style="color: Orange;">nMOCO-S</h1>
                             <p>All nondominated points by Multi-Objective Combinatorial Optimization Solver</p>
-                            <p>Generate all nondominated points of your MOCO or MOIP problem. Upload your file, compute on the cloud, download results. </p>
+                            <p>Generate all nondominated points of your MOCO or MOIP problem. You upload your file, we compute on our server and send you the results. </p>
                             <p><a class="btn btn-lg btn-primary" href="jsp/nMOCO-S/nMOCO-S_Home.jsp" role="button">Try it!</a></p>
                         </div>
                     </div>
@@ -121,7 +133,7 @@
                             <h1 style="color: Orange;">libMOCO-S</h1>
                             <p>Library for Multi-objective Combinatorial Optimization Solver</p>
                             <p>A collection of instances in an easy format.</p>
-                            <p>Do you have your own algorithm? Test it on our instances and verify both nMOCO-S and your own algorithm.</p>
+                            <p>Do you have your own algorithm? Test it on our instances and verify both our algorithms and yours.</p>
                             <p><a class="btn btn-lg btn-primary" href="jsp/libMOCO-S/libMOCO-S.jsp" role="button">Browse library.</a></p>
                         </div>
                     </div>
@@ -189,14 +201,19 @@
                     <img class="featurette-image img-responsive center-block" src="images/lib-logo-2.png" alt="MOKP">
                 </div>
             </div>
-
+            
             <hr class="featurette-divider">
-            <div>
-                <p style> <b>Terms of use:</b> </p>
-                <p>
-                    
-                </p>
+            
+            <div class="row featurette">
+                <div class="col-md-7">
+                    <h2 class="featurette-heading">rMOCO-S. <span class="text-muted">Find representative nondominated points for your problem.</span></h2>
+                    <p class="lead"> Quickly capture the trade-offs associated with your problem. </p>
+                </div>
+                <div class="col-md-5">
+                    <img class="featurette-image img-responsive center-block" src="images/rMOCOS.png" alt="nondominatedPoints">
+                </div>  
             </div>
+            
             <hr class="featurette-divider">
 
             <!-- /END THE FEATURETTES -->
@@ -205,7 +222,11 @@
             <!-- FOOTER -->
             <footer>
                 <p class="pull-right"><a href="#">Back to top</a></p>
-                <p>Supported by The Scientific and Technological Research Council of Turkey</p>
+                <p> Copyright &copy; 2015 Supported by The Scientific and Technological Research Council of Turkey 
+                    &middot; <a href="https://github.com/gokhanceyhan/MOCOS/issues">Report Web Page Bugs</a> 
+                    &middot; <a href="https://github.com/gokhanceyhan/MOIP_Solvers/issues">Report Solver Bugs</a> 
+                    &middot; <a href="jsp/terms.jsp">Terms of Use</a>
+                </p>
             </footer>
 
         </div><!-- /.container -->

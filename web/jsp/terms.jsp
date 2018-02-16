@@ -1,7 +1,7 @@
 <%-- 
-    Document   : admin
-    Created on : Jul 1, 2017, 1:42:48 PM
-    Author     : gokhanceyhan
+    Document   : terms
+    Created on : Feb 16, 2018, 11:25:40 AM
+    Author     : moco
 --%>
 
 <!DOCTYPE html>
@@ -27,7 +27,7 @@
         <meta name="author" content="">
         <link rel="icon" href="favicon.ico">
 
-        <title>MOCO-S</title>
+        <title>Terms of Use</title>
 
         <!-- Bootstrap core CSS -->
         <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -46,8 +46,7 @@
 
         <!-- Custom styles for this template -->
         <link href="../css/carousel.css" rel="stylesheet">
-        <link href="../css/admin.css" rel="stylesheet">
-
+        <link href="../css/about.css" rel="stylesheet">
     </head>
     <!-- NAVBAR
     ================================================== -->
@@ -79,22 +78,44 @@
                 </div>
             </nav>
 
-            <div class="jumbotron">
-                <div class="row">   
+            <div>
+                <h2 align="center">Terms of Use</h2> 
+                <p>
+                    This program is free software: you can redistribute it and/or modify
+                    it under the terms of the GNU General Public License as published by
+                    the Free Software Foundation, either version 3 of the License, or
+                    (at your option) any later version.
+                </p>
 
-                    <div class="col-md-4">
-                        <h2 style="color: darkslateblue">DB Listener</h2>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <form id="listenerForm" name="listenerForm" method="post" action="${pageContext.request.contextPath}/SolveServlet">
-                                    <button type="submit" class="btn btn-success" id="listenerStartBtn" name="listen" value="listen">Start</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                <p>
+                    This program is distributed in the hope that it will be useful,
+                    but WITHOUT ANY WARRANTY; without even the implied warranty of
+                    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                    <a href="https://www.gnu.org/licenses/gpl.txt">GNU General Public License</a>
+                    for more details.
+                </p>
 
-                </div>  
+                <p>In order to get services from the solvers available on this site, you agree the following terms:</p>
 
+                <h5>&middot; <strong>Privacy Policy:</strong></h5>
+                <p>
+                    We need user email addresses to be able to send the result files back to the problem owners. 
+                    We will not share your email addresses on purpose with any third-party except IBM. We may share
+                    user email addresses with IBM upon their request. Any other private information is not required
+                    to get services from our solvers.
+                </p>
+                
+                <h5>&middot; <strong>Submitted Files:</strong></h5>
+                <p>
+                    We keep the right to store, publish, modify and use your submitted problem data for non-commercial and academical purposes.
+                    You agree that your submission is non-confidential, is not the subject of any non-disclosure obligations of any third party
+                    and does not violate any law or rights.
+                </p>
+                
+                <h5>&middot; <strong>Purpose of Use:</strong></h5>
+                <p>
+                    You agree that your sole purpose of using the provided solvers is <strong>NON-COMMERCIAL</strong> and <strong>ACADEMICAL</strong>.
+                </p>
             </div>
 
 

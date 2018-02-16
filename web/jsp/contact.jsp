@@ -7,6 +7,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114316991-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-114316991-1');
+        </script>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -132,7 +144,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <h3>Send us your message</h3>
-                        
+
                         <form name="sentMessage" id="contactForm" novalidate>
                             <div class="control-group form-group">
                                 <div class="controls">
@@ -174,7 +186,7 @@
                 <footer>
                     <div class="row">
                         <div class="col-lg-12">
-                            <p>Copyright &copy; Your Website 2014</p>
+                            <p>Copyright &copy; 2015</p>
                         </div>
                     </div>
                 </footer>

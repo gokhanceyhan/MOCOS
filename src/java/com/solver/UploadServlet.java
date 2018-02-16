@@ -5,7 +5,6 @@ import com.solver.dataTypes.InputData;
 import com.solver.dataTypes.InputType;
 import com.solver.dataTypes.JobStatus;
 import com.solver.dataTypes.ProblemType;
-import com.solver.dataTypes.Processors;
 import com.solver.dataTypes.SolverType;
 import com.solver.database.ConnectionManager;
 import java.io.File;
@@ -116,7 +115,7 @@ public class UploadServlet extends HttpServlet {
         PreparedStatement statement = con.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
         statement.setTimestamp(1, new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
         statement.setString(2, usermail);
-        statement.setString(3, Processors.NMOCOS.toString());
+        statement.setString(3, inputData.getSolverType().toString());
         statement.setString(4, "");
         statement.setString(5, "");
         statement.setString(6, JobStatus.TO_DO.toString());
@@ -164,12 +163,12 @@ public class UploadServlet extends HttpServlet {
         inputData = new InputData();
         String solverType = request.getParameter("SolverType");
         if ("nMOCO-S".equalsIgnoreCase(solverType)) {
-            inputData.setSolverType(SolverType.ALL);
+            inputData.setSolverType(SolverType.nMOCOS);
         } else if ("rMOCO-S_sba".equalsIgnoreCase(solverType)) {
-            inputData.setSolverType(SolverType.SBA);
+            inputData.setSolverType(SolverType.rMOCOS_sba);
         }
         else
-            inputData.setSolverType(SolverType.TDA);
+            inputData.setSolverType(SolverType.rMOCOS_tda);
         
         String inputType = request.getParameter("InputType");
         if ("Model".equalsIgnoreCase(inputType)) {
@@ -273,13 +272,13 @@ public class UploadServlet extends HttpServlet {
 
         PrintWriter out_MainFile = new PrintWriter(new FileWriter(MainFile));
         switch (inputData.getSolverType().toString()) {
-            case "ALL":
+            case "nMOCOS":
                 out_MainFile.println(1);
                 break;
-            case "SBA":
+            case "rMOCOS_sba":
                 out_MainFile.println(2);
                 break;
-            case "TDA":
+            case "rMOCOS_tda":
                 out_MainFile.println(3);
                 break;
         }
@@ -287,7 +286,6 @@ public class UploadServlet extends HttpServlet {
         out_MainFile.println(inputData.getNumOfObjectives());
         out_MainFile.println(inputData.getTimeLimit());
         out_MainFile.println(inputData.getPointLimit());
-        out_MainFile.println(Constants.BOUND_TOLERANCE); 
         out_MainFile.println(inputData.getDelta());
         switch (inputData.getInputType().toString()) {
             case "MODELFILE":
@@ -348,10 +346,6 @@ public class UploadServlet extends HttpServlet {
         }
 
         return fileName;
-    }
-
-    private boolean canInputFileBePublic(HttpServletRequest request) {
-        return request.getParameter("filePermission").equalsIgnoreCase("yes");
     }
 
     private void sendSucessResponse(HttpServletResponse response) throws IOException {

@@ -10,5 +10,5 @@ package com.solver.dataTypes;
  * @author moco
  */
 public enum SolverType {
-    ALL, SBA, TDA;
+    nMOCOS, rMOCOS_sba, rMOCOS_tda;
 }

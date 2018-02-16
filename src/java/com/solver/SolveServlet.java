@@ -62,20 +62,18 @@ public class SolveServlet extends HttpServlet {
                 boolean anyJob = false;
                 String issuer = null;
                 Long jobId = null;
-                String processor = null;
                 while (resultSet.next()) {
                     String jobStatus = resultSet.getString("JOBSTATUS");
                     if (jobStatus.equalsIgnoreCase(JobStatus.TO_DO.toString())) {
                         anyJob = true;
                         issuer = resultSet.getString("ISSUER");
                         jobId = resultSet.getLong("JOBID");
-                        processor = resultSet.getString("PROCESSOR");
                         statement.close();
                         break;
                     }
                 }
                 if (anyJob) {
-                    processJob(issuer, jobId, processor);
+                    processJob(issuer, jobId);
                 } else {
                     // sleep for a while (1 min)
                     Thread.sleep(60000);
@@ -88,7 +86,7 @@ public class SolveServlet extends HttpServlet {
 
     }
 
-    private void processJob(String issuer, Long jobId, String processor)
+    private void processJob(String issuer, Long jobId)
             throws InterruptedException, IOException, SQLException {
 
         assignJobStatus(jobId, JobStatus.IN_PROGRESS.toString());
@@ -149,6 +147,7 @@ public class SolveServlet extends HttpServlet {
     }
 
     /**
+     * 
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
