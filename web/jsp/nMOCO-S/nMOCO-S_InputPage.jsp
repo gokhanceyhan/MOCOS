@@ -85,7 +85,7 @@
                         <div class="row">  
 
                             <div class="col-md-6">
-                                <legend> Solver Parameters: <a href="../guide/guide.jsp#nMOCO-S_Input"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a></legend>
+                                <legend style="color: darkblue"> SOLVER PARAMETERS </legend>
                                 <fieldset class="control-group form-group" id="nMOCOS_SolverParams">
                                     <label for="nMOCOS_SolverType">Solver Type</label>
                                     <select class="form-control" id="nMOCOS_SolverType" name="SolverType" onchange="updateSolverParamsLists();">
@@ -96,8 +96,9 @@
                                     <p class="help-block"></p>
                                 </fieldset>
                                 <fieldset class="control-group form-group" id="nMOCOS_TimeLimit">
-                                    <label for="nMOCOS_TimeLimit">Time Limit in seconds (Default = 600)</label>
+                                    <label for="nMOCOS_TimeLimit">Time Limit in seconds</label>
                                     <input type="number" class="form-control" id="nMOCOS_timeLimit" name="TimeLimit" placeholder=""
+                                           required
                                            value="600"
                                            min="0"
                                            max="600"
@@ -105,8 +106,9 @@
                                     <p class="help-block"></p>
                                 </fieldset>
                                 <fieldset class="control-group form-group" id="nMOCOS_PointLimit" style="display: none">
-                                    <label for="nMOCOS_PointLimit">Number of points to generate (Default = -1(ALL))</label>
+                                    <label for="nMOCOS_PointLimit">Max number of points to generate ( [No Limit] = -1)</label>
                                     <input type="number" class="form-control" id="nMOCOS_pointLimit" name="PointLimit" placeholder=""
+                                           required
                                            value="-1"
                                            min="-1"
                                            step="1"
@@ -116,8 +118,9 @@
                                     <p class="help-block"></p>
                                 </fieldset>
                                 <fieldset class="control-group form-group" id="nMOCOS_Delta" style="display: none">
-                                    <label for="nMOCOS_Delta">Coverage gap target (Default = 0.1)</label>
+                                    <label for="nMOCOS_Delta">Coverage gap target</label>
                                     <input type="number" class="form-control" id="nMOCOS_delta" name="delta" placeholder=""
+                                           required
                                            value="0.1"
                                            min="0"
                                            max="1"                          
@@ -127,21 +130,25 @@
                                 <fieldset class="control-group form-group" >
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                        <input id="email" type="email" class="form-control" name="email" placeholder="Email" required data-validation-required-message="Please enter your email address.">                                           
+                                        <input id="email" type="email" class="form-control" name="email" placeholder="Email" 
+                                               required
+                                               data-validation-required-message="Please enter your email address.">                                           
                                     </div>
                                     <p class="help-block"></p>
                                 </fieldset>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" id="nMOCOS_agreement" name="aggrement"
-                                               checked
-                                               minchecked="1"
-                                               data-validation-checkone-message=
-                                               "You must agree to the terms and conditions"
-                                               >
+                                <fieldset class="control-group form-group" id="nMOCOS_Aggree" >
+                                    <label for="nMOCOS_Agreee">
                                         I agree with the <a data-toggle="modal" data-target="#termsModal">terms and conditions</a> 
                                     </label>
-                                </div>
+                                    <input type="checkbox" class="checkbox" id="nMOCOS_agreement" name="aggrement" placeholder=""
+                                           required
+                                           checked
+                                           data-validation-required-message=
+                                           "You must agree to the terms and conditions"
+                                           />
+                                    <p class="help-block"></p>
+                                </fieldset>
+
                                 <div class="form-group">
                                     <div>
                                         <button type="submit" class="btn btn-primary" id="uploadBtn" name="upload" value="upload">Upload</button>
@@ -150,7 +157,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <legend> Input Parameters: <a href="../guide/guide.jsp#nMOCO-S_Input"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a></legend>
+                                <legend style="color: darkblue"> INPUT PARAMETERS </legend>
                                 <fieldset class="control-group form-group" id="nMOCOS_InputParams1">
                                     <label for="nMOCOS_InputType">Input Type</label>
                                     <select class="form-control" id="nMOCOS_InputType" name="InputType" onchange="updateInputParamsLists();">
@@ -186,6 +193,7 @@
                                     <fieldset class="control-group form-group" id="nMOCOS_KnapsackParams1">
                                         <label for="nMOCOS_numOfKnapsacks">Number of Knapsacks</label>
                                         <input type="number" class="form-control" id="nMOCOS_numOfKnapsacks" name="numOfKnapsacks" placeholder=""
+                                               required
                                                value="1"
                                                min="1"
                                                step="1"
@@ -198,6 +206,7 @@
                                     <fieldset class="control-group form-group" id="nMOCOS_KnapsackParams2">
                                         <label for="nMOCOS_numOfItems">Number of Items</label>
                                         <input type="number" class="form-control" id="nMOCOS_numOfItems" name="numOfItems" placeholder=""
+                                               required
                                                value="1"
                                                min="1"
                                                step="1"
@@ -210,6 +219,7 @@
                                     <fieldset class="control-group form-group" id="nMOCOS_AssignmentParams1">
                                         <label for="nMOCOS_numOfJobs">Number of Jobs</label>
                                         <input type="number" class="form-control" id="nMOCOS_numOfJobs" name="numOfJobs" placeholder=""
+                                               required
                                                value="1"
                                                min="1"
                                                step="1"
@@ -248,21 +258,40 @@
 
                             <div class="modal-body">
                                 <p>
-                                    You understand and agree that in using the provided solvers, 
-                                    IBM authorizes You to use IBM ILOG CPLEX solely for academic, non-commercial research purposes,
-                                    and that IBM shall have the right to enforce any violation of this
-                                    limitation directly against You.
+                                <p>In order to get services from the solvers available on this site, you agree the following terms:</p>
+
+                                <h4>&middot; <strong>Privacy Policy:</strong></h4>
+                                <p>
+                                    We need user email addresses to be able to send the result files back to the problem owners. 
+                                    We will not share your email addresses with any third-party. Any other private information is not required
+                                    to get services from our solvers.
+                                </p>
+
+                                <h4>&middot; <strong>Submitted Files:</strong></h4>
+                                <p>
+                                    We keep the right to store, publish, modify and use your submitted problem data for non-commercial and academical purposes.
+                                    You agree that your submission is non-confidential, is not the subject of any non-disclosure obligations of any third party
+                                    and does not violate any law or rights.
+                                </p>
+
+                                <h4>&middot; <strong>Purpose of Use:</strong></h4>
+                                <p>
+                                    You agree that your sole purpose of using the provided solvers is <strong>non-commercial</strong> and <strong>academical</strong>.
+                                </p>
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
 
-
+            <!-- FOOTER -->
+            <footer>
+                <p> &middot; <a href="../guide/guide.jsp#nMOCO-S_Input">Help</a>
+                    &middot; <a href="https://github.com/gokhanceyhan/MOCOS/issues">Report Web Page Bugs</a> 
+                    &middot; <a href="https://github.com/gokhanceyhan/MOIP_Solvers/issues">Report Solver Bugs</a> 
+                </p>
+            </footer>
         </div> <!-- /container -->
 
     </body>

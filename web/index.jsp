@@ -127,7 +127,7 @@
                     </div>
                 </div>   
                 <div class="item">
-                    <img class="fourth-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+                    <img class="fourth-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
                     <div class="container">
                         <div class="carousel-caption">
                             <h1 style="color: Orange;">libMOCO-S</h1>
@@ -135,6 +135,18 @@
                             <p>A collection of instances in an easy format.</p>
                             <p>Do you have your own algorithm? Test it on our instances and verify both our algorithms and yours.</p>
                             <p><a class="btn btn-lg btn-primary" href="jsp/libMOCO-S/libMOCO-S.jsp" role="button">Browse library.</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img class="fourth-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Fourth slide">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1 style="color: Orange;">vMOCO</h1>
+                            <p>Visualization tools for the nondominated points of your MOCO/MOIP problem.</p>
+                            <p>Ready-to-use Shiny web application source code on GitHub.</p>
+                            <p></p>
+                            <p><a class="btn btn-lg btn-primary" href="https://github.com/gokhanceyhan/vMOCO" role="button">Go to GitHub.</a></p>
                         </div>
                     </div>
                 </div>
@@ -201,19 +213,19 @@
                     <img class="featurette-image img-responsive center-block" src="images/lib-logo-2.png" alt="MOKP">
                 </div>
             </div>
-            
+
             <hr class="featurette-divider">
-            
+
             <div class="row featurette">
                 <div class="col-md-7">
                     <h2 class="featurette-heading">rMOCO-S. <span class="text-muted">Find representative nondominated points for your problem.</span></h2>
                     <p class="lead"> Quickly capture the trade-offs associated with your problem. </p>
                 </div>
                 <div class="col-md-5">
-                    <img class="featurette-image img-responsive center-block" src="images/rMOCOS.png" alt="nondominatedPoints">
+                    <img class="featurette-image img-responsive center-block" src="images/rMOCOS_v2.png" alt="nondominatedPoints">
                 </div>  
             </div>
-            
+
             <hr class="featurette-divider">
 
             <!-- /END THE FEATURETTES -->

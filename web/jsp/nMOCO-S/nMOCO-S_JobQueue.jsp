@@ -136,7 +136,6 @@
                                             <th>Issuer</th>
                                             <th>Job Creation Time</th>
                                             <th>Seq. Number</th>
-                                            <th>Est. Waiting Time</th>
                                             <th>Job Status</th>
                                             <th>Job Completion Time</th>
                                             <th>Processing Time (secs)</th>
@@ -149,7 +148,6 @@
                                                 <td>${job.issuer}</td>
                                                 <td>${job.jobCreationTime}</td>
                                                 <td>${job.sequenceNumber}</td>
-                                                <td>${job.waitingTime}</td>
                                                 <td>${job.jobStatus}</td>
                                                 <td>${job.completionTime}</td>
                                                 <td>${job.processTime}</td>

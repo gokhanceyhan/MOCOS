@@ -100,8 +100,7 @@
                 <h5>&middot; <strong>Privacy Policy:</strong></h5>
                 <p>
                     We need user email addresses to be able to send the result files back to the problem owners. 
-                    We will not share your email addresses on purpose with any third-party except IBM. We may share
-                    user email addresses with IBM upon their request. Any other private information is not required
+                    We will not share your email addresses with any third-party. Any other private information is not required
                     to get services from our solvers.
                 </p>
                 
@@ -114,8 +113,9 @@
                 
                 <h5>&middot; <strong>Purpose of Use:</strong></h5>
                 <p>
-                    You agree that your sole purpose of using the provided solvers is <strong>NON-COMMERCIAL</strong> and <strong>ACADEMICAL</strong>.
+                    You agree that your sole purpose of using the provided solvers is <strong>non-commercial</strong> and <strong>academical</strong>.
                 </p>
+                <img src="../images/agree_image.jpeg" alt="agree" width="1150" height="400">
             </div>
 
 

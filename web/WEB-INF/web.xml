@@ -16,6 +16,10 @@
         <servlet-name>JobSearchServlet</servlet-name>
         <servlet-class>com.solver.JobSearchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ContactServlet</servlet-name>
+        <servlet-class>com.solver.ContactServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UploadServlet</servlet-name>
         <url-pattern>/UploadServlet</url-pattern>
@@ -32,6 +36,10 @@
         <servlet-name>JobSearchServlet</servlet-name>
         <url-pattern>/JobSearchServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactServlet</servlet-name>
+        <url-pattern>/ContactServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -39,11 +47,7 @@
     </session-config>
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>upload page</web-resource-name>
-            <url-pattern>/jsp/nMOCO-S/nMOCO-S_InputPage.jsp</url-pattern>
-        </web-resource-collection>
-        <web-resource-collection>
-            <web-resource-name>upload page</web-resource-name>
+            <web-resource-name>admin page</web-resource-name>
             <url-pattern>/jsp/admin.jsp</url-pattern>
         </web-resource-collection>
         <auth-constraint>

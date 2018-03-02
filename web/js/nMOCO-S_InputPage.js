@@ -2,7 +2,7 @@
 var req;
 
 $(function () {
-    $("input,textarea").not("[type=submit]").jqBootstrapValidation();
+    $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
 });
 
 
