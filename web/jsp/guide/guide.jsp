@@ -101,7 +101,7 @@
                     <div class="col-lg-12">
 
                         <h1 id="intro" class="text-success">MOCO-S USER GUIDE</h1>
-                        
+
                         <!--table of contents-->
                         <ul>
                             <li>
@@ -112,6 +112,9 @@
                                     </li>
                                     <li>
                                         <a href="#rMOCO-S">rMOCO-S</a>
+                                    </li>
+                                    <li>
+                                        <a href="#Jobs">Job Status and Solver Outputs</a>
                                     </li>
                                     <li>
                                         <a href="#SolverParameters">Solver Parameters</a>
@@ -139,11 +142,17 @@
                             We provide three different solvers on <a href="../nMOCO-S/nMOCO-S_InputPage.jsp">problem upload page</a>. 
                             Each solver has been designed to work on a particular need of the user. The first solver <a href="#nMOCO-S">nMOCO-S</a>
                             tries to find the all nondominated points of the given multi-objective integer program. On the other hand, two
-                            <a href="#rMOCO-S">rMOCO-S</a> solvers target a representative subset of the nondominated set in two different ways.
+                            <a href="#rMOCO-S">rMOCO-S</a> solvers target a representative subset of the nondominated set. Both use <mark>coverage gap</mark>
+                            measure to assess the representativeness of a nondominated point set. Please see
+                            <a href="http://etd.lib.metu.edu.tr/upload/12617675/index.pdf">Ceyhan (2014)</a> for the definition of this measure. rMOCO-S solvers
+                            have been designed for two different use cases:
+
                             The first one, <code>Subset Based Algorithm (SBA)</code>, iteratively generates the nondominated points with the highest coverage gaps
-                            with respect to the already generated nondominated points. The second solver, <code>Territory Defining Algorithm (TDA)</code>, requires a threshold
+                            with respect to the already generated nondominated points. So, at each iteration the worst represented nondominated point 
+                            joints the representative subset. The second solver, <code>Territory Defining Algorithm (TDA)</code>, requires a threshold
                             coverage gap value to be satisfied by the final nondominated point set and uses this threshold to reduce the space searched by the algorithm. At the end,
-                            it guarantees to find a representative nondominated point subset that achieves the desired coverage gap by the user.                            
+                            it guarantees to find a representative nondominated point subset that achieves the desired coverage gap by the user.
+
                         </p>
                         <p>
                             The main characteristics of the algorithms are listed below: 
@@ -166,17 +175,17 @@
                                 For bi-objective problems, users can easily create a dummy criterion vector variable.)
                             </li>
                             <li>
-                                
+
                                 The underlying algorithms work in the <strong>scaled criterion space</strong>. In the preprocessing stage of the algorithms, we scale the criterion vectors with their Euclidean norms in order to
                                 have a similar scale of possible values on each criterion.
                                 In this way, we try to minimize the negative impact of criteria with very different scales on the nondominance of the generated points and the representativeness of the generated subsets. 
                             </li>
                         </ul>
-                        
+
                         <p>
                             We suggest users to select the appropriate solver for their needs. For this purpose, we state the following use cases for our solvers: 
                         </p>
-                        
+
                         <ul>
                             <li>
                                 <strong>nMOCO-S:</strong> Use this solver only if
@@ -196,7 +205,7 @@
                                     </li>
                                 </ul>                      
                             </li>
-                            
+
                             <li>
                                 <strong>rMOCO-S:</strong> Use this solver when
                                 <ul>
@@ -215,7 +224,7 @@
                                 </ul>
                             </li>
                         </ul>
-                        
+
                         <p>You can refer to the following papers for more information about the algorithms:</p>
                         <ul>
                             <li>
@@ -228,19 +237,16 @@
 
                         <h3 id="nMOCO-S" class="text-info">nMOCO-S</h3>
 
-                        <h4>Overview of the algorithm</h4>
-
-
                         <h4 id="nMOCO-S_input">Problem upload</h4>
                         <p>
                             Problem files can be submitted to <mark>nMOCO-S</mark> application
                             via two alternative ways listed in <strong>Input Type</strong> field. For a subset of problems,
-                            <code>Data File</code> upload option is available. These problems are multi-dimensional 0-1 knapsack,
-                            assignment and shorthest path problems as listed under <strong>Problem Type</strong> field.
+                            <code>Data File</code> upload option is available. These problems are multi-dimensional 0-1 knapsack and
+                            assignment problems as listed under <strong>Problem Type</strong> field.
                             Apart from that, the user must fill the required fields that appear only when <strong>Input Type</strong> is
                             selected as <code>Data File</code>. For any problem that cannot be submitted as a <code>Data File</code>
                             through one of the available options, <code>Model File (.lp)</code> option enables the user to upload
-                            the problem in ".lp" format of IBM ILOG CPLEX software.                                     
+                            the problem in ".lp" format.                                     
                         </p>
 
                         <h5>Input parameters</h5>
@@ -270,7 +276,7 @@
                                 <tr>
                                     <td>Number of objectives</td>
                                     <td>Number of objective functions in the uploaded problem file.</td>
-                                    <td>$\left\{n \in \mathbb{N} : n \geq 2 \right\}$</td>
+                                    <td>$\left\{n \in \mathbb{N} : n \geq 3 \right\}$</td>
                                 </tr>
                                 <tr>
                                     <td>Number of knapsacks</td>
@@ -316,8 +322,8 @@
 
                         <h5>Model file format</h5>
                         <p>
-                            The user has the option to upload a multi-objective integer program (MIP) in LP file format used
-                            by IBM ILOG CPLEX solver with some minor modifications. You can have the necessary information about this input file
+                            The user has the option to upload a multi-objective mixed-integer program (MOMIP) in LP file format
+                            with some minor modifications. You can have the necessary information about LP file
                             format <a href="http://www.ibm.com/support/knowledgecenter/en/SSSA5P_12.3.0/ilog.odms.cplex.help/Content/Optimization/Documentation/Optimization_Studio/_pubskel/ps_reffileformatscplex2159.html">here.</a>
                             First of all, we require the user has the associated LP file format of the single objective MIP problem.
                             Then, the user should follow the steps given below:
@@ -340,19 +346,20 @@
                             </li>
                         </ul>
 
-                        <p><i> Example:</i></p>
+                        <p id="example1"><i> Example:</i></p>
                         <p>
-                            Consider a single-knapsack, 5-item bi-objective 0-1 knapsack problem. Let the criterion matrix be
-                            [[5, 2, 6, 8, 9];[3, 9, 7, 6, 4]] and the weight vector be [2, 9, 1, 5, 7]. Suppose the capacity of
+                            Consider a single-knapsack, 5-item three-objective 0-1 knapsack problem. Let the criterion matrix be
+                            [[5, 2, 6, 8, 9];[3, 9, 7, 6, 4];[2, 8, 7, 3, 9]] and the weight vector be [2, 9, 1, 5, 7]. Suppose the capacity of
                             the knapsack is 15. Then, the valid file format for <mark>nMOCO-s</mark> is shown below:
                         </p>
                         <pre>
                                     Maximize
-                                    obj: 0.0001z1 + z2
+                                    obj: 0.0001z1 + 0.0001z2 + z3
                                     Subject To
                                     c1: 2 x1 + 9 x2 + x3 + 5 x4 + 7 x5 <= 15
                                     c2: 5 x1 + 2 x2 + 6 x3 + 8 x4 + 9 x5 - z1 = 0
                                     c3: 3 x1 + 9 x2 + 7 x3 + 6 x4 + 4 x5 - z2 = 0
+                                    c4: 2 x1 + 8 x2 + 7 x3 + 3 x4 + 9 x5 - z3 = 0
                                     Bounds
                                     0 <= x1 <= 1
                                     0 <= x2 <= 1
@@ -364,54 +371,130 @@
                                     End
                         </pre>
 
+                        <h3 id="rMOCO-S" class="text-info">rMOCO-S</h3>
+                        rMOCO-S input file format slightly differs from the one for nMOCO-S only if the user selects 
+                        <code>Model File (.lp)</code> option for <strong>Input Type</strong> parameter. If there are $m$ objective functions
+                        in the problem, create $(m+1)$ continuous variables in the objective function. Set the objective function
+                        coefficients of these variables to $\epsilon=1e-4$ except $z_{m+1}$. Consider again the <a href="#example1">example</a> given for nMOCO-S,
+                        but now assume that the user selects rMOCO-S to solve the problem. The associated model file format should be as follows:
+                        <pre>
+                                    Maximize
+                                    obj: 0.0001z1 + 0.0001z2 + 0.0001z3 + z4
+                                    Subject To
+                                    c1: 2 x1 + 9 x2 + x3 + 5 x4 + 7 x5 <= 15
+                                    c2: 5 x1 + 2 x2 + 6 x3 + 8 x4 + 9 x5 - z1 = 0
+                                    c3: 3 x1 + 9 x2 + 7 x3 + 6 x4 + 4 x5 - z2 = 0
+                                    c4: 2 x1 + 8 x2 + 7 x3 + 3 x4 + 9 x5 - z3 = 0
+                                    Bounds
+                                    0 <= x1 <= 1
+                                    0 <= x2 <= 1
+                                    0 <= x3 <= 1
+                                    0 <= x4 <= 1
+                                    0 <= x5 <= 1
+                                    General
+                                    x1 x2 x3 x4 x5
+                                    End
+                        </pre>
+                        <p>For all the other input specifications, please refer to <a href="#nMOCO-S">nMOCO-S</a>.</p>
 
-                        <h4 id="nMOCO-S_output">Solver output</h4>
+
+                        <h3 id="Jobs" class="text-info">Job Status and Solver Outputs</h3>
+                        <h4 id="Jobs_status">Job status</h4>
                         <p>
-                            If the solver <mark>nMOCO-S</mark> terminates successfully, the following outputs are displayed
-                            when the user clicks on the button <kbd>Show results</kbd>.
+                            We call each submitted problem instance as a <strong>Job</strong> and assign a <code>Job Id</code> unique
+                            to that job. By using this id number, problem owners can query the status of their job on <a href="http://onlinemoco.com/MOIP/jsp/nMOCO-S/nMOCO-S_JobQueue.jsp">Job Search</a> page.
+                            Once a job has been submitted, it is assigned <code>TO_DO</code> status. The scheduler orders the submitted jobs
+                            according to the first-in-first-out principle. The <code>Seq. Number</code> column shows the sequence of the
+                            corresponding job in the list of waiting, <code>TO_DO</code>, jobs. As soon as the engine starts processing the 
+                            submitted job, it is assigned <code>IN_PROGRESS</code> status. Afterwards, the job will either take <code>FINISHED_SUCESS</code>
+                            or <code>FINISHED_FAILED</code> status. If it returns success status, the user must have taken an email from <code>info@onlinemoco.com</code>.
+                            Otherwise, the user should verify that the input parameters and the uploaded file are consistent with each other and 
+                            comply with the requirements. If everything seems fine,
+                            please <a href="https://github.com/gokhanceyhan/MOCOS/issues">report this issue</a> to us by
+                            specifying your problem parameters and attaching your data or model file with a brief explanation of the encountered problem.
+                        </p>
+                        
+                        <h4 id="Jobs_output">Solver output</h4>
+                        <p>
+                            If the solvers terminate successfully, any user should receive two files by e-mail
+                            from <code>info@onlinemoco.com</code>. The first one is the <mark>results.txt</mark> file which contains
+                            all the relevant information about the output of the selected solver on the submitted problem instance.
+                            The second file is the <mark>model.lp</mark> file. This file is sent to the users in order to let them
+                            verify the submitted problem instance and the returned output. The  <mark>results.txt</mark> contains the
+                            following fields:
                         </p>
 
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Parameter Name</th>
+                                    <th>Field Name</th>
                                     <th>Definition</th>
                                     <th>Set of values</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>Solver Type</td>
+                                    <td>Specifies the selected solver by the user.</td>
+                                    <td>{nMOCOS, rMOCOS_sba, rMOSOS_tda}</td>
+                                </tr>
+                                <tr>
+                                    <td>Solver Status</td>
+                                    <td>Indicates whether the solver was able to solve the problem instance successfully or
+                                        aborted due to time or point limit or threw an exception. If the solver status is 
+                                        <code>FailedToSolveSingleObjProblem</code>, it is possible that the user has entered in the wrong
+                                        input format or the single objective solver is not capable of solving the submitted problem type.
+                                        For the list of problem types that our solvers can solve, please refer <a href="#Solvers">here</a>. 
+                                    </td>
+                                    <td>{Success, AbortTimeLimit, AbortPointLimit, FailedToSolveSingleObjProblem}</td>
+                                </tr>
+                                <tr>
                                     <td>Number of nondominated points</td>
                                     <td>Specifies the number of nondominated points generated for the uploaded problem.</td>
                                     <td>$\left\{n \in \mathbb{N}\right\}$</td>
                                 </tr>
                                 <tr>
-                                    <td>Number of calls to solver</td>
+                                    <td>Number of models solved</td>
                                     <td>The number of times the single objective solver is called during the process.</td>
                                     <td>$\left\{n \in \mathbb{N}\right\}$</td>
                                 </tr>
                                 <tr>
-                                    <td>Total CPU time (secs)</td>
-                                    <td>The cpu time spent by the solver.</td>
+                                    <td>Elapsed time (seconds)</td>
+                                    <td>The wall clock time spent by the solver.</td>
                                     <td>$\left\{t \in \mathbb{R}_{>0}\right\}$</td>
                                 </tr>
-
+                                <tr>
+                                    <td>Ideal point</td>
+                                    <td>Specifies the ideal point of the problem. If the <strong>Solver Status</strong> is <code>Success</code>,
+                                        then it is the true ideal point. Else, it gives the best estimate for the ideal point.
+                                    </td>
+                                    <td>$\left\{z \in \mathbb{R}^m\right\}$</td>
+                                </tr>
+                                <tr>
+                                    <td>Incumbent nadir point</td>
+                                    <td>Specifies the nadir point of the problem. The solvers first find the payoff nadir and update it as new
+                                        nondominated points are generated. The stated point is not guaranteed to be the true nadir point.
+                                    </td>
+                                    <td>$\left\{z \in \mathbb{R}^m\right\}$</td>
+                                </tr>
+                                <tr>
+                                    <td>The set of nondominated points</td>
+                                    <td>The list of nondominated points generated. If the <strong>Solver Status</strong> is <code>Success</code> and
+                                        the <strong>Solver Type</strong> is <code>nMOCOS</code> or <code>rMOCOS_sba</code>, then the set is the true nondominated set of the problem.
+                                        Otherwise, the set is only a subset of the nondominated set.
+                                    </td>
+                                    <td>$R \subseteq \mathbb{R}^m$</td>
+                                </tr>
                             </tbody>
-                        </table>
-                        <p>
-                            To download the output file containing the list of nondominated points generated,
-                            click on the button <kbd>Download</kbd>. The format of the output file is explained
-                            <a href="#output_format">here.</a>
-                        </p>
+                        </table>                
 
-                        <h3 id="rMOCO-S" class="text-info">rMOCO-S</h3>
                         
                         <h3 id="SolverParameters">Solver Parameters</h3>
 
                         <h2 id="Library" class="text-primary">Instance Library</h2>
                         <p>
                             Our library, <mark>libMOCO-S</mark>, includes instances from well-known combinatorial optimization problems
-                            like knapsack, assignment and shorthest path. Those instances are randomly generated by the schemes explained
+                            like knapsack and assignment. Those instances are randomly generated by the schemes explained
                             in <a href="http://onlinelibrary.wiley.com/doi/10.1002/nav.20336/abstract">Köksalan and Lokman (2009)</a>.
                         </p>
                         <h3 id="MOKP">Multi-objective knapsack problem (MOKP)</h3>
@@ -503,12 +586,9 @@
 
                         <h3 id="output_format">Output file format</h3>
                         <p>
-                            Each instance in <mark>libMOCO-S</mark> has an associated output file which presents the main results
-                            returned by <mark>nMOCO-S</mark> application. The first entry gives the total number of nondominated points
-                            <code>N</code>, the second entry shows the total number of times the backend single objective optimization solver is called.
-                            Next <code>N</code> lines list all of the nondominated points of the associated problem. Each line gives 
-                            the criterion values of a nondominated point separated by white spaces.
-
+                            Each instance in <mark>libMOCO-S</mark> has an associated output file which presents the main computational
+                            results obtained by the selected solver on our server machine.
+                            You can find the structure of the output file <a href="#Jobs_output">here</a>.
                         </p>
 
 
