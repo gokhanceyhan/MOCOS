@@ -132,9 +132,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="#Visualization">Visualization</a>
-                            </li>
                         </ul>
 
                         <h2 id="Solvers" class="text-primary">Solvers</h2>  
@@ -210,7 +207,7 @@
                                 <strong>rMOCO-S:</strong> Use this solver when
                                 <ul>
                                     <li>
-                                        your problem includes continuous variables. The generated representative nondominated points by rMOCO-S are expected to represent the complete nondominated
+                                        your problem includes continuous variables as well as integer ones. The generated representative nondominated points by rMOCO-S are expected to represent the complete nondominated
                                         frontier of the problem well enough including the continuous regions.
                                     </li>               
                                     <li>
@@ -413,7 +410,7 @@
                             please <a href="https://github.com/gokhanceyhan/MOCOS/issues">report this issue</a> to us by
                             specifying your problem parameters and attaching your data or model file with a brief explanation of the encountered problem.
                         </p>
-                        
+
                         <h4 id="Jobs_output">Solver output</h4>
                         <p>
                             If the solvers terminate successfully, any user should receive two files by e-mail
@@ -488,8 +485,92 @@
                             </tbody>
                         </table>                
 
-                        
+
                         <h3 id="SolverParameters">Solver Parameters</h3>
+                        <p>
+                            In this part, we both state the user-specific solver parameters asked to a user when submitting a problem instance 
+                            and the solver specific parameters determined by the administrator.
+                        </p>
+                        <h4 id="SolverParameters_user">User parameters</h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Field Name</th>
+                                    <th>Definition</th>
+                                    <th>Set of values</th>
+                                    <th>Default value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Solver Type</td>
+                                    <td>Specifies the selected solver by the user.</td>
+                                    <td>{nMOCO-S, rMOCO-S1, rMOSO-S2}</td>
+                                    <td>nMOCO-S</td>
+                                </tr>
+                                <tr>
+                                    <td>Time Limit in seconds</td>
+                                    <td>Specifies the max wall clock time in seconds to be allocated for solving the submitted problem instance.</td>
+                                    <td>$\left\{t \in \mathbb{R}_{\geq 0}: 0 \leq t \leq 600\right\}$</td>
+                                    <td>600</td>
+                                </tr>
+                                <tr>
+                                    <td>Max number of points to generate</td>
+                                    <td>Required if rMOCO-S1 solver is selected. It specifies a stopping condition on the solver together with the time limit. When this 
+                                        many nondominated points are generated before hitting the time limit, the solver stops and returns as many nondominated points as specified.
+                                        If the user specifies the value <code>-1</code>, it deactivates the point limit from being a stopping condition.</td>
+                                    <td>$\left\{n \in \mathbb{Z}: -1 \leq n \right\}$</td>
+                                    <td>-1</td>
+                                </tr>
+                                <tr>
+                                    <td>Coverage gap target</td>
+                                    <td>Required if rMOCO-S2 solver is selected. It specifies a stopping condition on the solver together with the time limit. The solver
+                                        stops when the coverage gap of the generated nondominated point set in the scaled criterion space (unit hypercube) is equal to or smaller than the specified value.</td>
+                                    <td>$\left\{\alpha \in \mathbb{R}_{\geq 0}: 0 \leq \alpha \leq 1 \right\}$</td>
+                                    <td>0.1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h4 id="SolverParameters_admin">Admin Parameters</h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Field Name</th>
+                                    <th>Definition</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>OBJ_EPSILON</td>
+                                    <td>Specifies the objective function coefficients assigned to all criterion variables but the last one.</td>
+                                    <td>1e-4</td>
+                                </tr>
+                                <tr>
+                                    <td>BOUND_TOLERANCE</td>
+                                    <td>Specifies the constant used to shift search space bounds from the criterion values of already
+                                        generated nondominated points.</td>
+                                    <td>1e-4</td>
+                                </tr>
+                                <tr>
+                                    <td>MIP_RELGAP</td>
+                                    <td>Mixed-integer program relative optimality gap of the single-objective solver.</td>
+                                    <td>1e-10</td>
+                                </tr>
+                                <tr>
+                                    <td>SIMPLEX_OPTGAP</td>
+                                    <td>Simplex algorithm constraint feasibility tolerance of the single-objective solver.</td>
+                                    <td>1e-9</td>
+                                </tr>
+                                <tr>
+                                    <td>BARRIER_CONV</td>
+                                    <td>Barrier algorithm convergence tolerance of the single-objective solver.</td>
+                                    <td>1e-9</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
 
                         <h2 id="Library" class="text-primary">Instance Library</h2>
                         <p>

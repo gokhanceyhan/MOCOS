@@ -80,13 +80,72 @@
 
             <!-- Jumbotron Header -->
             <div class="jumbotron">
-                <h1 style="color: darkslateblue">The project</h1>
-                <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+
+                <div class="row">  
+                    <div class="col-md-6">
+                        <img src="../images/about_page_1.jpg" alt="agree" width="500" height="300">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="../images/odtu_logo.jpg" alt="agree" width="300" height="100">
+                    </div>
+                    <div class="col-md-2">
+                        <img src="../images/tubitak_logo.jpg" alt="agree" width="100" height="100">
+                    </div>
+                </div>
+
+                <h2 style="color: darkslateblue">About the project</h2>
+                <p style="color: black">
+                    Our goal is to provide solvers as a service to the students or researchers
+                    having optimization problems with multiple objective functions. Although there are many software and tools to 
+                    solve single-objective optimization problems, the resources are scarce for multiple-objective case. 
+                </p>
+                <p style="color: black">
+                    Under multiple objective functions, we talk about the efficiency of a solution instead of optimality. The image of efficient solutions
+                    in the criterion space are called nondominated points and there may be many nondominated points especially when the objective
+                    functions are conflicting with each other. If the decision maker can prioritize the objective functions, then the problem can be modeled
+                    as a Lexicographic optimization problem and solved by a series of a single-objective optimation problems. Other than that, if the decision
+                    maker can assign weights to objective functions, then the problem can be solved by optimizing the weighted sum of the objective functions. However,
+                    these approaches are insufficient for any decision maker who lacks any prioritization between the objective functions and
+                    wants to investigate different parts of the criterion space. 
+                </p>
+                <p style="color: black">
+                    We have packaged our algorithms that can solve multi-objective mixed-integer programming problems into easy-to-use applications and made them
+                    available to the public. We save the users from troublesome installation process of softwares and the associated libraries to their computers.
+                    We also undertake the computational cost of solving the problems. Users just upload their problems in the required format,
+                    we solve the problem and send the results.
+                </p>
+
+                <p style="color: black">Our project has been supported by The Scientific and Technological Research Council of Turkey (TUBITAK).</p>
+            </div>
+            <hr>
+            <div class="row">  
+                <div class="col-md-6">
+                    <img src="../images/about_page_2.jpg" alt="agree" width="500" height="300">
+                </div>
+                <div class="col-md-6">
+
+                </div>
             </div>
             <hr>
             <div class="jumbotron">
-                <h1 style="color: darkred">The software</h1>
-                <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+                <h2 style="color: darkred">About the software</h2>
+                <div class="row">  
+                    <div class="col-md-8">
+                        <p style="color: black">How a user interacts with the system:</p>
+                        <img src="../images/usecase.png" alt="agree" width="650" height="300">
+                    </div>
+                    <div class="col-md-4">
+                        <p style="color: black">Users select a solver type and upload their problems. The problem file
+                            and job specifications are stored in a central FIFO queue. The Scheduler monitors this queue and assign
+                            the jobs to the solvers. Once a job is completed, the output is stored in the database and also sent to the user.
+                        
+                        </p>
+                    </div>
+                </div>
+
+                <ul>
+                    <li> <a></a> </li>
+                </ul>
             </div>
         </div>
 
