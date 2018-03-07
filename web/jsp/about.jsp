@@ -103,7 +103,7 @@
                     Under multiple objective functions, we talk about the efficiency of a solution instead of optimality. The image of efficient solutions
                     in the criterion space are called nondominated points and there may be many nondominated points especially when the objective
                     functions are conflicting with each other. If the decision maker can prioritize the objective functions, then the problem can be modeled
-                    as a Lexicographic optimization problem and solved by a series of a single-objective optimation problems. Other than that, if the decision
+                    as a lexicographic optimization problem and solved by a series of a single-objective optimation problems. Other than that, if the decision
                     maker can assign weights to objective functions, then the problem can be solved by optimizing the weighted sum of the objective functions. However,
                     these approaches are insufficient for any decision maker who lacks any prioritization between the objective functions and
                     wants to investigate different parts of the criterion space. 
@@ -137,14 +137,16 @@
                     <div class="col-md-4">
                         <p style="color: black">Users select a solver type and upload their problems. The problem file
                             and job specifications are stored in a central FIFO queue. The Scheduler monitors this queue and assign
-                            the jobs to the solvers. Once a job is completed, the output is stored in the database and also sent to the user.
-                        
+                            the jobs to the solvers. Once a job is completed, the output is stored in the database with its input data
+                            and also sent to the user. Users can also query the status of their job with the id number assigned to their
+                            problem instance.
                         </p>
                     </div>
                 </div>
-
+                <p style="color: black"> Have a look at the following presentations for further details: </p>
                 <ul>
-                    <li> <a></a> </li>
+                    <li> <a href="guide/MCDM2017_BanuLokman_LV.pdf">A web-based solution platform for Multi-objective integer programs, MCDM Conference, 2017</a> </li>
+                    <li> <a href="guide/INFORMS2017-3.pdf">A Web Application for Solving Multi-objective Integer Programming Problems, Informs Annual Meeting, 2017</a> </li>
                 </ul>
             </div>
         </div>
