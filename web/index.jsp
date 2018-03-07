@@ -234,7 +234,7 @@
             <!-- FOOTER -->
             <footer>
                 <p class="pull-right"><a href="#">Back to top</a></p>
-                <p> Copyright &copy; 2015 Supported by The Scientific and Technological Research Council of Turkey 
+                <p> Copyright &copy; 2015 Gökhan Ceyhan
                     &middot; <a href="https://github.com/gokhanceyhan/MOCOS/issues">Report Web Page Bugs</a> 
                     &middot; <a href="https://github.com/gokhanceyhan/MOIP_Solvers/issues">Report Solver Bugs</a> 
                     &middot; <a href="jsp/terms.jsp">Terms of Use</a>
