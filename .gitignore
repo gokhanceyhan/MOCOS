@@ -1,0 +1,12 @@
+*.DS_Store
+.DS_Store
+.vscode/
+build/
+dist/
+jobs/
+nbproject/
+font-awesome-4.7.0/
+.reload
+build.xml
+derby.log
+*.properties

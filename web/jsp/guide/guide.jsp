@@ -231,6 +231,9 @@
                             <li>
                                 <a href="http://etd.lib.metu.edu.tr/upload/12617675/index.pdf">G. Ceyhan (2014), "Generating Nondominated Point Subsets in Multi-objective Integer Programs", M.Sc. Thesis, Middle East Technical University</a>
                             </li>
+                            <li>
+                                <a href="https://www.sciencedirect.com/science/article/pii/S0377221718305356">Ceyhan, G., Köksalan, M., & Lokman, B. (2019). Finding a representative nondominated set for multi-objective mixed integer programs. European Journal of Operational Research, 272(1), 61-77.</a>
+                            </li>
                         </ul>
 
                         <h3 id="nMOCO-S" class="text-info">nMOCO-S</h3>

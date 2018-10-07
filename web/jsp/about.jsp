@@ -115,7 +115,8 @@
                     we solve the problem and send the results.
                 </p>
 
-                <p style="color: black">Our project has been supported by The Scientific and Technological Research Council of Turkey (TUBITAK).</p>
+                <p style="color: black">Our project has been supported by The Scientific and Technological Research Council of Turkey (TUBITAK)
+                    under 1001 program with project number 215M844.</p>
             </div>
             <hr>
             <div class="row">  
