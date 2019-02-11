@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : about
     Created on : Aug 23, 2016, 9:45:23 PM
     Author     : gokhanceyhan
@@ -116,8 +116,16 @@
                 </p>
 
                 <p style="color: black">Our project has been supported by The Scientific and Technological Research Council of Turkey (TUBITAK)
-                    under 1001 program with project number 215M844.</p>
+                    under 1001 program with project number 215M844. Below is the abstract of the final project report:</p>
             </div>
+            <hr>
+            <blockquote><i class="quotation" style="color: darkslateblue">
+                    In large organizations and complex systems, the decision makers (DMs) usually have to deal with optimization problems with conflicting objectives. In multi-criteria optimization problems, typically there does not exist a unique solution of interest. It is essential to find the relevant nondominated points, for which an improvement in any objective is not possible without sacrificing in one of the remaining objectives. Since the number of nondominated points grows exponentially with the problem size, generating all nondominated points is not only difficult but is also not practical in real-sized problems. 
+                    In this study, we develop a web-based decision support system for MOIPs. To do this, we first develop a web-based exact algorithm to generate all nondominated points for any MOIP. We study and exploit the characteristics of the nondominated sets of Multi-objective Integer Programs (MOIPs). We introduce a density measure and search for common properties of the distributions of nondominated points for different MOIPs. Secondly, we propose a procedure that estimates the possible locations and distributions of nondominated points over the criterion space for a given MOIP problem based on the analysis of the properties of nondominated points. Different from the existing studies, we develop new quality measures to evaluate how well a given set represents the nondominated set based on the density information. Using these quality measures and distribution characteristics, we develop algorithms to generate a representative subset with the desired quality level. These algorithms are designed in a way that the preference information is incorporated into the solution process. 
+                    In this project, we also develop an online tool that is accessible to other researchers. The software we develop is capable to interact with the DM and generate a representative set to satisfy the desired quality level. We also develop visualization tools to present the points to the DM to help visualize tradeoffs between the points. 
+                    We tested performance of our algorithms on different MOIPs and the results show that the algorithms work well. We present a digital library to the researchers that provides a collection of test data sets for a variety of MOIPs.            
+            </i>
+            </blockquote>
             <hr>
             <div class="row">  
                 <div class="col-md-6">
