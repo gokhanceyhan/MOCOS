@@ -142,7 +142,7 @@
                                     </label>
                                     <input type="checkbox" class="checkbox" id="nMOCOS_agreement" name="aggrement" placeholder=""
                                            required
-                                           checked
+                                           unchecked
                                            data-validation-required-message=
                                            "You must agree to the terms and conditions"
                                            />

@@ -1,0 +1,29 @@
+#Solver type:
+rMOCO-S_tda
+#Solver status:
+Success
+#Number of nondominated points:
+14
+#Number of models solved:
+67
+#Elapsed time (seconds):
+0.687
+#Ideal point:
+966 966 942 1138 
+#Incumbent nadir point:
+782.45 650 709.121 904 
+#The set of nondominated points:
+901 891 869 1061 
+860 886 736 1138 
+748 824 790 1131 
+795 754 825 1112 
+797 650 942 904 
+858 758 935 978 
+871 768 924 1046 
+778 796 824 1107 
+899 871 914 1033 
+887 889 778 1125 
+892 966 732 1008 
+919 932 677 1061 
+905 931 775 1065 
+941 928 840 1032 

@@ -186,6 +186,93 @@
                                 <!-- /.panel-body -->
                             </div>
                             <!--/.panel panel-collapse-->
+                            <div class="panel-heading">   
+                                <h2 class="panel-title">
+                                    <a data-toggle="collapse" href="#SBATable">Subset Based Algorithm (SBA) Runs <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a>
+                                </h2>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div id="SBATable" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <%statement = connection.createStatement();
+                                            resultset = statement.executeQuery("select * from INS_SBA");
+                                        %>
+                                        <thead>
+                                            <tr>
+                                                <th>Instance Id</th>
+                                                <th>Problem</th>
+                                                <th>Number of Objectives</th>
+                                                <th>Problem Size Info</th>
+                                                <th>Number of Points</th>
+                                                <th>Coverage Gap</th>
+                                                <th>Input File</th>
+                                                <th>Output File</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            <% while (resultset.next()) {%>
+                                            <tr>    
+                                                <td> <%= resultset.getString(1)%></td>
+                                                <td> <%= resultset.getString(2)%></td>
+                                                <td> <%= resultset.getString(3)%></td>
+                                                <td> <%= resultset.getString(4)%></td>
+                                                <td> <%= resultset.getString(5)%></td>
+                                                <td> <%= resultset.getString(6)%></td>
+                                                <td> <a href=../../libraryFiles/SBA/<%= resultset.getString(7)%> download role="button"><span class="glyphicon glyphicon-save-file"></span></a></td>                                  
+                                                <td> <a href=../../libraryFiles/SBA/<%= resultset.getString(8)%> download role="button"><span class="glyphicon glyphicon-save-file"></span></a></td>                             
+                                            </tr>
+                                            <% }%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!--/.panel panel-collapse-->
+                            <!--/.panel panel-collapse-->
+                            <div class="panel-heading">   
+                                <h2 class="panel-title">
+                                    <a data-toggle="collapse" href="#TDATable">Territory Defining Algorithm (TDA) Runs <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a>
+                                </h2>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div id="TDATable" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <%statement = connection.createStatement();
+                                            resultset = statement.executeQuery("select * from INS_TDA");
+                                        %>
+                                        <thead>
+                                            <tr>
+                                                <th>Instance Id</th>
+                                                <th>Problem</th>
+                                                <th>Number of Objectives</th>
+                                                <th>Problem Size Info</th>
+                                                <th>Coverage Gap Target</th>
+                                                <th>Number of Points</th>
+                                                <th>Input File</th>
+                                                <th>Output File</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            <% while (resultset.next()) {%>
+                                            <tr>    
+                                                <td> <%= resultset.getString(1)%></td>
+                                                <td> <%= resultset.getString(2)%></td>
+                                                <td> <%= resultset.getString(3)%></td>
+                                                <td> <%= resultset.getString(4)%></td>
+                                                <td> <%= resultset.getString(5)%></td>
+                                                <td> <%= resultset.getString(6)%></td>
+                                                <td> <a href=../../libraryFiles/TDA/<%= resultset.getString(7)%> download role="button"><span class="glyphicon glyphicon-save-file"></span></a></td>                                  
+                                                <td> <a href=../../libraryFiles/TDA/<%= resultset.getString(8)%> download role="button"><span class="glyphicon glyphicon-save-file"></span></a></td>                             
+                                            </tr>
+                                            <% }%>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!--/.panel panel-collapse-->                            
                         </div>
                         <!--/.panel panel-default-->
                     </div>
